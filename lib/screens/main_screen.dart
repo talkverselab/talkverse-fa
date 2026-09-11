@@ -3,12 +3,17 @@ import 'package:flutter/material.dart';
 import '../core/theme.dart';
 import '../main.dart';
 import '../widgets/spanish_decor.dart';
+import 'chunk_search_screen.dart';
 import 'conversation_screen.dart';
 import 'episode_screen.dart';
+import 'grammar_lesson_screen.dart';
 import 'profile_screen.dart';
+import 'sentence_flashcard_screen.dart';
+import 'speaking_practice_screen.dart';
 import 'progress_screen.dart';
 import 'topic_vocab_screen.dart';
 import 'verb_screen.dart';
+import 'word_flashcard_screen.dart';
 import 'word_freq_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -285,6 +290,14 @@ class _MenuGrid extends StatelessWidget {
     final items = <_MenuItem>[
       _MenuItem(label: '회화', sub: 'Conversación', badge: 'Ch', color: AppColors.rojo,
         builder: (_) => const ConversationScreen()),
+      _MenuItem(label: '문법', sub: 'دستور', badge: 'G', color: AppColors.rojoDeep,
+        builder: (_) => const GrammarHubScreen()),
+      _MenuItem(label: '문장 카드', sub: 'جمله‌ها', badge: 'S', color: AppColors.tinta,
+        builder: (_) => const SentenceFlashcardScreen()),
+      _MenuItem(label: '말하기', sub: 'صحبت', badge: '🎙', color: AppColors.rojo,
+        builder: (_) => const SpeakingPracticeScreen()),
+      _MenuItem(label: '청크 검색', sub: 'جستجو', badge: '🔍', color: AppColors.gualdaDeep,
+        builder: (_) => const ChunkSearchScreen()),
       _MenuItem(label: '동사 활용', sub: 'Conjugación', badge: 'V', color: AppColors.irregular,
         builder: (_) => const VerbScreen()),
       _MenuItem(label: '단어', sub: 'Vocabulario', badge: 'W', color: AppColors.oliva,
@@ -299,8 +312,8 @@ class _MenuGrid extends StatelessWidget {
         builder: (_) => const _ComingSoon(title: '성·수 일치')),
       _MenuItem(label: '발음', sub: 'Pronunciación', badge: 'rr', color: AppColors.er,
         builder: (_) => const _ComingSoon(title: '발음 (rr · ñ · 강세)')),
-      _MenuItem(label: '복습', sub: 'Repaso', badge: 'R', color: AppColors.gualdaDeep,
-        builder: (_) => const _ComingSoon(title: '플래시카드 복습')),
+      _MenuItem(label: '단어 카드', sub: 'کارت‌ها', badge: 'R', color: AppColors.gualdaDeep,
+        builder: (_) => const WordFlashcardScreen()),
     ];
 
     return GridView.builder(

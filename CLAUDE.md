@@ -136,3 +136,22 @@ adb -s R3CY20HDN2K install --user 0 -r <apk>
   절차: `docs/ios-build-and-testflight.md`.
 - `ios/Runner/Info.plist` 에 마이크·음성 인식 권한 문구가 있다(말하기 연습). 지우면 iOS 에서 크래시.
 - `release.yml`(Android) 은 `ios/**`·`docs/**`·`tools/**` 만 바뀐 푸시는 건너뛴다.
+
+## 8. Zealot 무선 설치 (apps.talkverse.uk) — 2026-10-11
+
+- **Zealot 앱이름: 페르시아어유니버스** (앱 표시 이름 그대로. 2026-10-11 정함 — 이 리포에는 그전에 올린 기록이 없다. 바꾸면 Zealot 에 다른 앱이 새로 생긴다.)
+- 올리기: `bash tools/zealot_push.sh ["변경 내용 한 줄"]` — `build/app/outputs/flutter-apk/` 의 가장 최근 release APK 를
+  `~/bin/zealot-upload` 로 올린다(빌드는 하지 않음. 변경 내용을 안 주면 최근 커밋 제목). 서명 SHA-1 이 §1 값과 다르면 올리지 않는다.
+- **덮어 설치 상태(2026-10-11 확인)**: 서명 = `android/key.properties` + `android/app/signing-key.jks` 가 이미 있고 SHA-1 `9C:C4:…:47:6B`(§1 과 같은 키) —
+  단 **맥미니의 `~/.android/debug.keystore` 는 다른 키(`BE:B3:…:0B:81`)** 라서 §1 의 `cp ~/.android/debug.keystore …` 를 맥미니에서 다시 실행하면 안 된다.
+  버전 = `pubspec.yaml` `0.1.0+1`, 배포된 CI 빌드는 build 5(`latest.json`) → 로컬 빌드는 `--build-number=<폰보다 큰 수>` 를 주지 않으면
+  버전 코드 1 이라 덮어 설치가 거부된다.
+- **Zealot 에는 CI 가 만든 APK 를 그대로 올린다(2026-10-26, pt 와 같은 방식)** — `gh release download latest -R talkverselab/talkverse-fa -p '*.apk'` →
+  `apksigner` 로 SHA-1 확인 → `~/bin/zealot-upload`. 빌드 번호가 앱 안 업데이트(`latest.json`)와 같아 꼬이지 않는다.
+  M6 의 `~/.android/debug.keystore` 도 §1 과 다른 키(`72:08:…:E7:BB`) — 여기서도 §1 의 `cp` 를 하지 말 것.
+- 서명 키 백업: Doppler `keys/prd` `SIGNKEY_*`(`SIGNKEY_INDEX` 참조) + PC `D:\backup\signing_keys\talkverse-fa\`.
+
+## 9. 화면 톤·아이콘 (2026-10-26) — `~/talkverse/branding/TONE.md`
+
+- 아이콘: `make_icon.py ف --font /System/Library/Fonts/GeezaPro.ttc --index 1`(강조선 하늘색→인디고). `flutter_launcher_icons` 쓰지 말 것.
+- `theme.dart` 는 색 이름(rojo·gualda·cal…)을 그대로 두고 값만 사이트 토큰. 언어 배지 색 `AppColors.farsi` = 사이트 페르시아어 카드 `#7a5cd6`.

@@ -103,6 +103,7 @@ adb -s R3CY20HDN2K install --user 0 -r <apk>
 - 대상어 문장 칸 이름은 템플릿 그대로 `es` 다(스페인어 앱에서 복제된 흔적). 언어와 무관하게 "대상어"로 읽으면 된다.
 - **콘텐츠는 초안**이다 — 회화 5편 × 8턴, 문법 10패턴 × 예문 3, 단어 40개. 자체 제작이며 원문·출처를 쓰지 않는다.
   내용을 늘리려면 `_update_kit/content/<언어코드>.py` 를 고치고 `build_content.py` 로 다시 만든다.
+- **회화를 만들거나 고칠 때는 공통 원칙 https://talkverse.uk/talkverse/dialogue-rules/ (2026-11-02 확정)** + 페르시아어 특이점 `docs/DIALOGUE_NOTES.md`(변이·독음 표기표·턴 길이).
 - 말하기 연습은 `RECORD_AUDIO` 권한과 기기의 음성 인식(Google 앱)이 필요하다. 인식 언어는 `TtsService.locale` 을 따른다.
 
 ## 5. 표시 언어 (한국어 / English / 日本語 / 中文) — 2026-09-12

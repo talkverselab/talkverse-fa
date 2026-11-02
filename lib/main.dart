@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'core/theme.dart';
+import 'data/account.dart';
+import 'data/purchase.dart';
 import 'data/db/app_database.dart';
 import 'data/db/seed_loader.dart';
 import 'screens/main_screen.dart';
@@ -15,6 +17,9 @@ void main() async {
   await SeedLoader(appDb).seedIfNeeded();
   await KoReadingPrefs.load();
   await AppLangPrefs.load();
+  // Talkverse ID(선택 로그인)·스토어 평생 이용권 — 기다리지 않는다(오프라인이어도 앱은 바로 뜬다)
+  Account.load();
+  Purchase.configure({'fa': ('com.talkverse.persianUniverse.lifetime', 'lang_fa')});
   runApp(const PersianUniverseApp());
 }
 

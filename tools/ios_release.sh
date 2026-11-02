@@ -22,6 +22,10 @@ if [[ " $* " != *" --no-build "* ]]; then
   flutter build ipa --release --export-method app-store --no-codesign --build-number="$BUILD"
 fi
 [ -d "$ARCHIVE" ] || { echo "아카이브 없음: $ARCHIVE" >&2; exit 1; }
+# --no-codesign 아카이브는 entitlements(Sign in with Apple)가 빠진다 → ad-hoc 서명으로 심어 두면 export 재서명이 가져간다(APP_GUIDE §7, 2026-11-02)
+if [ -f ios/Runner/Runner.entitlements ]; then
+  codesign --force --deep -s - --entitlements ios/Runner/Runner.entitlements "$ARCHIVE/Products/Applications/Runner.app" && echo "entitlements 심음(ad-hoc)"
+fi
 # --no-build 때는 아카이브에 박힌 빌드 번호를 쓴다(백업 파일명·안내가 실제와 어긋나지 않게)
 BUILD="$(/usr/libexec/PlistBuddy -c 'Print :ApplicationProperties:CFBundleVersion' "$ARCHIVE/Info.plist" 2>/dev/null || echo "$BUILD")"
 

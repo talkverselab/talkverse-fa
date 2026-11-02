@@ -12,6 +12,7 @@ import '../services/art_service.dart';
 import '../services/dialogue_service.dart';
 import '../services/learner_prefs.dart';
 import '../services/tts_service.dart';
+import 'glyph_sheet.dart';
 import 'achievement_desk.dart';
 
 /// 「모든 문장 듣기」 재생 패널 — 일본어앱 Grok UXUI 시안 02 「만화책 읽기형」을 옮김(2026-11-02, 일본어앱 `data/review/uxui/sian_02.md`).
@@ -134,6 +135,7 @@ class _EpisodePlayPaneState extends State<EpisodePlayPane> {
       showRd: _showRd,
       showKo: _showKo,
       hasRd: d.turns.any((t) => t.rd.isNotEmpty),
+      hasCol: d.turns.any((t) => t.gloss.isNotEmpty),
       onPlay: _playing ? _pause : _play,
       onSeek: (v) => _goto(v),
       onRate: () => setState(() => _rate = _rate >= 1.25 ? 0.75 : (_rate + 0.25)),
@@ -235,8 +237,8 @@ class _Script extends StatelessWidget {
                     const SizedBox(width: 8),
                     Expanded(
                       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                        Text(LearnerPrefs.fill(t.tl), textDirection: TextDirection.rtl, style: TextStyle(fontSize: on ? 16.5 : 15, fontWeight: FontWeight.w800, color: AppColors.sumi, height: 1.35)),
-                        if (showGloss && t.gloss.isNotEmpty && t.gloss != t.tl) Text(t.gloss, style: const TextStyle(fontSize: 11, color: AppColors.ai, fontWeight: FontWeight.w600)),
+                        TappablePersianText(LearnerPrefs.fill(t.tl), style: TextStyle(fontSize: on ? 16.5 : 15, fontWeight: FontWeight.w800, color: AppColors.sumi, height: 1.35)),
+                        if (showGloss && t.gloss.isNotEmpty && t.gloss != t.tl) Text(t.gloss, textDirection: TextDirection.rtl, style: const TextStyle(fontSize: 11, color: AppColors.ai, fontWeight: FontWeight.w600)),
                         if (showRd && t.rd.isNotEmpty) Text(LearnerPrefs.fill(t.rd, ko: true), style: const TextStyle(fontSize: 11.5, color: AppColors.muted)),
                         if (showKo) Text(LearnerPrefs.fill(t.ko, ko: true), style: const TextStyle(fontSize: 12.5, color: AppColors.sumiLight, height: 1.35)),
                         if (on && t.note.isNotEmpty) Padding(padding: const EdgeInsets.only(top: 4), child: Text('💡 ${t.note}', style: const TextStyle(fontSize: 11, color: AppColors.beniDeep, height: 1.35))),
@@ -326,8 +328,8 @@ class _Caption extends StatelessWidget {
         child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
           Expanded(
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              Text(LearnerPrefs.fill(turn.tl), textDirection: TextDirection.rtl, style: TextStyle(fontSize: wide ? 20 : 17, fontWeight: FontWeight.w800, color: AppColors.sumi, height: 1.35)),
-              if (showGloss && turn.gloss.isNotEmpty && turn.gloss != turn.tl) Text(turn.gloss, style: const TextStyle(fontSize: 12, color: AppColors.ai, fontWeight: FontWeight.w600)),
+              TappablePersianText(LearnerPrefs.fill(turn.tl), style: TextStyle(fontSize: wide ? 20 : 17, fontWeight: FontWeight.w800, color: AppColors.sumi, height: 1.35)),
+              if (showGloss && turn.gloss.isNotEmpty && turn.gloss != turn.tl) Text(turn.gloss, textDirection: TextDirection.rtl, style: const TextStyle(fontSize: 12, color: AppColors.ai, fontWeight: FontWeight.w600)),
               if (showRd && turn.rd.isNotEmpty) Text(LearnerPrefs.fill(turn.rd, ko: true), style: const TextStyle(fontSize: 12.5, color: AppColors.muted)),
               if (showKo) Padding(padding: const EdgeInsets.only(top: 2), child: Text(LearnerPrefs.fill(turn.ko, ko: true), style: const TextStyle(fontSize: 13.5, color: AppColors.sumiLight, height: 1.35))),
             ]),
@@ -341,7 +343,7 @@ class _Caption extends StatelessWidget {
 
 /// 하단 고정 컨트롤: ▶ 재생 · 진행 슬라이더 · 속도 · 자막 단계.
 class _ControlBar extends StatelessWidget {
-  final bool playing, showGloss, showRd, showKo, hasRd;
+  final bool playing, showGloss, showRd, showKo, hasRd, hasCol;
   final int index, total;
   final double rate;
   final VoidCallback onPlay, onRate, onGloss, onRd, onKo;
@@ -355,6 +357,7 @@ class _ControlBar extends StatelessWidget {
     required this.showRd,
     required this.showKo,
     required this.hasRd,
+    this.hasCol = false,
     required this.onPlay,
     required this.onSeek,
     required this.onRate,
@@ -378,7 +381,7 @@ class _ControlBar extends StatelessWidget {
                 border: Border.all(color: fixed ? AppColors.beni : (on ? AppColors.ai : AppColors.line)),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Text(t, style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w800, color: fixed ? Colors.white : (on ? AppColors.ai : AppColors.muted))),
+              child: Text(tr(t), style: TextStyle(fontSize: 11.5, fontWeight: FontWeight.w800, color: fixed ? Colors.white : (on ? AppColors.ai : AppColors.muted))),
             ),
           ),
         );
@@ -406,6 +409,7 @@ class _ControlBar extends StatelessWidget {
       Text(tr('자막'), style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: AppColors.sumi)),
       const SizedBox(width: 4),
       chip('فارسی', true, null, fixed: true),
+      if (hasCol) chip('입말', showGloss, onGloss),
       if (hasRd) chip('독음', showRd, onRd),
       chip('한국어', showKo, onKo),
     ]);

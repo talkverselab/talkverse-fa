@@ -16,7 +16,8 @@ class AchievementService {
 
   final Map<String, String> _episodes = {}; // 편 id → 처음 완주한 날(yyyy-mm-dd)
   final Map<String, List<int>> _cards = {}; // 편 id → [맞음, 전체] (마지막 세션)
-  final Map<String, Map<String, int>> _daily = {}; // 날짜 → {episodes, cards}
+  final Map<String, Map<String, int>> _daily = {}; // 날짜 → {episodes, cards, glyphs}
+  final Set<String> _glyphs = {}; // 글자 시트에서 본 글자 모양 '글자:모양'(UX 시안 FA-01 ①)
   final ValueNotifier<int> changes = ValueNotifier(0);
   bool _loaded = false;
 
@@ -32,6 +33,7 @@ class AchievementService {
         (j['episodes'] as Map<String, dynamic>? ?? {}).forEach((k, v) => _episodes[k] = v.toString());
         (j['cards'] as Map<String, dynamic>? ?? {}).forEach((k, v) => _cards[k] = (v as List).cast<int>());
         (j['daily'] as Map<String, dynamic>? ?? {}).forEach((k, v) => _daily[k] = (v as Map).map((a, b) => MapEntry(a.toString(), (b as num).toInt())));
+        _glyphs.addAll(((j['glyphs'] as List?) ?? const []).map((e) => e.toString()));
       }
     } catch (e) {
       debugPrint('Achievement: load 실패 $e');
@@ -41,7 +43,7 @@ class AchievementService {
 
   Future<void> _save() async {
     changes.value++;
-    final data = json.encode({'episodes': _episodes, 'cards': _cards, 'daily': _daily});
+    final data = json.encode({'episodes': _episodes, 'cards': _cards, 'daily': _daily, 'glyphs': _glyphs.toList()});
     (await SharedPreferences.getInstance()).setString(_key, data);
   }
 
@@ -49,6 +51,18 @@ class AchievementService {
     final d = _daily.putIfAbsent(today, () => {});
     d[what] = (d[what] ?? 0) + n;
   }
+
+  /// 글자 시트에서 글자 모양 하나를 봤다(처음 볼 때만 셈).
+  Future<void> markGlyph(String key) async {
+    await load();
+    if (_glyphs.add(key)) {
+      _bump('glyphs');
+      await _save();
+    }
+  }
+
+  int get glyphCount => _glyphs.length;
+  int glyphsOn(String day) => _daily[day]?['glyphs'] ?? 0;
 
   /// 편을 끝까지 들었다. 처음 완주한 날만 기록(반복 횟수는 세지 않는다).
   Future<bool> markEpisodeDone(String id) async {
@@ -87,7 +101,7 @@ class AchievementService {
   }
 
   Map<String, int> get thisWeek {
-    final out = {'episodes': 0, 'cards': 0};
+    final out = {'episodes': 0, 'cards': 0, 'glyphs': 0};
     for (final (d, _) in week()) {
       final m = _daily[d];
       if (m == null) continue;

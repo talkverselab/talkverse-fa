@@ -5,6 +5,7 @@ import '../core/l10n.dart';
 import '../core/theme.dart';
 import '../services/achievement_service.dart';
 import '../services/dialogue_service.dart';
+import '../services/persian_script.dart';
 import 'spanish_decor.dart';
 
 /// 「나」 탭 성과 데스크 — 일본어앱에서 옮김(시안 02 §5·wire_02). 큰 숫자 대신 문장 + 작은 진행 막대. 경쟁·순위·포인트·스트릭 없음.
@@ -44,6 +45,8 @@ class _AchievementDeskState extends State<AchievementDesk> {
       final left = Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [
         _WeekLine(a: _a),
         const SizedBox(height: 12),
+        _GlyphBar(a: _a),
+        const SizedBox(height: 12),
         _WeekDots(a: _a),
       ]);
       final right = _IslandGrid(a: _a, columns: c.maxWidth >= 900 ? 4 : (c.maxWidth >= 380 ? 2 : 1));
@@ -52,7 +55,7 @@ class _AchievementDeskState extends State<AchievementDesk> {
             ? Row(crossAxisAlignment: CrossAxisAlignment.start, children: [Expanded(flex: 5, child: left), const SizedBox(width: 14), Expanded(flex: 7, child: right)])
             : Column(children: [left, const SizedBox(height: 12), right]),
         const SizedBox(height: 6),
-        Text(tr('센다: 편 완주 · 그림 카드 맞음  /  안 센다: 앱 오픈 · 스트릭 · 포인트 · 순위'),
+        Text(tr('센다: 편 완주 · 그림 카드 맞음 · 익힌 글자 모양  /  안 센다: 앱 오픈 · 스트릭 · 포인트 · 순위'),
             style: const TextStyle(fontSize: 10.5, color: AppColors.muted, height: 1.4)),
       ]);
     });
@@ -73,10 +76,10 @@ class _WeekLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final w = a.thisWeek;
-    final e = w['episodes'] ?? 0, c = w['cards'] ?? 0;
+    final e = w['episodes'] ?? 0, c = w['cards'] ?? 0, g = w['glyphs'] ?? 0;
     final island = a.weekSentence();
     final line = e == 0 && c == 0
-        ? tr('이번 주는 아직 조용해요. 편 하나를 끝까지 들어 보세요.')
+        ? (g > 0 ? trf('이번 주 글자 모양을 {0}개 새로 봤어요', [g]) : tr('이번 주는 아직 조용해요. 편 하나를 끝까지 들어 보세요.'))
         : (island.isNotEmpty ? trf('이번 주엔 {0} 주제를 가장 많이 읽었어요', [tr(DialogueService.islandKo[island] ?? island)]) : tr('이번 주도 한 걸음씩 가고 있어요'));
     return _card(
       border: AppColors.beni.withValues(alpha: 0.5),
@@ -85,6 +88,31 @@ class _WeekLine extends StatelessWidget {
         Text(line, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: AppColors.sumi, height: 1.4)),
         const SizedBox(height: 4),
         Text(trf('편 {0} 완주 · 그림 카드 {1}장 맞음', [e, c]), style: const TextStyle(fontSize: 11.5, color: AppColors.muted)),
+      ]),
+    );
+  }
+}
+
+/// 익힌 글자 모양 — 글자 시트(회화 리더에서 낱말 탭)에서 본 글자 모양 수. UX 시안 FA-01 §5.
+class _GlyphBar extends StatelessWidget {
+  final AchievementService a;
+  const _GlyphBar({required this.a});
+  @override
+  Widget build(BuildContext context) {
+    final n = a.glyphCount, total = totalGlyphForms;
+    return _card(
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Row(children: [
+          Expanded(child: _label(tr('익힌 글자 모양'))),
+          Text('$n / $total', style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w800, color: AppColors.beni)),
+        ]),
+        const SizedBox(height: 6),
+        ClipRRect(
+          borderRadius: BorderRadius.circular(4),
+          child: LinearProgressIndicator(value: total == 0 ? 0 : n / total, minHeight: 6, color: AppColors.beni, backgroundColor: AppColors.line),
+        ),
+        const SizedBox(height: 6),
+        Text(tr('회화 리더에서 페르시아어 낱말을 누르면 글자 모양을 볼 수 있어요'), style: const TextStyle(fontSize: 11, color: AppColors.muted)),
       ]),
     );
   }

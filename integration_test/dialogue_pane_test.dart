@@ -9,6 +9,7 @@ import 'package:persian_universe/main.dart';
 import 'package:persian_universe/services/achievement_service.dart';
 import 'package:persian_universe/services/ko_reading.dart';
 import 'package:persian_universe/services/learner_prefs.dart';
+import 'package:persian_universe/widgets/glyph_sheet.dart';
 import 'package:integration_test/integration_test.dart';
 
 void main() {
@@ -54,6 +55,13 @@ void main() {
     await t.tap(find.text('첫 인사').first);
     await wait(t, 1500);
     await shot(t, '04_reader');
+
+    // 글자 시트(UX 시안 FA-01 ①): 캡션의 페르시아어 줄 낱말 탭
+    await t.tap(find.byType(TappablePersianText).first, warnIfMissed: false);
+    await wait(t, 1500);
+    await shot(t, '04b_glyph_sheet');
+    Navigator.of(t.element(find.byType(GlyphSheet))).pop();
+    await wait(t, 1000);
 
     await t.tap(find.text('재생').first);
     await wait(t, 6000);

@@ -9,7 +9,7 @@ import 'learner_prefs.dart';
 ///
 /// 지금 데이터는 옛 `assets/data/dialogues/L1.json`(초안 5편 × 8턴) 하나뿐이라 그것을 그대로 읽어 이 모양으로 바꾼다.
 /// 회화 콘텐츠는 바꾸지 않는다(사용자 지시 2026-11-02 "회화는 아직 하지마") — 새 구조(R0~R4·주제별 편 파일)는 회화 작성이 풀리면.
-/// 칸: tl = 페르시아어(옛 파일의 칸 이름은 템플릿 그대로 `es`), gloss = 없음(빈 값), rd = 한글 독음, ko = 한국어, note = 「표현 = 뜻」.
+/// 칸: tl = 페르시아어(옛 파일의 칸 이름은 템플릿 그대로 `es`), gloss = 테헤란 입말 줄(`tl_col`, 아직 없음), rd = 한글 독음, ko = 한국어, note = 「표현 = 뜻」.
 class DialogueTurn {
   final int num;
   final String speaker; // A·B
@@ -36,7 +36,7 @@ class DialogueTurn {
         num: j['num'] as int? ?? 0,
         speaker: j['speaker'] as String? ?? 'A',
         tl: j['es'] as String? ?? '',
-        gloss: j['gloss'] as String? ?? '',
+        gloss: j['tl_col'] as String? ?? '', // 테헤란 입말 한 줄(UX 시안 FA-01 ②) — 데이터는 회화 작업 뒤, 없으면 칩을 숨긴다
         rd: j['rd'] as String? ?? '',
         ko: j['ko'] as String? ?? '',
         note: j['note'] as String? ?? '',

@@ -52,7 +52,7 @@ class ProfileScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 4),
                       Text(
-                        tr('Día 1 · 입문 (A1)'),
+                        tr('1일차 · 입문 (A1)'),
                         style: TextStyle(
                           color: AppColors.gualdaBright,
                           fontSize: 13,
@@ -90,8 +90,8 @@ class ProfileScreen extends StatelessWidget {
                   title: tr('앱 업데이트'),
                   subtitle: tr('아이폰은 TestFlight 앱에서 새 빌드를 받습니다')),
             _SettingItem(icon: Icons.volume_up, title: tr('TTS 음성'), subtitle: tr('fa-IR (시스템 보이스)')),
-            _SettingItem(icon: Icons.public, title: tr('변종'), subtitle: tr('카스티야 (España) · vosotros')),
-            _SettingItem(icon: Icons.palette, title: tr('테마'), subtitle: tr('낮 · rojo y gualda #AA151B')),
+            _SettingItem(icon: Icons.public, title: tr('변종'), subtitle: tr('이란 페르시아어 (테헤란)')),
+            _SettingItem(icon: Icons.palette, title: tr('테마'), subtitle: tr('낮 · talkverse.uk 톤')),
           ]),
           const SizedBox(height: 16),
           _SectionTitle(tr('정보')),
@@ -108,7 +108,7 @@ class ProfileScreen extends StatelessWidget {
           const SizedBox(height: 6),
           Center(
             child: Text(
-              'El saber no ocupa lugar',
+              'دانستن توانستن است',
               style: TextStyle(
                 color: AppColors.tintaLight,
                 fontSize: 11,
@@ -153,7 +153,7 @@ class _SettingsGroup extends StatelessWidget {
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: AppColors.gualda.withValues(alpha: 0.5)),
       ),
-      child: Column(
+      child: Material(type: MaterialType.transparency, child: Column(
         children: [
           for (var i = 0; i < items.length; i++) ...[
             ListTile(
@@ -178,7 +178,7 @@ class _SettingsGroup extends StatelessWidget {
               Container(height: 0.5, color: AppColors.gualda.withValues(alpha: 0.3)),
           ],
         ],
-      ),
+      )),
     );
   }
 }
@@ -205,7 +205,7 @@ class _AccountSection extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             border: Border.all(color: AppColors.gualda.withValues(alpha: 0.5)),
           ),
-          child: Column(children: [
+          child: Material(type: MaterialType.transparency, child: Column(children: [
             if (u == null)
               ListTile(
                 leading: const Icon(Icons.account_circle_outlined, color: AppColors.rojo),
@@ -255,7 +255,7 @@ class _AccountSection extends StatelessWidget {
               ),
               onTap: () => Purchase.restore(),
             ),
-          ]),
+          ])),
         ),
       );
 
@@ -297,7 +297,7 @@ class _LearnerSection extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               border: Border.all(color: AppColors.gualda.withValues(alpha: 0.5)),
             ),
-            child: Column(children: [
+            child: Material(type: MaterialType.transparency, child: Column(children: [
               ListTile(
                 leading: const Icon(Icons.badge_outlined, color: AppColors.rojo),
                 title: Text(tr('이름'), style: const TextStyle(fontWeight: FontWeight.w700, color: AppColors.tinta)),
@@ -314,7 +314,7 @@ class _LearnerSection extends StatelessWidget {
                     style: const TextStyle(color: AppColors.tintaLight, fontSize: 11)),
                 onTap: () => LearnerPrefs.setGender(gender == 'female' ? 'male' : 'female'),
               ),
-            ]),
+            ])),
           ),
         ),
       );

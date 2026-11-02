@@ -190,6 +190,10 @@ const Map<String, String> kDictEn = {
   '남성 — 탭하면 여성': 'Male — tap for female',
   '회화에서 불릴 이름': 'Name used in conversations',
   '저장': 'Save',
+  '민준 & 사라 이야기 {0}': 'Minjun & Sara story {0}',
+  '1일차 · 입문 (A1)': 'Day 1 · Beginner (A1)',
+  '이란 페르시아어 (테헤란)': 'Iranian Persian (Tehran)',
+  '낮 · talkverse.uk 톤': 'Light · talkverse.uk tone',
 };
 
 const Map<String, String> kDictJa = {
@@ -368,6 +372,10 @@ const Map<String, String> kDictJa = {
   '남성 — 탭하면 여성': '男性 — タップで女性',
   '회화에서 불릴 이름': '会話で呼ばれる名前',
   '저장': '保存',
+  '민준 & 사라 이야기 {0}': 'ミンジュン & サラの物語 {0}',
+  '1일차 · 입문 (A1)': '1日目・入門 (A1)',
+  '이란 페르시아어 (테헤란)': 'イランのペルシア語（テヘラン）',
+  '낮 · talkverse.uk 톤': 'ライト・talkverse.uk トーン',
 };
 
 const Map<String, String> kDictZh = {
@@ -546,4 +554,8 @@ const Map<String, String> kDictZh = {
   '남성 — 탭하면 여성': '男 — 点击改为女',
   '회화에서 불릴 이름': '会话中使用的名字',
   '저장': '保存',
+  '민준 & 사라 이야기 {0}': '敏俊 & 萨拉的故事 {0}',
+  '1일차 · 입문 (A1)': '第1天 · 入门 (A1)',
+  '이란 페르시아어 (테헤란)': '伊朗波斯语（德黑兰）',
+  '낮 · talkverse.uk 톤': '浅色 · talkverse.uk 风格',
 };

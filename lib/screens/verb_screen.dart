@@ -69,7 +69,7 @@ class _VerbScreenState extends State<VerbScreen> {
         : _verbs.where((v) => v.group == _filter).toList();
     return Scaffold(
       backgroundColor: AppColors.cal,
-      appBar: AppBar(title: Text(tr('동사 활용 · Conjugación'))),
+      appBar: AppBar(title: Text(tr('동사 활용'))),
       body: Column(
         children: [
           Padding(

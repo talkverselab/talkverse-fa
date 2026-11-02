@@ -156,7 +156,7 @@ class HomeScreen extends StatelessWidget {
                           Row(
                             children: const [
                               Text(
-                                '¡Hola!',
+                                'سلام!',
                                 style: TextStyle(
                                   fontSize: 28,
                                   fontWeight: FontWeight.w700,
@@ -319,7 +319,7 @@ class _TodayMissionState extends State<_TodayMission> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              meta.level == 'L1' ? 'PRINCIPIANTE 1' : meta.level,
+              meta.level == 'L1' ? 'داستان ۱' : meta.level,
               style: const TextStyle(
                 color: AppColors.gualdaBright,
                 fontSize: 11,
@@ -338,7 +338,7 @@ class _TodayMissionState extends State<_TodayMission> {
             ),
             const SizedBox(height: 2),
             Text(
-              trf('Minjun & Lucía 스토리 {0}', [meta.emoji]),
+              trf('민준 & 사라 이야기 {0}', [meta.emoji]),
               style: TextStyle(color: AppColors.cal.withValues(alpha: 0.85), fontSize: 12),
             ),
             const SizedBox(height: 12),
@@ -379,19 +379,19 @@ class _MenuGrid extends StatelessWidget {
         builder: (_) => const SpeakingPracticeScreen()),
       _MenuItem(label: tr('청크 검색'), sub: 'جستجو', badge: '🔍', color: AppColors.gualdaDeep,
         builder: (_) => const ChunkSearchScreen()),
-      _MenuItem(label: tr('동사 활용'), sub: 'Conjugación', badge: 'V', color: AppColors.irregular,
+      _MenuItem(label: tr('동사 활용'), sub: 'صرف فعل', badge: 'V', color: AppColors.irregular,
         builder: (_) => const VerbScreen()),
-      _MenuItem(label: tr('단어'), sub: 'Vocabulario', badge: 'W', color: AppColors.oliva,
+      _MenuItem(label: tr('단어'), sub: 'واژه‌ها', badge: 'W', color: AppColors.oliva,
         builder: (_) => const TopicVocabScreen()),
-      _MenuItem(label: tr('표현'), sub: 'Expresión', badge: 'E', color: AppColors.rojoLight,
+      _MenuItem(label: tr('표현'), sub: 'عبارت‌ها', badge: 'E', color: AppColors.rojoLight,
         builder: (_) => TopicVocabScreen(
             title: tr('주제별 표현'),
             asset: 'assets/data/vocab/travel_expressions.json')),
-      _MenuItem(label: tr('빈도 단어'), sub: 'Frecuencia', badge: 'F', color: AppColors.farsi,
+      _MenuItem(label: tr('빈도 단어'), sub: 'بسامد', badge: 'F', color: AppColors.farsi,
         builder: (_) => const WordFreqScreen()),
-      _MenuItem(label: tr('성·수'), sub: 'Género', badge: 'el/la', color: AppColors.mar,
+      _MenuItem(label: tr('성·수'), sub: 'جنس', badge: 'el/la', color: AppColors.mar,
         builder: (_) => _ComingSoon(title: tr('성·수 일치'))),
-      _MenuItem(label: tr('발음'), sub: 'Pronunciación', badge: 'rr', color: AppColors.er,
+      _MenuItem(label: tr('발음'), sub: 'تلفظ', badge: 'rr', color: AppColors.er,
         builder: (_) => _ComingSoon(title: tr('발음 (rr · ñ · 강세)'))),
       _MenuItem(label: tr('단어 카드'), sub: 'کارت‌ها', badge: 'R', color: AppColors.gualdaDeep,
         builder: (_) => const WordFlashcardScreen()),
@@ -486,7 +486,7 @@ class _ComingSoon extends StatelessWidget {
       appBar: AppBar(title: Text(title)),
       body: Center(
         child: Text(
-          tr('Próximamente · 준비 중'),
+          tr('준비 중'),
           style: TextStyle(color: AppColors.tintaLight, letterSpacing: 2),
         ),
       ),

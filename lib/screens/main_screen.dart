@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
+import '../core/pane.dart';
+import '../core/platform.dart';
 import '../core/theme.dart';
 import '../main.dart';
 import '../widgets/spanish_decor.dart';
 import 'chunk_search_screen.dart';
 import 'conversation_screen.dart';
+import 'dialogue_screen.dart';
 import 'episode_screen.dart';
 import 'grammar_lesson_screen.dart';
 import 'profile_screen.dart';
@@ -41,17 +44,92 @@ class _MainScreenState extends State<MainScreen> {
     NavigationDestination(icon: Icon(Icons.person_outline), selectedIcon: Icon(Icons.person), label: tr('프로필')),
   ];
 
+  final _pane = GlobalKey<NavigatorState>();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: IndexedStack(index: _index, children: _screens),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _index,
-        onDestinationSelected: (i) => setState(() => _index = i),
-        destinations: _tabs,
+    final stack = IndexedStack(index: _index, children: _screens);
+    // 폰(한 화면): 하단 탭 + 내용 전체 화면
+    if (!isWide(context)) {
+      return Scaffold(
+        body: stack,
+        bottomNavigationBar: NavigationBar(
+          selectedIndex: _index,
+          onDestinationSelected: (i) => setState(() => _index = i),
+          destinations: _tabs,
+        ),
+      );
+    }
+    // 넓은 화면(아이패드·태블릿·폴드 펼침): 레일 + 왼쪽 칸(탭 화면) | 오른쪽 칸(연 화면) — 일본어앱·인도네시아어앱과 같은 구조(2026-11-02).
+    // 회화 재생·카드 같은 학습은 openFull 로 전체 화면.
+    final w = MediaQuery.sizeOf(context).width;
+    final left = (w * 0.34).clamp(300.0, 440.0);
+    return Pane(
+      navKey: _pane,
+      child: NavigatorPopHandler(
+        onPopWithResult: (_) => _pane.currentState?.maybePop(),
+        child: Scaffold(
+          body: SafeArea(
+            bottom: false,
+            child: Row(
+              children: [
+                NavigationRail(
+                  selectedIndex: _index,
+                  onDestinationSelected: (i) => setState(() => _index = i),
+                  labelType: w >= 900 ? NavigationRailLabelType.all : NavigationRailLabelType.selected,
+                  backgroundColor: AppColors.washiDeep,
+                  indicatorColor: AppColors.beni.withValues(alpha: 0.12),
+                  selectedIconTheme: const IconThemeData(color: AppColors.beniDeep),
+                  unselectedIconTheme: const IconThemeData(color: AppColors.muted),
+                  selectedLabelTextStyle: const TextStyle(color: AppColors.beni, fontSize: 11, fontWeight: FontWeight.w600),
+                  unselectedLabelTextStyle: const TextStyle(color: AppColors.muted, fontSize: 11, fontWeight: FontWeight.w600),
+                  destinations: [
+                    for (final t in _tabs)
+                      NavigationRailDestination(icon: t.icon, selectedIcon: t.selectedIcon, label: Text(t.label)),
+                  ],
+                ),
+                const VerticalDivider(width: 1, thickness: 1, color: AppColors.line),
+                SizedBox(width: left, child: stack),
+                const VerticalDivider(width: 1, thickness: 1, color: AppColors.line),
+                Expanded(
+                  child: ClipRect(
+                    child: Navigator(
+                      key: _pane,
+                      onGenerateInitialRoutes: (_, _) => [MaterialPageRoute(builder: (_) => const _PanePlaceholder())],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
+}
+
+/// 오른쪽 칸이 비어 있을 때.
+class _PanePlaceholder extends StatelessWidget {
+  const _PanePlaceholder();
+
+  @override
+  Widget build(BuildContext context) => Scaffold(
+        backgroundColor: AppColors.washi,
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const TileBadge(text: 'FA', size: 56, color: AppColors.farsi),
+              const SizedBox(height: 14),
+              Text(
+                tr('왼쪽에서 고르면 여기에 열립니다 · 회화 재생·카드는 전체 화면'),
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: AppColors.muted, fontWeight: FontWeight.w600),
+              ),
+            ],
+          ),
+        ),
+      );
 }
 
 class HomeScreen extends StatelessWidget {
@@ -221,10 +299,7 @@ class _TodayMissionState extends State<_TodayMission> {
     final ratio = _total == 0 ? 0.0 : _learned / _total;
     return InkWell(
       onTap: () async {
-        await Navigator.push(
-          context,
-          MaterialPageRoute(builder: (_) => EpisodeScreen(meta: meta)),
-        );
+        await openPane(context, (_) => EpisodeScreen(meta: meta));
         _load();
       },
       child: Container(
@@ -292,7 +367,9 @@ class _MenuGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final items = <_MenuItem>[
-      _MenuItem(label: tr('회화'), sub: 'Conversación', badge: 'Ch', color: AppColors.rojo,
+      _MenuItem(label: tr('회화'), sub: 'گفتگو', badge: 'Ch', color: AppColors.beni,
+        builder: (_) => const DialogueHomeScreen()),
+      _MenuItem(label: tr('회화 노트'), sub: 'یادداشت', badge: 'N', color: AppColors.rojo,
         builder: (_) => const ConversationScreen()),
       _MenuItem(label: tr('문법'), sub: 'دستور', badge: 'G', color: AppColors.rojoDeep,
         builder: (_) => const GrammarHubScreen()),
@@ -327,7 +404,7 @@ class _MenuGrid extends StatelessWidget {
         crossAxisCount: 3,
         mainAxisSpacing: 10,
         crossAxisSpacing: 10,
-        childAspectRatio: 0.95,
+        mainAxisExtent: 150, // 고정 높이 — 아이패드 왼쪽 좁은 칸(300~440)에서 비율로 잡으면 아래가 넘친다
       ),
       itemCount: items.length,
       itemBuilder: (context, i) => _MenuTile(item: items[i]),
@@ -357,7 +434,7 @@ class _MenuTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.push(context, MaterialPageRoute(builder: item.builder)),
+      onTap: () => openPane(context, item.builder),
       borderRadius: BorderRadius.circular(14),
       child: Container(
         decoration: BoxDecoration(

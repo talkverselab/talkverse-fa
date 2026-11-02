@@ -1,6 +1,7 @@
 import 'package:drift/drift.dart' hide Column;
 import 'package:flutter/material.dart';
 
+import '../widgets/achievement_desk.dart';
 import '../core/theme.dart';
 import '../main.dart';
 import '../widgets/spanish_decor.dart';
@@ -60,6 +61,9 @@ class _ProgressScreenState extends State<ProgressScreen> {
           : ListView(
               padding: const EdgeInsets.all(16),
               children: [
+                // 성과 데스크(일본어앱 시안 02 §5) — 편 완주·그림 카드. 큰 숫자 대신 문장.
+                const AchievementDesk(),
+                const SizedBox(height: 16),
                 _StatCard(
                   label: tr('회화 턴'),
                   badge: 'Ch',

@@ -27,7 +27,8 @@ class SeedLoader {
 
     await _seedWords();
     await _seedVerbs();
-    await _seedTurns();
+    // 회화 턴은 새로 깔 때만 채운다 — 다시 채우면 학습 기록(user_progress)이 지워진다. 회화를 바꿀 때는 이 조건을 다시 볼 것.
+    if (stored == 0) await _seedTurns();
 
     await prefs.setInt(_kDbVersion, bundled);
   }

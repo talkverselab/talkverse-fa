@@ -9,6 +9,8 @@ import 'services/learner_prefs.dart';
 import 'data/db/app_database.dart';
 import 'data/db/seed_loader.dart';
 import 'screens/main_screen.dart';
+import 'screens/sync_screen.dart';
+import 'services/content_sync.dart';
 import 'services/ko_reading.dart';
 import 'core/l10n.dart';
 
@@ -26,7 +28,9 @@ void main() async {
   Account.load();
   Purchase.configure({'fa': ('com.talkverse.persianUniverse.lifetime', 'lang_fa')});
   await _setOrientations(); // 폰은 세로 고정, 태블릿·폴드 펼침(짧은 변 600 이상)은 회전 허용
-  runApp(const PersianUniverseApp());
+  // 그림(장면 컷·단어 그림) 기기 내려받기: 버전이 다르면 로딩 화면에서 받고 시작(사용자 지시 2026-11-04)
+  final needSync = await ContentSync.instance.init(large: _wide ?? false);
+  runApp(PersianUniverseApp(syncFirst: needSync));
 }
 
 bool? _wide;
@@ -45,7 +49,8 @@ Future<void> _setOrientations([double? shortest]) async {
 }
 
 class PersianUniverseApp extends StatelessWidget {
-  const PersianUniverseApp({super.key});
+  final bool syncFirst;
+  const PersianUniverseApp({super.key, this.syncFirst = false});
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +75,7 @@ class PersianUniverseApp extends StatelessWidget {
             child: child ?? const SizedBox.shrink(),
           );
         },
-        home: const MainScreen(),
+        home: syncFirst ? const SyncScreen(next: MainScreen()) : const MainScreen(),
       ),
     );
   }

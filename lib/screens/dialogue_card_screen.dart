@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../core/l10n.dart';
+import '../services/ko_reading.dart';
+import '../widgets/glyph_sheet.dart';
 import '../core/platform.dart';
 import '../core/theme.dart';
 import '../services/achievement_service.dart';
@@ -75,6 +77,7 @@ class _DialogueCardScreenState extends State<DialogueCardScreen> {
           const SizedBox(height: 2),
           Text('${_pos + 1} / ${_order.length}', style: const TextStyle(color: AppColors.muted, fontSize: 10, letterSpacing: 2)),
         ]),
+        actions: const [KoReadingToggleAction()],
       ),
       body: Column(children: [
         Expanded(
@@ -156,9 +159,9 @@ class _CardText extends StatelessWidget {
               child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text('$name · ${t.num}', style: const TextStyle(fontSize: 11, color: AppColors.muted)),
                 const SizedBox(height: 8),
-                Text(LearnerPrefs.fill(t.tl), textDirection: TextDirection.rtl, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: AppColors.beni, height: 1.3)),
+                TappablePersianText(LearnerPrefs.fill(t.tl), lemmas: t.lemmas, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w900, color: AppColors.beni, height: 1.3)),
                 if (t.gloss.isNotEmpty) ...[const SizedBox(height: 6), Text(t.gloss, style: const TextStyle(fontSize: 13, color: AppColors.ai, fontWeight: FontWeight.w600))],
-                if (t.rd.isNotEmpty) Text(LearnerPrefs.fill(t.rd, ko: true), style: const TextStyle(fontSize: 13, color: AppColors.muted)),
+                if (t.rd.isNotEmpty) KoReadingText(LearnerPrefs.fill(t.rd, ko: true), style: const TextStyle(fontSize: 13, color: AppColors.muted)),
                 const SizedBox(height: 12),
                 const BrushDivider(height: 2),
                 const SizedBox(height: 10),

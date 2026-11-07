@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../core/l10n.dart';
+import '../services/ko_reading.dart';
+import '../widgets/glyph_sheet.dart';
 import '../core/platform.dart';
 import '../core/pane.dart';
 import '../core/theme.dart';
@@ -223,6 +225,7 @@ class _DialogueScreenState extends State<DialogueScreen> {
               style: const TextStyle(color: AppColors.muted, fontSize: 10, letterSpacing: 1)),
         ]),
         actions: [
+          const KoReadingToggleAction(),
           IconButton(
             tooltip: tr('그림 카드(글자 없이)'),
             icon: const Icon(Icons.style_outlined, color: AppColors.ai),
@@ -317,9 +320,9 @@ class _Bubble extends StatelessWidget {
                   InkWell(onTap: onPlayFrom, child: const Icon(Icons.play_circle_outline, size: 16, color: AppColors.ai)),
                 ]),
                 const SizedBox(height: 4),
-                Text(LearnerPrefs.fill(t.tl), textDirection: TextDirection.rtl, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: AppColors.sumi, height: 1.4)),
+                TappablePersianText(LearnerPrefs.fill(t.tl), lemmas: t.lemmas, style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w800, color: AppColors.sumi, height: 1.4)),
                 if (t.gloss.isNotEmpty) Text(t.gloss, style: const TextStyle(fontSize: 11.5, color: AppColors.ai, fontWeight: FontWeight.w600)),
-                if (t.rd.isNotEmpty) Text(LearnerPrefs.fill(t.rd, ko: true), style: const TextStyle(fontSize: 12, color: AppColors.muted)),
+                if (t.rd.isNotEmpty) KoReadingText(LearnerPrefs.fill(t.rd, ko: true), style: const TextStyle(fontSize: 12, color: AppColors.muted)),
                 const SizedBox(height: 3),
                 Text(LearnerPrefs.fill(t.ko, ko: true), style: const TextStyle(fontSize: 13, color: AppColors.sumiLight, height: 1.35)),
                 if (t.note.isNotEmpty) ...[

@@ -44,7 +44,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
     final catalog = EpisodeCatalog.instance;
     return Scaffold(
       backgroundColor: AppColors.cal,
-      appBar: AppBar(title: Text(tr('회화 · Conversación'))),
+      appBar: AppBar(title: Text(tr('에피소드'))),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
           : ListView(

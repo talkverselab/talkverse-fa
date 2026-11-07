@@ -10,6 +10,7 @@ import '../screens/dialogue_card_screen.dart';
 import '../services/achievement_service.dart';
 import '../services/art_service.dart';
 import '../services/dialogue_service.dart';
+import '../services/ko_reading.dart';
 import '../services/learner_prefs.dart';
 import '../services/tts_service.dart';
 import 'glyph_sheet.dart';
@@ -39,7 +40,7 @@ class _EpisodePlayPaneState extends State<EpisodePlayPane> {
   bool _playing = false;
   double _rate = 1.0; // 0.75 / 1.0 / 1.25
   bool _showGloss = false;
-  bool _showRd = true;
+  bool get _showRd => KoReadingPrefs.show.value;
   bool _showKo = true;
   int _session = 0; // 재생 루프 세대(중단 판별)
   bool _done = false; // 완주 연출 표시
@@ -52,6 +53,7 @@ class _EpisodePlayPaneState extends State<EpisodePlayPane> {
   @override
   void initState() {
     super.initState();
+    KoReadingPrefs.show.addListener(_onRd);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       if (!mounted) return;
       // 대사에 {name} 자리가 있는데 이름이 없으면 먼저 묻는다(앱 켠 뒤 한 번, 사용자 지시 2026-11-04)
@@ -61,8 +63,13 @@ class _EpisodePlayPaneState extends State<EpisodePlayPane> {
     });
   }
 
+  void _onRd() {
+    if (mounted) setState(() {});
+  }
+
   @override
   void dispose() {
+    KoReadingPrefs.show.removeListener(_onRd);
     _session++;
     TtsService.instance.stop();
     super.dispose();
@@ -149,7 +156,7 @@ class _EpisodePlayPaneState extends State<EpisodePlayPane> {
       onSeek: (v) => _goto(v),
       onRate: () => setState(() => _rate = _rate >= 1.25 ? 0.75 : (_rate + 0.25)),
       onGloss: () => setState(() => _showGloss = !_showGloss),
-      onRd: () => setState(() => _showRd = !_showRd),
+      onRd: () => KoReadingToggleAction.toggle(context),
       onKo: () => setState(() => _showKo = !_showKo),
     );
     return LayoutBuilder(builder: (context, c) {
@@ -208,6 +215,8 @@ class _Script extends StatelessWidget {
           const SizedBox(width: 6),
           Text(tr('대화 스크립트'), style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w800, color: AppColors.sumi)),
           const Spacer(),
+          const SizedBox(height: 28, child: FittedBox(child: KoReadingToggleAction())),
+          const SizedBox(width: 4),
           Container(
             width: 22,
             height: 22,
@@ -246,7 +255,7 @@ class _Script extends StatelessWidget {
                     const SizedBox(width: 8),
                     Expanded(
                       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-                        TappablePersianText(LearnerPrefs.fill(t.tl), style: TextStyle(fontSize: on ? 16.5 : 15, fontWeight: FontWeight.w800, color: AppColors.sumi, height: 1.35)),
+                        TappablePersianText(LearnerPrefs.fill(t.tl), lemmas: t.lemmas, style: TextStyle(fontSize: on ? 16.5 : 15, fontWeight: FontWeight.w800, color: AppColors.sumi, height: 1.35)),
                         if (showGloss && t.gloss.isNotEmpty && t.gloss != t.tl) Text(t.gloss, textDirection: TextDirection.rtl, style: const TextStyle(fontSize: 11, color: AppColors.ai, fontWeight: FontWeight.w600)),
                         if (showRd && t.rd.isNotEmpty) Text(LearnerPrefs.fill(t.rd, ko: true), style: const TextStyle(fontSize: 11.5, color: AppColors.muted)),
                         if (showKo) Text(LearnerPrefs.fill(t.ko, ko: true), style: const TextStyle(fontSize: 12.5, color: AppColors.sumiLight, height: 1.35)),
@@ -337,7 +346,7 @@ class _Caption extends StatelessWidget {
         child: Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
           Expanded(
             child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              TappablePersianText(LearnerPrefs.fill(turn.tl), style: TextStyle(fontSize: wide ? 20 : 17, fontWeight: FontWeight.w800, color: AppColors.sumi, height: 1.35)),
+              TappablePersianText(LearnerPrefs.fill(turn.tl), lemmas: turn.lemmas, style: TextStyle(fontSize: wide ? 20 : 17, fontWeight: FontWeight.w800, color: AppColors.sumi, height: 1.35)),
               if (showGloss && turn.gloss.isNotEmpty && turn.gloss != turn.tl) Text(turn.gloss, textDirection: TextDirection.rtl, style: const TextStyle(fontSize: 12, color: AppColors.ai, fontWeight: FontWeight.w600)),
               if (showRd && turn.rd.isNotEmpty) Text(LearnerPrefs.fill(turn.rd, ko: true), style: const TextStyle(fontSize: 12.5, color: AppColors.muted)),
               if (showKo) Padding(padding: const EdgeInsets.only(top: 2), child: Text(LearnerPrefs.fill(turn.ko, ko: true), style: const TextStyle(fontSize: 13.5, color: AppColors.sumiLight, height: 1.35))),

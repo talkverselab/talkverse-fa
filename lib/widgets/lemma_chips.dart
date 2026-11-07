@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../core/l10n.dart';
 import '../core/theme.dart';
 import '../services/dialogue_service.dart';
+import '../services/ko_reading.dart';
 import '../services/tts_service.dart';
 import '../services/vocab_service.dart';
 import 'glyph_sheet.dart';
@@ -34,7 +35,7 @@ class LemmaChips extends StatelessWidget {
                 gloss: found[l.base]?.gloss,
                 compact: compact,
                 on: found[l.base] != null,
-                onTap: () => found[l.base] != null ? _wordSheet(context, found[l.base]!) : GlyphSheet.show(context, l.base),
+                onTap: () => found[l.base] != null ? showWordSheet(context, found[l.base]!) : GlyphSheet.show(context, l.base),
               ),
           ]),
         );
@@ -42,7 +43,10 @@ class LemmaChips extends StatelessWidget {
     );
   }
 
-  static void _wordSheet(BuildContext context, VocabEntry e) => showModalBottomSheet(
+}
+
+/// 단어창 — 뜻·독음·듣기.
+void showWordSheet(BuildContext context, VocabEntry e) => showModalBottomSheet(
         context: context,
         showDragHandle: true,
         backgroundColor: AppColors.washi,
@@ -54,7 +58,7 @@ class LemmaChips extends StatelessWidget {
             Expanded(
               child: Column(mainAxisSize: MainAxisSize.min, crossAxisAlignment: CrossAxisAlignment.start, children: [
                 Text(e.tx, textDirection: TextDirection.rtl, style: const TextStyle(fontSize: 26, fontWeight: FontWeight.w800, color: AppColors.sumi)),
-                if (e.rd.isNotEmpty) Text(e.rd, style: const TextStyle(fontSize: 13, color: AppColors.muted)),
+                if (e.rd.isNotEmpty) KoReadingText(e.rd, style: const TextStyle(fontSize: 13, color: AppColors.muted)),
                 const SizedBox(height: 4),
                 Text(e.ko, style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AppColors.sumiLight)),
               ]),
@@ -63,7 +67,6 @@ class LemmaChips extends StatelessWidget {
           ]),
         ),
       );
-}
 
 class _Chip extends StatelessWidget {
   final String label;

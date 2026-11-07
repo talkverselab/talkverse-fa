@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
+import 'about_screen.dart';
 import 'login_screen.dart';
-import 'update_screen.dart';
 
 import '../core/theme.dart';
 import '../widgets/spanish_decor.dart';
 import '../core/l10n.dart';
-import '../core/platform.dart';
+import '../core/pane.dart';
 import '../data/account.dart';
 import '../data/entitlement.dart';
 import '../data/purchase.dart';
+import '../services/ko_reading.dart';
 import '../services/learner_prefs.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -23,7 +24,6 @@ class ProfileScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          if (!isIOS) const UpdateEntryTile(),
           Container(
             padding: const EdgeInsets.all(18),
             decoration: BoxDecoration(
@@ -67,38 +67,42 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 18),
+          _SectionTitle(tr('계정')),
+          const SizedBox(height: 8),
+          const _AccountSection(),
+          const SizedBox(height: 18),
           // 학습자 프로필(일본어앱 learner_prefs) — 이름 → 회화의 {name} 자리, 성별 → 학습자 목소리(새 회화 구조부터)
           _SectionTitle(tr('학습자')),
           const SizedBox(height: 8),
           const _LearnerSection(),
           const SizedBox(height: 18),
-          _SectionTitle(tr('계정')),
-          const SizedBox(height: 8),
-          const _AccountSection(),
-          const SizedBox(height: 18),
           _SectionTitle(tr('설정')),
           const SizedBox(height: 8),
-          _SettingsGroup(items: [
-            _SettingItem(
-                icon: Icons.language,
-                title: tr('언어 / Language'),
-                subtitle: '${AppLangPrefs.lang.value.label}  →  ${AppLangPrefs.peekNext().label}',
-                onTap: AppLangPrefs.next),
-            if (isIOS)
+          ValueListenableBuilder<bool>(
+            valueListenable: KoReadingPrefs.show,
+            builder: (context, on, _) => _SettingsGroup(items: [
               _SettingItem(
-                  icon: Icons.flight_takeoff,
-                  title: tr('앱 업데이트'),
-                  subtitle: tr('아이폰은 TestFlight 앱에서 새 빌드를 받습니다')),
-            _SettingItem(icon: Icons.volume_up, title: tr('TTS 음성'), subtitle: tr('fa-IR (시스템 보이스)')),
-            _SettingItem(icon: Icons.public, title: tr('변종'), subtitle: tr('이란 페르시아어 (테헤란)')),
-            _SettingItem(icon: Icons.palette, title: tr('테마'), subtitle: tr('낮 · talkverse.uk 톤')),
-          ]),
+                  icon: Icons.language,
+                  title: tr('언어 / Language'),
+                  subtitle: '${AppLangPrefs.lang.value.label}  →  ${AppLangPrefs.peekNext().label}',
+                  onTap: AppLangPrefs.next),
+              _SettingItem(
+                  icon: Icons.text_fields,
+                  title: tr('한글독음'),
+                  subtitle: on ? tr('표시 — 탭하면 숨김') : tr('미표시(기본) — 힘들어도 보지 않고 익혀보세요'),
+                  onTap: () => KoReadingToggleAction.toggle(context)),
+            ]),
+          ),
           const SizedBox(height: 16),
           _SectionTitle(tr('정보')),
           const SizedBox(height: 8),
           _SettingsGroup(items: [
+            _SettingItem(
+                icon: Icons.landscape_outlined,
+                title: tr('앱 소개'),
+                subtitle: tr('절벽구간 — 이 앱이 단어를 나누는 기준'),
+                onTap: () => openPane(context, (_) => const AboutScreen())),
             _SettingItem(icon: Icons.info_outline, title: tr('앱 버전'), subtitle: '0.1.0 · alpha'),
-            _SettingItem(icon: Icons.code, title: 'Stack', subtitle: 'Flutter 3.41 · Material 3 · Drift'),
             _SettingItem(icon: Icons.copyright, title: tr('저작권'), subtitle: tr('페르시아어유니버스 · 2026')),
           ]),
           const SizedBox(height: 20),

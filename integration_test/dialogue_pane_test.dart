@@ -44,7 +44,7 @@ void main() {
     await wait(t, 1500);
     await shot(t, '01_home_wide');
 
-    await t.tap(find.text('회화').first);
+    await t.tap(find.text('회화').at(1)); // 0 = 섹션 머리글
     await wait(t, 2500);
     await shot(t, '02_dialogue_home_right');
 

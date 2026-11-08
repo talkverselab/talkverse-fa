@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'alphabet_screen.dart';
 import '../core/pane.dart';
 import '../core/platform.dart';
 import '../core/theme.dart';
@@ -387,11 +388,15 @@ class _TodayMissionState extends State<_TodayMission> {
   }
 }
 
-/// 메뉴 순서(일본어앱 구조, 사용자 지시 2026-11-07): 문법 → 회화 → 단어 → 에피소드 → 참고.
+/// 메뉴 순서(일본어앱 구조, 사용자 지시 2026-11-07·11-08): 기초 → 문법 → 회화 → 단어 → 에피소드 → 참고.
 class _MenuGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sections = <(String, List<_MenuItem>)>[
+      (tr('기초'), [
+        _MenuItem(label: tr('문자와 발음'), sub: 'الفبا', badge: 'ا', color: AppColors.farsi,
+          builder: (_) => const AlphabetScreen()),
+      ]),
       (tr('문법'), [
         _MenuItem(label: tr('문법'), sub: 'دستور', badge: 'G', color: AppColors.rojoDeep,
           builder: (_) => const GrammarHubScreen()),

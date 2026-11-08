@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'alphabet_screen.dart';
+import 'keyboard_screen.dart';
 import '../core/pane.dart';
 import '../core/platform.dart';
 import '../core/theme.dart';
@@ -396,6 +397,8 @@ class _MenuGrid extends StatelessWidget {
       (tr('기초'), [
         _MenuItem(label: tr('문자와 발음'), sub: 'الفبا', badge: 'ا', color: AppColors.farsi,
           builder: (_) => const AlphabetScreen()),
+        _MenuItem(label: tr('키보드 연습'), sub: tr('페르시아어 키보드로 따라 치기'), badge: '⌨️', color: AppColors.oliva,
+          builder: (_) => const KeyboardScreen()),
       ]),
       (tr('문법'), [
         _MenuItem(label: tr('문법'), sub: 'دستور', badge: 'G', color: AppColors.rojoDeep,

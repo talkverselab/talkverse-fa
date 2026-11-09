@@ -42,3 +42,4 @@ Claude 초안(끝) → **Grok 재작성(11/9 13:30 재개 공지)** → **Gemini
 - 디스크: 11-09 M6 가 한 번 꽉 찼다(빌드·시뮬레이터). `build/` 와 scratchpad APK 는 지워도 된다(PC 백업 있음).
 - Grok·Gemini 는 M4 Chrome(`~/talkverse/GROK_M4_LOGIN.md`, `GROK_PROMPT_GUIDE.md`), 한 번에 한 작업, 탭·Chrome 은 끝나면 닫는다.
 - **Grok 재개(2026-11-09 허브 공지 `~/logs/rc/RELAY_grok_20261109.md`)**: 옛 계정 다시 로그인(M4 uk 크롬 포트 9231, uk 의 방은 건드리지 말 것). 자기 크롬을 켠 뒤 `ssh macmini4 /usr/bin/python3 ~/talkverse-uk/tools/grok_cookie_sync.py 9231 <자기 포트>` 로 쿠키 동기화. **한자 세션은 더 이상 대행하지 않는다** — 직접 처리, 요청 도구는 M6 `~/Hanja/tools/grok_req.py`·`grok_cdp.py` 를 이 저장소 `tools/` 로 복사해 쓴다. 회화 Grok 재작성은 여전히 사용자 지시 뒤.
+- **Grok 프롬프트 최소화(2026-11-09 사용자 지시, uk 전달)**: 규칙은 문서(첨부 파일)에 한 번만, 방 첫 메시지에서 「이후엔 파일 이름 한 줄만 보낸다」고 약속하고 그 뒤 채팅은 한 줄만. 그림이 처음과 달라지면 최초 통과 그림을 기준으로(이미 만든 것은 그대로). 회화 감정 열(`emotion`·`segs`, 턴마다)은 재작성 뒤에도 유지 — 지금 146편 1,467턴 모두 들어 있음.

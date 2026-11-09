@@ -7,6 +7,7 @@ import '../core/theme.dart';
 import '../widgets/legal_links.dart';
 import '../widgets/spanish_decor.dart';
 import '../core/l10n.dart';
+import '../embed.dart';
 import '../core/pane.dart';
 import '../data/account.dart';
 import '../data/entitlement.dart';
@@ -68,6 +69,13 @@ class ProfileScreen extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 18),
+          // 통합 앱(Talkverse)에서만: 다른 언어 앱으로(2026-11-09)
+          if (switchLanguage != null) ...[
+            _SettingsGroup(items: [
+              _SettingItem(icon: Icons.swap_horiz, title: tr('다른 언어 배우기'), subtitle: tr('Talkverse 의 다른 언어로 이동'), onTap: switchLanguage!),
+            ]),
+            const SizedBox(height: 16),
+          ],
           _SectionTitle(tr('계정')),
           const SizedBox(height: 8),
           const _AccountSection(),

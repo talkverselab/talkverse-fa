@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
+import '../core/embed_env.dart';
 import '../core/theme.dart';
 import '../services/ko_reading.dart';
 import '../services/memorized_store.dart';
@@ -49,7 +50,7 @@ class _WordFlashcardScreenState extends State<WordFlashcardScreen> {
   Future<void> _load() async {
     await MemorizedStore.load();
     try {
-      final d = json.decode(await rootBundle.loadString(widget.asset)) as Map<String, dynamic>;
+      final d = json.decode(await rootBundle.loadString(assetPath(widget.asset))) as Map<String, dynamic>;
       for (final t in (d['themes'] as List? ?? const []).whereType<Map>()) {
         final title = '${t['emoji'] ?? ''} ${t['title'] ?? ''}'.trim();
         _themes.add(title);

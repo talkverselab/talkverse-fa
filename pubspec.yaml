@@ -27,9 +27,9 @@ dependencies:
   flutter_tts: ^4.2.0
 
   # Drift (SQLite ORM)
-  drift: ^2.20.3
-  drift_flutter: ^0.2.0
-  sqlite3_flutter_libs: ^0.5.24
+  drift: ^2.33.0
+  drift_flutter: ^0.3.0
+  sqlite3_flutter_libs: ^0.6.0+eol
   http: ^1.6.0
   flutter_web_auth_2: ^5.1.0
   flutter_secure_storage: ^11.2.0
@@ -47,8 +47,8 @@ dev_dependencies:
   flutter_lints: ^6.0.0
 
   # Drift codegen
-  drift_dev: ^2.20.3
-  build_runner: ^2.4.13
+  drift_dev: ^2.33.0
+  build_runner: ^2.15.0
 
   # Launcher icons
   flutter_launcher_icons: ^0.14.1

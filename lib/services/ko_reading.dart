@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import '../core/prefs.dart';
 import '../core/l10n.dart';
 
 /// 한글독음(발음 표기) 표시/숨김 전역 설정 — 모든 메뉴 공용.
@@ -12,13 +12,13 @@ class KoReadingPrefs {
   static final ValueNotifier<bool> show = ValueNotifier<bool>(false);
 
   static Future<void> load() async {
-    final p = await SharedPreferences.getInstance();
+    final p = await Prefs.getInstance();
     show.value = p.getBool(_key) ?? false;
   }
 
   static Future<void> toggle() async {
     show.value = !show.value;
-    final p = await SharedPreferences.getInstance();
+    final p = await Prefs.getInstance();
     await p.setBool(_key, show.value);
   }
 }

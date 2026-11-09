@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
+import '../core/embed_env.dart';
 import '../core/theme.dart';
 import '../services/ko_reading.dart';
 import '../services/memorized_store.dart';
@@ -45,7 +46,7 @@ class VocabCatalog {
 
   Future<void> ensureLoaded(String asset) async {
     if (_byAsset.containsKey(asset)) return;
-    final raw = await rootBundle.loadString(asset);
+    final raw = await rootBundle.loadString(assetPath(asset));
     final data = json.decode(raw) as Map<String, dynamic>;
     _byAsset[asset] = [
       for (final t in (data['themes'] as List).whereType<Map>())

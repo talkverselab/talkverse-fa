@@ -4,6 +4,7 @@ import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
+import '../core/embed_env.dart';
 import '../core/cliff.dart';
 import '../core/l10n.dart';
 import '../core/platform.dart';
@@ -56,7 +57,7 @@ class _WordFreqScreenState extends State<WordFreqScreen> {
   }
 
   Future<void> _load() async {
-    final rows = const CsvToListConverter(eol: '\n').convert(await rootBundle.loadString('assets/data/freq/lang_es_top.csv'));
+    final rows = const CsvToListConverter(eol: '\n').convert(await rootBundle.loadString(assetPath('assets/data/freq/lang_es_top.csv')));
     final words = <WordEntry>[];
     for (final r in rows.skip(1)) {
       if (r.length < 10) continue;
@@ -65,7 +66,7 @@ class _WordFreqScreenState extends State<WordFreqScreen> {
       words.add(WordEntry(rank: rank, word: '${r[1]}', ko: '${r[4]}', rd: '${r[9]}', region: '${r[7]}'));
     }
     final conv = <WordEntry>[];
-    final j = json.decode(await rootBundle.loadString('assets/data/freq/conv_words_fa.json')) as Map<String, dynamic>;
+    final j = json.decode(await rootBundle.loadString(assetPath('assets/data/freq/conv_words_fa.json'))) as Map<String, dynamic>;
     for (final w in (j['words'] as List).cast<Map<String, dynamic>>()) {
       conv.add(WordEntry(rank: conv.length + 1, word: '${w['word']}', ko: '${w['ko'] ?? ''}', rd: '${w['rd'] ?? ''}', region: 'C'));
     }

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
+import 'prefs.dart';
 import 'l10n_dict.dart';
 
 /// 앱 표시 언어 — 한국어(기본) / English / 日本語 / 中文.
@@ -26,14 +26,14 @@ class AppLangPrefs {
   static bool get isEn => lang.value == AppLang.en;
 
   static Future<void> load() async {
-    final p = await SharedPreferences.getInstance();
+    final p = await Prefs.getInstance();
     final v = p.getString(_key) ?? 'ko';
     lang.value = AppLang.values.firstWhere((l) => l.name == v, orElse: () => AppLang.ko);
   }
 
   static Future<void> set(AppLang l) async {
     lang.value = l;
-    final p = await SharedPreferences.getInstance();
+    final p = await Prefs.getInstance();
     await p.setString(_key, l.name);
   }
 

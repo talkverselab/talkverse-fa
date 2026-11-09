@@ -2,6 +2,7 @@ import 'package:csv/csv.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
+import '../core/embed_env.dart';
 import '../core/l10n.dart';
 import '../core/platform.dart';
 import '../core/theme.dart';
@@ -46,7 +47,7 @@ class _KeyboardScreenState extends State<KeyboardScreen> {
   Future<void> _load() async {
     final out = <_Item>[];
     if (_items == KeyboardItems.words) {
-      final rows = const CsvToListConverter(eol: '\n').convert(await rootBundle.loadString('assets/data/freq/lang_es_top.csv'));
+      final rows = const CsvToListConverter(eol: '\n').convert(await rootBundle.loadString(assetPath('assets/data/freq/lang_es_top.csv')));
       final h = rows.first.map((e) => '$e').toList();
       final w = h.indexOf('word'), ko = h.indexOf('ko'), rd = h.indexOf('rd');
       for (final r in rows.skip(1)) {

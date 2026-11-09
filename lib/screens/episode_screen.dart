@@ -4,9 +4,10 @@ import 'package:drift/drift.dart' hide Column;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
+import '../core/embed_env.dart';
 import '../core/theme.dart';
 import '../data/db/app_database.dart';
-import '../main.dart';
+import '../embed.dart';
 import '../services/tts_service.dart';
 import '../services/ko_reading.dart';
 import '../widgets/spanish_decor.dart';
@@ -58,7 +59,7 @@ class EpisodeCatalog {
     if (_loaded) return;
     for (final level in levels) {
       try {
-        final raw = await rootBundle.loadString('assets/data/dialogues/$level.json');
+        final raw = await rootBundle.loadString(assetPath('assets/data/dialogues/$level.json'));
         final data = json.decode(raw) as Map<String, dynamic>;
         final units = (data['episodes'] as List?) ?? (data['dialogues'] as List?) ?? [];
         _byLevel[level] = [

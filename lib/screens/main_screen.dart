@@ -5,7 +5,7 @@ import 'keyboard_screen.dart';
 import '../core/pane.dart';
 import '../core/platform.dart';
 import '../core/theme.dart';
-import '../main.dart';
+import '../embed.dart';
 import '../widgets/spanish_decor.dart';
 import 'about_screen.dart';
 import 'chunk_search_screen.dart';

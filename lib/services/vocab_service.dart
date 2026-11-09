@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:csv/csv.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
+import '../core/embed_env.dart';
+
 /// 앱 단어장(`assets/data/vocab/travel_words.json` + 빈도 단어 `assets/data/freq/lang_es_top.csv`) 조회 — 문장 레마 칩용(일본어앱 WordService.byLemmas 자리, 2026-11-04).
 class VocabEntry {
   final String tx; // 페르시아어
@@ -21,7 +23,7 @@ class VocabService {
   Future<Map<String, VocabEntry>> _load() async {
     final out = <String, VocabEntry>{};
     try {
-      final j = json.decode(await rootBundle.loadString('assets/data/vocab/travel_words.json')) as Map<String, dynamic>;
+      final j = json.decode(await rootBundle.loadString(assetPath('assets/data/vocab/travel_words.json'))) as Map<String, dynamic>;
       for (final t in (j['themes'] as List? ?? const [])) {
         for (final sec in ((t as Map)['sections'] as List? ?? const [])) {
           for (final w in ((sec as Map)['words'] as List? ?? const [])) {
@@ -35,7 +37,7 @@ class VocabService {
     } catch (_) {}
     // 빈도 단어(머리글 rank,word,pos,gender,ko,freq,cum_pct,region,cefr,rd — 회화 레마 보충분, uk 세션 2026-11-04)
     try {
-      final rows = const CsvToListConverter(eol: '\n').convert(await rootBundle.loadString('assets/data/freq/lang_es_top.csv'));
+      final rows = const CsvToListConverter(eol: '\n').convert(await rootBundle.loadString(assetPath('assets/data/freq/lang_es_top.csv')));
       for (final r in rows.skip(1)) {
         if (r.length < 5) continue;
         final tx = '${r[1]}'.trim();

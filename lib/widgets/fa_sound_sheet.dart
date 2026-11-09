@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../core/embed_env.dart';
 import '../core/l10n.dart';
 import '../core/platform.dart';
 import '../core/theme.dart';
@@ -147,7 +148,7 @@ class _FaSoundSheetState extends State<_FaSoundSheet> {
             if (_showChart) ...[
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Container(color: Colors.white, padding: const EdgeInsets.all(8), child: Image.asset('assets/images/ipa/places_of_articulation.png', fit: BoxFit.contain)),
+                child: Container(color: Colors.white, padding: const EdgeInsets.all(8), child: Image.asset(assetPath('assets/images/ipa/places_of_articulation.png'), fit: BoxFit.contain)),
               ),
             ],
           ],

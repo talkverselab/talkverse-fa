@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
+import '../core/prefs.dart';
 import 'dialogue_service.dart';
 
 /// 성과 기록·집계 — 일본어앱 `achievement_service.dart`(Grok UXUI 시안 02 §5)를 옮김, 2026-11-02.
 ///
 /// **센다**: 편 완주(「모든 문장 듣기」 끝까지) · 그림 카드 맞음. (라이트너 단계·빈도 커버율은 복습 엔진을 옮긴 뒤.)
-/// **안 센다**: 앱 오픈·스트릭·포인트·순위. 저장은 SharedPreferences `achievements_v1`(JSON 하나).
+/// **안 센다**: 앱 오픈·스트릭·포인트·순위. 저장은 Prefs `achievements_v1`(JSON 하나).
 class AchievementService {
   AchievementService._();
   static final AchievementService instance = AchievementService._();
@@ -27,7 +27,7 @@ class AchievementService {
   Future<void> load() async {
     if (_loaded) return;
     try {
-      final raw = (await SharedPreferences.getInstance()).getString(_key);
+      final raw = (await Prefs.getInstance()).getString(_key);
       if (raw != null) {
         final j = json.decode(raw) as Map<String, dynamic>;
         (j['episodes'] as Map<String, dynamic>? ?? {}).forEach((k, v) => _episodes[k] = v.toString());
@@ -44,7 +44,7 @@ class AchievementService {
   Future<void> _save() async {
     changes.value++;
     final data = json.encode({'episodes': _episodes, 'cards': _cards, 'daily': _daily, 'glyphs': _glyphs.toList()});
-    (await SharedPreferences.getInstance()).setString(_key, data);
+    (await Prefs.getInstance()).setString(_key, data);
   }
 
   void _bump(String what, [int n = 1]) {

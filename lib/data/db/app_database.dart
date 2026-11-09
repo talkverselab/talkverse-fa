@@ -1,6 +1,8 @@
 import 'package:drift/drift.dart';
 import 'package:drift_flutter/drift_flutter.dart';
 
+import '../../core/embed_env.dart';
+
 part 'app_database.g.dart';
 
 // ─── Tables ─────────────────────────────────────────────────────────────────
@@ -105,6 +107,6 @@ class AppDatabase extends _$AppDatabase {
       );
 
   static QueryExecutor _openConnection() {
-    return driftDatabase(name: 'spanish_universe');
+    return driftDatabase(name: dbName); // 통합 앱 = fa_universe, 단독 앱 = 옛 이름(2026-11-09)
   }
 }

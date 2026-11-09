@@ -23,7 +23,8 @@
 - 확인: `flutter analyze` 0, `flutter test` 11개, 아이폰 시뮬레이터로 홈·프로필·문자와 발음·키보드·결제 시트·통합 준비 뒤 단독 실행(키 이전·폴더·에셋) 확인.
 
 ## 회화 다음 순서(사용자 지시, uk 전달)
-Claude 초안(끝) → **Grok 재작성(11/9 13:30 재개 공지)** → **Gemini 검수**(fa 포함, `~/talkverse/GEMINI_REVIEW_GUIDE.md`: 3.1 Pro, `-j 1 --gap 60`, 한 번에 한 세션, BLOCKED 면 멈추고 알림, 샘플 먼저) → 실제 오류만 반영(`emotion`·`segs` 유지, `make_plan.py` 다시) → 리뷰 통과 → 앱 연결(`dialogue_service` 가 R 폴더를 읽게, pubspec 폴더 단위 추가, version.json db 번호 올림, `tools/add_lemmas_fa.py`) → 장면 컷 → 전편 음성.
+**2026-11-10 현재: 사용자 결정 「다」 = 페르시아어는 Grok 재작성 생략, 바로 Gemini 검수.** Grok 시험 2편(첫 방 규칙 그대로 → 거의 손대지 않음, 규칙 1 강화 뒤 새 방 → 초안에 한 문장씩 덧붙이기만 하고 초급 줄이 길어짐, 결과 `data/grok/out/*_v3.md`, 회화 JSON 엔 반영 안 함). Gemini 프롬프트 146건 생성 끝(`data/gemini/prompts/`, `list.tsv`). **막힘: PC 크롬 9244(`D:\chrome-grok-fa`)에 Google 로그인 없음(Flash-Lite 비로그인 화면) → 사용자가 RustDesk 로 로그인해야 함.** 로그인 뒤: 3.1 Pro 확인 → 샘플 2편 보여 주고 승인 → `GEMINI_CDP_PORT=9244 python3 tools/gemini_batch.py data/gemini/prompts/list.tsv -j 1 --gap 60`(gemini_send.py 기본 포트 9226 은 베트남어 크롬이니 쓰지 말 것). 11-10 00:2x uk 지시로 작업 멈추고 대기(탭 닫음, 크롬 창은 둠). Grok 도구 `tools/grok_text.py` 는 사용자 지시대로 3분 넘으면 생성 중지.
+원래 순서: Claude 초안(끝) → **Grok 재작성(11/9 13:30 재개 공지)** → **Gemini 검수**(fa 포함, `~/talkverse/GEMINI_REVIEW_GUIDE.md`: 3.1 Pro, `-j 1 --gap 60`, 한 번에 한 세션, BLOCKED 면 멈추고 알림, 샘플 먼저) → 실제 오류만 반영(`emotion`·`segs` 유지, `make_plan.py` 다시) → 리뷰 통과 → 앱 연결(`dialogue_service` 가 R 폴더를 읽게, pubspec 폴더 단위 추가, version.json db 번호 올림, `tools/add_lemmas_fa.py`) → 장면 컷 → 전편 음성.
 - Gemini 틀 `tools/prompts/review_gemini_fa.md`, 생성 `tools/gemini_prompts_fa.py`, 도구 `tools/gemini_send.py`·`gemini_batch.py`.
 - 다시 볼 것: 말장난 `رئیس/ریش`(r2_work_b2)·`ما عسلی‌ایم/ماه عسلیم`(r2_travel_b2), 수위 `پدرسوخته`(r3_friends_b4)·`گند`(r1_life_a2, `profanity_mild`), R1 장면어 초과, R3 감정이 턴마다 하나.
 - 글말/입말 두 칸은 `DIALOGUE_NOTES.md` 의 「제안」을 따른 것 — 사용자 확인 전.

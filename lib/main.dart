@@ -26,7 +26,8 @@ void main() async {
   await AchievementService.instance.load();
   // Talkverse ID(선택 로그인)·스토어 평생 이용권 — 기다리지 않는다(오프라인이어도 앱은 바로 뜬다)
   Account.load();
-  Purchase.configure({'fa': ('com.talkverse.persianUniverse.lifetime', 'lang_fa')});
+  // 가격·상품 ID = Talkverse 공통(~/talkverse/PRICING.md, 2026-11-09 확정): 앱 할인가(정가). 스토어 등록은 사용자(docs/store/STORE_PRODUCTS.md).
+  Purchase.configure('fa', kPlans);
   await _setOrientations(); // 폰은 세로 고정, 태블릿·폴드 펼침(짧은 변 600 이상)은 회전 허용
   // 그림(장면 컷·단어 그림) 기기 내려받기: 버전이 다르면 로딩 화면에서 받고 시작(사용자 지시 2026-11-04)
   final needSync = await ContentSync.instance.init(large: _wide ?? false);

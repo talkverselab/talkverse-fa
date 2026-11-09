@@ -4,6 +4,7 @@ import 'about_screen.dart';
 import 'login_screen.dart';
 
 import '../core/theme.dart';
+import '../widgets/legal_links.dart';
 import '../widgets/spanish_decor.dart';
 import '../core/l10n.dart';
 import '../core/pane.dart';
@@ -103,6 +104,8 @@ class ProfileScreen extends StatelessWidget {
                 subtitle: tr('절벽구간 — 이 앱이 단어를 나누는 기준'),
                 onTap: () => openPane(context, (_) => const AboutScreen())),
             _SettingItem(icon: Icons.info_outline, title: tr('앱 버전'), subtitle: '0.1.0 · alpha'),
+            _SettingItem(icon: Icons.description_outlined, title: tr('이용약관'), subtitle: 'talkverse.uk/terms', onTap: () => Legal.open(Legal.terms)),
+            _SettingItem(icon: Icons.privacy_tip_outlined, title: tr('개인정보처리방침'), subtitle: 'talkverse.uk/talkverse/fa/privacy', onTap: () => Legal.open(Legal.privacy)),
             _SettingItem(icon: Icons.copyright, title: tr('저작권'), subtitle: tr('페르시아어유니버스 · 2026')),
           ]),
           const SizedBox(height: 20),
@@ -238,8 +241,8 @@ class _AccountSection extends StatelessWidget {
             Container(height: 0.5, color: AppColors.gualda.withValues(alpha: 0.3)),
             ListTile(
               leading: const Icon(Icons.workspace_premium_outlined, color: AppColors.rojo),
-              title: Text(tr('평생 이용권'), style: const TextStyle(fontWeight: FontWeight.w700, color: AppColors.tinta)),
-              subtitle: Text(Entitlement.premium ? tr('이용 중') : tr('한 번 결제 · 구독 아님'), style: const TextStyle(color: AppColors.tintaLight, fontSize: 11)),
+              title: Text(tr('이용권'), style: const TextStyle(fontWeight: FontWeight.w700, color: AppColors.tinta)),
+              subtitle: Text(Entitlement.premium ? tr('이용 중') : tr('1개월·3개월·1년·평생 · 구매 또는 이전 구매 복원'), style: const TextStyle(color: AppColors.tintaLight, fontSize: 11)),
               trailing: const Icon(Icons.chevron_right, color: AppColors.rojo, size: 18),
               onTap: () => Entitlement.showPaywall(context),
             ),
@@ -253,7 +256,7 @@ class _AccountSection extends StatelessWidget {
                       'pending' => tr('확인 중…'),
                       'restored' => tr('복원했습니다'),
                       'nothing' => tr('복원할 구매가 없습니다'),
-                      _ => tr('이전에 산 평생 이용권을 이 기기에서 다시 엽니다'),
+                      _ => tr('이전에 산 이용권을 이 기기에서 다시 엽니다'),
                     },
                     style: const TextStyle(color: AppColors.tintaLight, fontSize: 11)),
               ),

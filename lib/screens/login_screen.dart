@@ -4,6 +4,7 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import '../core/l10n.dart';
 import '../core/theme.dart';
 import '../data/account.dart';
+import '../widgets/legal_links.dart';
 
 /// 로그인 — Talkverse 공용 계정(한자 앱 login_screen.dart 이식, 2026-11-02).
 /// 구글·네이버·카카오·애플 네 버튼 고정 순서, 서버에 아직 없는 제공자는 누르면 '준비 중'. 아래 작게 이메일(심사·테스트용) 로그인.
@@ -92,6 +93,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     const Center(child: Padding(padding: EdgeInsets.all(24), child: CircularProgressIndicator()))
                   else
                     for (final p in const ['google', 'naver', 'kakao', 'apple']) Padding(padding: const EdgeInsets.only(bottom: 12), child: _button(p)),
+                  // 로그인 동의 안내(출시 점검 2026-11-09)
+                  LegalLinks(lead: tr('로그인하면 이용약관에 동의하고, 개인정보처리방침에 따른 정보(이메일·이름·계정 ID) 수집에 동의하는 것으로 봅니다.')),
                   if (error != null) ...[
                     const SizedBox(height: 8),
                     Text(error!, textAlign: TextAlign.center, style: const TextStyle(color: Colors.redAccent, fontSize: 13)),

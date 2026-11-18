@@ -21,6 +21,10 @@
 - 30% 고름(`data/review/select_30_fa.txt`): R1 25 · R2 11 · R3 9 = 45편, 주제별로 나눔, 음성 있는 2편 포함, 다시 볼 4편(말장난·수위) 뺌. 나머지 101편은 `data/dialogues_later/`(로컬)로 옮김. Gemini 목록 `data/gemini/prompts/list_30.tsv`.
 - **로컬에 만들어 둠(커밋 안 함 — 회화 JSON 이 검수 전이라 CI 빌드가 깨지므로 함께 커밋)**: `lib/services/script_sync.dart`(일본어앱 그대로, `art/script/fa`), `dialogue_service.dart` 가 R 폴더+ScriptSync 를 읽음(R 편이 없을 때만 옛 L1), `embed.dart` 에서 ContentSync 앞에 refresh(15초), 회화 홈이 `revision` 에 다시 그림, pubspec 에 R 폴더 20개+`script_rev.json`(로컬 rev 1), `tools/script_publish.py`·`turn_lock.py`(대상 R1~R3), 시험 `script_sync_test`·`dialogue_load_test`. `flutter analyze` 0, 시험 15개 통과.
 - **막힘: PC 크롬 9244 가 꺼져 있음(11-18 확인).** 사용자가 PC 에서 `chrome.exe --remote-debugging-port=9244 --remote-debugging-address=127.0.0.1 --user-data-dir=D:\chrome-grok-fa --no-first-run https://gemini.google.com` 을 띄우고 Google 로그인해야 함.
+- **11-18 오후: Grok 45편 끝**(「빠른」, 방 2개 25+20, 골격만 보냄 → 초안과 줄별 유사도 대부분 0.2~0.7, 0.9↑ 줄은 다시 요청). `data/grok/w/<id>.md` → `fa_grok_io.py import` 로 회화 JSON 반영(`grok: true`), 한국어 칸 `؟`→`?` 정리, 독음은 Claude 가 채움(`data/grok/rd/*.rd.tsv`). uk 에 「Grok 끝」 보냄.
+  - 검사기: 45편·452턴, 길이 오류 5편(r1_life_a1 t5·r1_love_a5 t5·r1_travel_a4 t1 = 11단어, r1_love_a3 t2·r1_survival_s1 t2·t4 = 1단어) → Gemini 지적과 함께 Grok 에 한 번에 다시 쓰게 할 것(Claude 수정 금지). ZWNJ 경고 2건은 کمی·جسمی 오탐.
+  - 독음 쓰면서 이상해 보인 Grok 줄(Gemini 확인용): r2_travel_b3 #4·#9, r3_study_b1 #5(می‌خوام…لازم داریم), r2_culture_b1 #4(بدونِ).
+  - Gemini 프롬프트 다시 만듦(`data/gemini/prompts30/`, `list_30.tsv` 갱신). **막힘: 9244 크롬 Gemini 비로그인(Flash-Lite) → 사용자 RustDesk 로그인 요청(푸시 보냄), 탭 열어 둠.**
 - 다음: uk 순서 + 크롬 뜨면 → Grok 45편(`tools/grok_text.py`, 3분 상한, 첫 방 약속 뒤 한 줄씩) → Gemini 3.1 Pro 확인 → 샘플 2편 → `GEMINI_CDP_PORT=9244 python3 tools/gemini_batch.py data/gemini/prompts/list_30.tsv -j 1 --gap 60` → 실제 오류만 반영 → `tools/turn_lock.py --write` → `rm assets/data/script_rev.json && python3 tools/script_publish.py --init`(R2 rev 1) → 회화·코드 함께 커밋(`git add` 경로 지정) → CI Android + iOS → uk 에 보고(커밋·`persian_universe`·새 에셋 `script_rev.json`·rev). 그 뒤 언어감각 과정(급마다 외울 대화 10줄+참고, `video_player`)·단어 퀴즈 복습(외래어 표기 따로 없음 → 단어 복습용)·장면 컷 10장.
 
 ## 화면(이번까지 만든 것)

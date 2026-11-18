@@ -17,10 +17,11 @@
 
 ## 2026-11-18 일본어앱 수준 맞추기(통합 앱 iOS 심사 준비, 일본어앱 전달문 `~/talkverse/ja/docs/RELAY_2026-11-18_ja_parity.md`)
 - **사용자 결정: 「Gemini 검수 먼저」** — 회화 30%를 초안 그대로 올리지 않고 검수한 뒤 연결.
+- **11-18 uk 전달 사용자 원칙(전 세션, `~/talkverse/LANG_APP_REPLICATE_PROMPT.md` §12)**: Claude 는 초안까지, 대사는 Grok(「빠른」, 모든 줄 새로, 「유지」 금지)이 쓰고 그대로 붙여 넣기 — Claude 는 형식(JSON·독음·감정 열·단어 칩)·검사기만. 11-10 의 「페르시아어 Grok 생략」은 이것으로 바뀜 → 순서 = **Grok 45편 → Gemini → 연결**. uk 에 「Grok 대사 작성 45편」 순서 요청 보냄(11-18, 답 대기). Grok 안 거친 것 보고함: 배포 앱의 옛 L1 5편, R2·D1 시험 음성 2편.
 - 30% 고름(`data/review/select_30_fa.txt`): R1 25 · R2 11 · R3 9 = 45편, 주제별로 나눔, 음성 있는 2편 포함, 다시 볼 4편(말장난·수위) 뺌. 나머지 101편은 `data/dialogues_later/`(로컬)로 옮김. Gemini 목록 `data/gemini/prompts/list_30.tsv`.
 - **로컬에 만들어 둠(커밋 안 함 — 회화 JSON 이 검수 전이라 CI 빌드가 깨지므로 함께 커밋)**: `lib/services/script_sync.dart`(일본어앱 그대로, `art/script/fa`), `dialogue_service.dart` 가 R 폴더+ScriptSync 를 읽음(R 편이 없을 때만 옛 L1), `embed.dart` 에서 ContentSync 앞에 refresh(15초), 회화 홈이 `revision` 에 다시 그림, pubspec 에 R 폴더 20개+`script_rev.json`(로컬 rev 1), `tools/script_publish.py`·`turn_lock.py`(대상 R1~R3), 시험 `script_sync_test`·`dialogue_load_test`. `flutter analyze` 0, 시험 15개 통과.
 - **막힘: PC 크롬 9244 가 꺼져 있음(11-18 확인).** 사용자가 PC 에서 `chrome.exe --remote-debugging-port=9244 --remote-debugging-address=127.0.0.1 --user-data-dir=D:\chrome-grok-fa --no-first-run https://gemini.google.com` 을 띄우고 Google 로그인해야 함.
-- 다음: 크롬 뜨면 → 3.1 Pro 확인 → 샘플 2편 → `GEMINI_CDP_PORT=9244 python3 tools/gemini_batch.py data/gemini/prompts/list_30.tsv -j 1 --gap 60` → 실제 오류만 반영 → `tools/turn_lock.py --write` → `rm assets/data/script_rev.json && python3 tools/script_publish.py --init`(R2 rev 1) → 회화·코드 함께 커밋(`git add` 경로 지정) → CI Android + iOS → uk 에 보고(커밋·`persian_universe`·새 에셋 `script_rev.json`·rev). 그 뒤 언어감각 과정(급마다 외울 대화 10줄+참고, `video_player`)·단어 퀴즈 복습(외래어 표기 따로 없음 → 단어 복습용)·장면 컷 10장.
+- 다음: uk 순서 + 크롬 뜨면 → Grok 45편(`tools/grok_text.py`, 3분 상한, 첫 방 약속 뒤 한 줄씩) → Gemini 3.1 Pro 확인 → 샘플 2편 → `GEMINI_CDP_PORT=9244 python3 tools/gemini_batch.py data/gemini/prompts/list_30.tsv -j 1 --gap 60` → 실제 오류만 반영 → `tools/turn_lock.py --write` → `rm assets/data/script_rev.json && python3 tools/script_publish.py --init`(R2 rev 1) → 회화·코드 함께 커밋(`git add` 경로 지정) → CI Android + iOS → uk 에 보고(커밋·`persian_universe`·새 에셋 `script_rev.json`·rev). 그 뒤 언어감각 과정(급마다 외울 대화 10줄+참고, `video_player`)·단어 퀴즈 복습(외래어 표기 따로 없음 → 단어 복습용)·장면 컷 10장.
 
 ## 화면(이번까지 만든 것)
 - 홈 메뉴: **기초**(문자와 발음 · 키보드 연습) → 문법(문법·동사 활용) → 회화(회화·문장 말하기·문장 카드) → 단어(절벽 단어·단어·단어 카드·표현) → 에피소드 → 참고(청크 검색). 아이패드 두 화면, 만화책 리더, 성과 데스크, 앱 소개.

@@ -24,6 +24,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
+          flutter-version: 3.47.7  # 새 stable 은 Gradle 9.3.1 을 요구 — 맥(3.47.7)·다른 언어앱과 같게 고정(11-22)
           cache: true
 
       - run: flutter --version

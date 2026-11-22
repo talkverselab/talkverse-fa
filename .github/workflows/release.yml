@@ -30,6 +30,7 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: stable
+          flutter-version: 3.47.7  # 새 stable 은 Gradle 9.3.1 을 요구 — 맥(3.47.7)·다른 언어앱과 같게 고정(11-22)
           cache: true
 
       # 폰에 이미 깔린 앱과 같은 키로 서명해야 덮어쓰기 설치가 된다.

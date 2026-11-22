@@ -31,6 +31,10 @@
   - 분류(`data/review/triage/<id>.json`): rd 85(Claude 반영), Grok 다시 쓰기 149줄/44편, 버림 138(우리 독음 표기표와만 다른 지적·의도된 반전·쿠네 식 걱정·‑ید→‑ین). 공통 독음 고침: اومد 우마, چشم 체슴, خب 코브, ولی 발리, هزار 헤저르 등.
   - r1_survival_s1 2·4줄 «بله.» 는 장면 장치라 그대로 — 턴에 `short_ok: true`, 검사기가 이를 따름.
   - Grok 다시 쓰기: uk 「fa 시작」, PC 9244(9231 쿠키 동기화, 「빠른」), `tools/grok_fix_batch.py`(답 `data/grok/fix/<id>.md`, 기록 `log.tsv`, `--apply` 로 tl_col·tl·ko·note 만 바꾸고 `grok_fix: true`).
+- **11-22 저녁 끝낸 것**: Grok 줄 다시 쓰기 44편 149줄(형식 재요청 0, 방 3개, PC 9244 끔) → 독음 → 검사기 0오류 → `turn_lock --write`(45편 452턴) → `script_publish --init` = **R2 `script/fa/index.json` rev 1(45파일)** → 커밋 `2ccbd9f`. CI 는 새 stable Flutter 가 Gradle 9.3.1 을 요구해 실패 → 다른 언어앱처럼 `flutter-version: 3.47.7` 고정(`4d0d75f`) → APK 빌드 18, Zealot https://apps.talkverse.uk/O2wYW/546 (SHA-1 9cc4bc93…). iOS `tools/ios_release.sh` 업로드(빌드 2611221754). PC 일시 멈춤(uk 11-22 19시)이라 APK 의 PC OneDrive 백업은 건너뜀 — 풀리면 할 것.
+  - 심사 정리(uk): 에피소드 화면에서 편 없는 급(L2·L3)의 「준비 중」을 숨김. 로그인 버튼 「준비 중」은 uk 지시로 그대로.
+  - 음성: 3090 MOSS 450조각 — uk 자리 11-29 프랑스어 「GPU 끝」 뒤(안 되면 11-30 00:01). PC 멈춤 풀린 뒤.
+  - 남은 일: 통합 앱 연결 보고(uk) · 음성 · 언어감각 과정 · 단어 퀴즈 복습 · 〇〇 이름 · 장면 컷 10장 · 단어 그림(art 매니페스트). 옛 L1 5편(Claude 글)은 사용자 결정 대기 그대로.
 - 다음: uk 순서 + 크롬 뜨면 → Grok 45편(`tools/grok_text.py`, 3분 상한, 첫 방 약속 뒤 한 줄씩) → Gemini 3.1 Pro 확인 → 샘플 2편 → `GEMINI_CDP_PORT=9244 python3 tools/gemini_batch.py data/gemini/prompts/list_30.tsv -j 1 --gap 60` → 실제 오류만 반영 → `tools/turn_lock.py --write` → `rm assets/data/script_rev.json && python3 tools/script_publish.py --init`(R2 rev 1) → 회화·코드 함께 커밋(`git add` 경로 지정) → CI Android + iOS → uk 에 보고(커밋·`persian_universe`·새 에셋 `script_rev.json`·rev). 그 뒤 언어감각 과정(급마다 외울 대화 10줄+참고, `video_player`)·단어 퀴즈 복습(외래어 표기 따로 없음 → 단어 복습용)·장면 컷 10장.
 
 ## 화면(이번까지 만든 것)

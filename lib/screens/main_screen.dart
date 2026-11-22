@@ -1,3 +1,4 @@
+import 'curriculum_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'alphabet_screen.dart';
@@ -394,6 +395,11 @@ class _MenuGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sections = <(String, List<_MenuItem>)>[
+      // 토크버스 커리큘럼(전 언어 공통 기준 ~/talkverse/CURRICULUM_SPEC.md, 2026-11-22) — 홈 맨 위
+      (tr('토크버스 커리큘럼'), [
+        _MenuItem(label: tr('토크버스 커리큘럼'), sub: tr('코스·복습·오늘 분량'), badge: '★', color: AppColors.beni,
+          builder: (_) => const CurriculumScreen()),
+      ]),
       (tr('기초'), [
         _MenuItem(label: tr('문자와 발음'), sub: 'الفبا', badge: 'ا', color: AppColors.farsi,
           builder: (_) => const AlphabetScreen()),
@@ -426,10 +432,7 @@ class _MenuGrid extends StatelessWidget {
               title: tr('주제별 표현'),
               asset: 'assets/data/vocab/travel_expressions.json')),
       ]),
-      (tr('에피소드'), [
-        _MenuItem(label: tr('에피소드'), sub: 'داستان', badge: 'N', color: AppColors.rojo,
-          builder: (_) => const ConversationScreen()),
-      ]),
+      // 「에피소드」(옛 L1 5편, Grok 미경유)는 사용자 원칙(11-18·11-22)에 따라 숨김 — Grok 으로 다시 쓰면 다시 보임. 화면 파일은 그대로.
       (tr('참고'), [
         _MenuItem(label: tr('청크 검색'), sub: 'جستجو', badge: '🔍', color: AppColors.gualdaDeep,
           builder: (_) => const ChunkSearchScreen()),

@@ -18,6 +18,9 @@ tab = a[a.index('--tab') + 1] if '--tab' in a else 'grok.com'
 push = '--push' in a
 fetch_only = '--fetch-only' in a
 ids = [x for x in a if not x.startswith('--') and x != tab]
+# `편id:N` = 그 편은 앞 N컷만(uk 11-22 「장면 컷 딱 10장」)
+MAXCUT = {x.split(':')[0]: int(x.split(':')[1]) for x in ids if ':' in x}
+ids = [x.split(':')[0] for x in ids]
 # 인물 기준 그림 chars_fa_v1(왼쪽부터 1~6번) — data/review/art/chars_fa_v1.md
 CAST = {'سارا': '시트 1번 사라(연한 하늘색 루사리를 느슨하게, 휴대폰, 밝게 웃는 얼굴)',
         'نگار': '시트 2번 네가르(남색 루사리, 올리브색 롱 코트, 안경, 스케치북 든 토트백)',
@@ -99,6 +102,7 @@ def do(eid):
     ep = json.load(open(path, encoding='utf-8'))
     turns = ep['turns']
     cuts = [((i // 2) + 1, turns[i:i + 2]) for i in range(0, len(turns), 2)]
+    if eid in MAXCUT: cuts = cuts[:MAXCUT[eid]]
     out = os.path.join(ART, ep['id'] + ('_f' if FEMALE else ''))
     os.makedirs(out, exist_ok=True)
     # 없는 컷만 골라 4장씩 요청(카오스·심쿵으로 바뀐 턴의 컷만 지우고 다시 받을 때 — 2026-11-03)

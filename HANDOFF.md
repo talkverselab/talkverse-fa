@@ -35,6 +35,9 @@
   - 심사 정리(uk): 에피소드 화면에서 편 없는 급(L2·L3)의 「준비 중」을 숨김. 로그인 버튼 「준비 중」은 uk 지시로 그대로.
   - 음성: 3090 MOSS 450조각 — uk 자리 11-29 프랑스어 「GPU 끝」 뒤(안 되면 11-30 00:01). 3090 우선순위(사용자 11-22) = Gym-free → 문법 영상 → 음성. 시작 직전 3090 사용량 8GB 넘으면 시작 안 함. **끝나면 uk 와 ru(뒤 차례 63편)에 「GPU 끝」.** PC 멈춤은 11-22 18:33 풀림, APK·IPA PC 백업 끝.
   - 남은 일: 통합 앱 연결 보고(uk) · 음성 · 언어감각 과정 · 단어 퀴즈 복습 · 〇〇 이름 · 장면 컷 10장 · 단어 그림(art 매니페스트). 옛 L1 5편(Claude 글)은 사용자 결정 대기 그대로.
+- **11-22 밤 — 커리큘럼·AI 회화 작성(전 언어 기준 ~/talkverse/CURRICULUM_SPEC.md)**: 일본어 기준 ceb91c3 이식 `a71005b` + 칩 줄 Wrap `80423c1`(홈 카드 「메인 메뉴」 위, 저장 fa_curriculum_v1, 테스트 29). 사용자 「넣어야지」 → 심사 빌드에 보임. AI 회화 작성 `879d790`(서버 /api/script/fa, kCustomScriptLive=false 숨김 — 작성기 켜는 것은 사용자 결정). 「에피소드」(옛 L1 5편) 메뉴 숨김. APK 빌드 23 Zealot https://apps.talkverse.uk/O2wYW/622 · iOS 2611222155 · PC 백업.
+  - 심사 빌드 뒤 할 일(uk 판단): 「문장 카드」·「문장 말하기」·홈 「오늘의 학습」이 쓰는 옛 L1 40줄(DB 시드)을 Grok 판 R1~R3 줄로 바꾸기. 옛 L1 5편은 PC 크롬 차례에 Grok 으로 다시 쓰기.
+  - 음성: MOSS 정식 지원 확인 → uk 순서 러시아어 바로 뒤. 「fa 지금 시작」 오면 3090 8GB 이하 확인 후 시작, 끝나면 uk·인도네시아어(다음)에 「GPU 끝」.
 - 다음: uk 순서 + 크롬 뜨면 → Grok 45편(`tools/grok_text.py`, 3분 상한, 첫 방 약속 뒤 한 줄씩) → Gemini 3.1 Pro 확인 → 샘플 2편 → `GEMINI_CDP_PORT=9244 python3 tools/gemini_batch.py data/gemini/prompts/list_30.tsv -j 1 --gap 60` → 실제 오류만 반영 → `tools/turn_lock.py --write` → `rm assets/data/script_rev.json && python3 tools/script_publish.py --init`(R2 rev 1) → 회화·코드 함께 커밋(`git add` 경로 지정) → CI Android + iOS → uk 에 보고(커밋·`persian_universe`·새 에셋 `script_rev.json`·rev). 그 뒤 언어감각 과정(급마다 외울 대화 10줄+참고, `video_player`)·단어 퀴즈 복습(외래어 표기 따로 없음 → 단어 복습용)·장면 컷 10장.
 
 ## 화면(이번까지 만든 것)

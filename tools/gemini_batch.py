@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """Gemini 검수 여러 건 동시 전송. 목록 파일 한 줄 = <프롬프트>\t<저장>.
-  /usr/bin/python3 tools/gemini_batch.py <목록> [-j 1]   건마다 최대 4번, 줄마다 OK/FAIL 출력. BADMODEL·BLOCKED 면 전부 멈춘다."""
+  /usr/bin/python3 tools/gemini_batch.py <목록> [-j 1]   건마다 최대 4번, 줄마다 OK/FAIL 출력. BADMODEL·BLOCKED·LOGGEDOUT 면 전부 멈춘다."""
 import subprocess, sys, threading, time
 from concurrent.futures import ThreadPoolExecutor
 jobs = [l.rstrip('\n').split('\t') for l in open(sys.argv[1], encoding='utf-8') if l.strip()]
@@ -19,7 +19,7 @@ def one(j):
         if r.startswith('OK'):
             print(f'OK {j[1]} try={t} {time.time() - t0:.0f}s', flush=True); time.sleep(gap); return
         print(f'  try{t} {j[1].split("/")[-1]}: {r[:90]} {time.time() - t0:.0f}s', flush=True)
-        if r.startswith(('BADMODEL', 'BLOCKED')): stop.set(); return
+        if r.startswith(('BADMODEL', 'BLOCKED', 'LOGGEDOUT')): stop.set(); return
     print(f'FAIL {j[1]} {r[:90]}', flush=True)
 
 

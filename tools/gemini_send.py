@@ -35,6 +35,9 @@ def run(c):
         if model and c.ev("!!" + BOX): break
     else:
         return 'BLOCKED' if 'google.com/sorry' in (c.ev('location.href') or '') else 'NOINPUT'
+    # 로그인 판정(uk 11-23): 「로그인」 단추가 하나라도 있으면 로그아웃 — 재시도 없이 물러난다(PICKED 는 로그아웃에서도 나옴)
+    if c.ev("[...document.querySelectorAll('a,button')].filter(e=>e.innerText.trim()==='로그인'||e.innerText.trim()==='Sign in').length") or 0:
+        return 'LOGGEDOUT'
     if 'Lite' in model or model.startswith(('Hydrogen', '자동')): return 'BADMODEL ' + model
     c.ev(BOX + ".focus()")
     c.call('Input.insertText', text=open(src, encoding='utf-8').read().strip()); time.sleep(1)

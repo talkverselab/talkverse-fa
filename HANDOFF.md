@@ -25,6 +25,12 @@
   - 검사기: 45편·452턴, 길이 오류 5편(r1_life_a1 t5·r1_love_a5 t5·r1_travel_a4 t1 = 11단어, r1_love_a3 t2·r1_survival_s1 t2·t4 = 1단어) → Gemini 지적과 함께 Grok 에 한 번에 다시 쓰게 할 것(Claude 수정 금지). ZWNJ 경고 2건은 کمی·جسمی 오탐.
   - 독음 쓰면서 이상해 보인 Grok 줄(Gemini 확인용): r2_travel_b3 #4·#9, r3_study_b1 #5(می‌خوام…لازم داریم), r2_culture_b1 #4(بدونِ).
   - Gemini 프롬프트 다시 만듦(`data/gemini/prompts30/`, `list_30.tsv` 갱신). **막힘: 9244 크롬 Gemini 비로그인(Flash-Lite) → 사용자 RustDesk 로그인 요청(푸시 보냄), 탭 열어 둠.**
+- **11-22 (사용자 「검수해」 + uk 전달 「막힌 건 각자 판단대로 완료」) — 고른 것**:
+  - Gemini: PC 9244 Google 로그인 대신 **M4 9226(chrome-grok-vi, 로그인됨)을 베트남어앱 허락 받아 빌림**(쿠키 복사 없음). 순서 fa → kk(kk-0b 요청으로 크롬 켜 둔 채 넘김).
+  - 모델: Gemini 화면이 바뀌어 3.1 Pro 없음 → Gemini 4 **Neon(심층 분석)** 으로 45편. `tools/gemini_send.py` 모델 확인을 새 선택기 aria-label(「현재 X 모드」)로 고침, Hydrogen·자동·Lite 면 BADMODEL. 결과 `data/review/dialogues/<id>_gemini.md`.
+  - 분류(`data/review/triage/<id>.json`): rd 85(Claude 반영), Grok 다시 쓰기 149줄/44편, 버림 138(우리 독음 표기표와만 다른 지적·의도된 반전·쿠네 식 걱정·‑ید→‑ین). 공통 독음 고침: اومد 우마, چشم 체슴, خب 코브, ولی 발리, هزار 헤저르 등.
+  - r1_survival_s1 2·4줄 «بله.» 는 장면 장치라 그대로 — 턴에 `short_ok: true`, 검사기가 이를 따름.
+  - Grok 다시 쓰기: uk 「fa 시작」, PC 9244(9231 쿠키 동기화, 「빠른」), `tools/grok_fix_batch.py`(답 `data/grok/fix/<id>.md`, 기록 `log.tsv`, `--apply` 로 tl_col·tl·ko·note 만 바꾸고 `grok_fix: true`).
 - 다음: uk 순서 + 크롬 뜨면 → Grok 45편(`tools/grok_text.py`, 3분 상한, 첫 방 약속 뒤 한 줄씩) → Gemini 3.1 Pro 확인 → 샘플 2편 → `GEMINI_CDP_PORT=9244 python3 tools/gemini_batch.py data/gemini/prompts/list_30.tsv -j 1 --gap 60` → 실제 오류만 반영 → `tools/turn_lock.py --write` → `rm assets/data/script_rev.json && python3 tools/script_publish.py --init`(R2 rev 1) → 회화·코드 함께 커밋(`git add` 경로 지정) → CI Android + iOS → uk 에 보고(커밋·`persian_universe`·새 에셋 `script_rev.json`·rev). 그 뒤 언어감각 과정(급마다 외울 대화 10줄+참고, `video_player`)·단어 퀴즈 복습(외래어 표기 따로 없음 → 단어 복습용)·장면 컷 10장.
 
 ## 화면(이번까지 만든 것)

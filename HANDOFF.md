@@ -41,6 +41,7 @@
 - **11-23 새벽 끝낸 것**: 회화 60편(Grok 새 15편 f538bb2, 서버 rev 2) · 언어감각 10급(Claude, 18e6da9) · 문법 서버 받기(스텝 수 데이터대로·서버에서 빠지면 숨김, 33398f6, rev 3) · 장면 컷 10장(r1_friends_b1 4·r1_life_a3 4·r1_love_a3 2, `data/scene/` 로컬, `tools/scene_upload.py` 로 R2·D1 올림) · APK 빌드 27 Zealot https://apps.talkverse.uk/O2wYW/638.
   - Gemini 예약(세션 안 cron, 01·09·13·17·21시): `data/gemini/prompts15/list.tsv` 25건(새 15편 + sense_L1~L10), M4 9226 순서 kk → hi → fa.
   - iOS 2611222355 TestFlight 업로드·PC 백업·build/ 삭제(디스크 회복 뒤, 11-23). 빌드 대기 확인은 `pgrep -x xcodebuild`(pgrep -f 는 자기 셸에 걸림). 장면 컷 도구는 Grok 이 한 요청 1장 → `SCENE_PER_REQ=1`.
+- **11-23 Gemini 25건 끝(9226, Neon)**: 언어감각 30줄 Claude 수정 + 새 15편 독음 27곳 → `91d1650`, 서버 원고 rev 4. **대사 다시 쓰기 62줄(14편)은 Grok 「재개」 뒤** — `data/review/triage/<id>.json`(로컬), `GROK_HOST=m4 GROK_CDP_PORT=<M4 포트> python3 tools/grok_fix_batch.py` → `--apply` → 독음 → 검사기 → `script_publish --publish`. 예약(cron)은 지움.
 - 다음: uk 순서 + 크롬 뜨면 → Grok 45편(`tools/grok_text.py`, 3분 상한, 첫 방 약속 뒤 한 줄씩) → Gemini 3.1 Pro 확인 → 샘플 2편 → `GEMINI_CDP_PORT=9244 python3 tools/gemini_batch.py data/gemini/prompts/list_30.tsv -j 1 --gap 60` → 실제 오류만 반영 → `tools/turn_lock.py --write` → `rm assets/data/script_rev.json && python3 tools/script_publish.py --init`(R2 rev 1) → 회화·코드 함께 커밋(`git add` 경로 지정) → CI Android + iOS → uk 에 보고(커밋·`persian_universe`·새 에셋 `script_rev.json`·rev). 그 뒤 언어감각 과정(급마다 외울 대화 10줄+참고, `video_player`)·단어 퀴즈 복습(외래어 표기 따로 없음 → 단어 복습용)·장면 컷 10장.
 
 ## 화면(이번까지 만든 것)

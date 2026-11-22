@@ -233,6 +233,19 @@ class HomeScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
                 const _TodayMission(),
+                const SizedBox(height: 18),
+                // 토크버스 커리큘럼 — 전 언어 공통 메뉴, 메인 메뉴(회화) 위(사용자 지시 2026-11-22, 기준 ~/talkverse/CURRICULUM_SPEC.md · 일본어앱 ceb91c3)
+                Text(
+                  tr('토크버스 커리큘럼'),
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.rojo,
+                    letterSpacing: -0.1,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                const CurriculumHomeCard(),
                 const SizedBox(height: 22),
                 Row(
                   children: [
@@ -395,11 +408,6 @@ class _MenuGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sections = <(String, List<_MenuItem>)>[
-      // 토크버스 커리큘럼(전 언어 공통 기준 ~/talkverse/CURRICULUM_SPEC.md, 2026-11-22) — 홈 맨 위
-      (tr('토크버스 커리큘럼'), [
-        _MenuItem(label: tr('토크버스 커리큘럼'), sub: tr('코스·복습·오늘 분량'), badge: '★', color: AppColors.beni,
-          builder: (_) => const CurriculumScreen()),
-      ]),
       (tr('기초'), [
         _MenuItem(label: tr('문자와 발음'), sub: 'الفبا', badge: 'ا', color: AppColors.farsi,
           builder: (_) => const AlphabetScreen()),

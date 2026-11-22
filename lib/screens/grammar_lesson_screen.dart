@@ -44,10 +44,12 @@ class GrammarLesson {
 
   /// 있는 스텝 번호 — 앱에 묶은 파일 + 서버 원고가 더한 파일. 스텝 수를 코드에 박지 않는다
   /// (사용자 11-23 「스텝 15까지 하자 내용이 없으면 자동으로 안나타나게」 — 15 를 넘어도 데이터대로).
-  static List<int> stepNumbers(Iterable<String> rels) {
+  /// [removed] = 서버 목록에서 빠진 파일(서버 목록을 받았을 때만 차 있음) — 묶음에 있어도 숨김(사용자 11-23 「스텝이 늘어날수도 줄어들수도」).
+  static List<int> stepNumbers(Iterable<String> rels, {Set<String> removed = const {}}) {
     final n = <int>{
       for (final r in rels)
-        if (_stepFile.firstMatch(r) case final m?) int.parse(m.group(1)!)
+        if (!removed.contains(r))
+          if (_stepFile.firstMatch(r) case final m?) int.parse(m.group(1)!)
     }.toList()
       ..sort();
     return n;
@@ -63,7 +65,7 @@ class GrammarLesson {
       bundled = [for (final p in manifest.listAssets().map(stripAssetPrefix)) if (p.startsWith('assets/data/')) p.substring('assets/data/'.length)];
     } catch (_) {}
     final out = <GrammarLesson>[];
-    for (final i in stepNumbers([...bundled, ...sync.added])) {
+    for (final i in stepNumbers([...bundled, ...sync.added], removed: sync.removed)) {
       try {
         final d = json.decode(await sync.load('grammar/lesson$i.json')) as Map<String, dynamic>;
         final l = fromJson(i, d);

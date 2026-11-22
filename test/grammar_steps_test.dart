@@ -19,6 +19,14 @@ void main() {
     );
   });
 
+  test('서버 목록: 빠지면 안 보임 · 더해지면 보임 · 못 받으면 묶음 목록', () {
+    final bundled = ['grammar/lesson1.json', 'grammar/lesson2.json', 'grammar/lesson3.json'];
+    // 서버를 못 받음 → added·removed 없음 → 묶음 그대로
+    expect(GrammarLesson.stepNumbers(bundled), [1, 2, 3]);
+    // 서버가 2 를 빼고 16 을 더함
+    expect(GrammarLesson.stepNumbers([...bundled, 'grammar/lesson16.json'], removed: {'grammar/lesson2.json'}), [1, 3, 16]);
+  });
+
   test('내용(패턴) 없는 스텝은 null(숨김), 있으면 강의', () {
     expect(GrammarLesson.fromJson(2, {'title': '빈 스텝', 'patterns': []}), isNull);
     expect(GrammarLesson.fromJson(2, {'title': '빈 스텝'}), isNull);

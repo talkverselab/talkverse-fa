@@ -43,10 +43,21 @@ class SenseCourse {
     await p.setStringList(_kDoneKey, s.toList());
   }
 
-  /// 모든 회차를 순서대로 (레벨, 회차) 쌍으로.
+  /// 내용이 있는 회차인가(문장·요점이 하나라도).
+  static bool hasContent(Map<String, dynamic> ls) =>
+      ((ls['sentences'] as List?)?.isNotEmpty ?? false) || ((ls['points'] as List?)?.isNotEmpty ?? false) || ((ls['lines'] as List?)?.isNotEmpty ?? false);
+
+  /// 보일 급 — 급 목록·제목·순서는 데이터(서버 원고 `grammar/sense_course.json`)에서. 내용 없는 급은 숨김(서버에 내용이 오면 저절로 보임, 사용자 11-23).
+  static List<Map<String, dynamic>> levels(Map<String, dynamic> d) => [
+        for (final lv in ((d['levels'] as List?) ?? const []).cast<Map<String, dynamic>>())
+          if (((lv['lessons'] as List?) ?? const []).cast<Map<String, dynamic>>().any(hasContent)) lv,
+      ];
+
+  /// 모든 회차를 순서대로 (레벨, 회차) 쌍으로 — 내용 있는 것만.
   static List<(Map<String, dynamic>, Map<String, dynamic>)> flat(Map<String, dynamic> d) => [
-        for (final lv in (d['levels'] as List).cast<Map<String, dynamic>>())
-          for (final ls in (lv['lessons'] as List).cast<Map<String, dynamic>>()) (lv, ls),
+        for (final lv in levels(d))
+          for (final ls in (lv['lessons'] as List).cast<Map<String, dynamic>>())
+            if (hasContent(ls)) (lv, ls),
       ];
 }
 
@@ -105,14 +116,14 @@ class _SenseCourseScreenState extends State<SenseCourseScreen> {
           style: const TextStyle(fontSize: 12, color: AppColors.muted)),
     ];
     var i = 0;
-    for (final lv in (d['levels'] as List).cast<Map<String, dynamic>>()) {
+    for (final lv in SenseCourse.levels(d)) {
       children.add(Padding(
         padding: const EdgeInsets.fromLTRB(2, 18, 2, 8),
         child: Text('${lv['id']}  ${lv['title']}',
             style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: AppColors.sumi)),
       ));
       var n = 1;
-      for (final ls in (lv['lessons'] as List).cast<Map<String, dynamic>>()) {
+      for (final ls in (lv['lessons'] as List).cast<Map<String, dynamic>>().where(SenseCourse.hasContent)) {
         final idx = i;
         final isDone = _done.contains(ls['id']);
         final isNext = idx == next;

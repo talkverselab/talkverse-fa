@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """원고를 서버에 올려 깔린 앱이 심사·새 빌드 없이 받게 한다(사용자 지시 2026-11-17). 규격 = docs/CONTENT_SYNC.md §6.
 
-대상: 회화 편 `assets/data/dialogues/R0~R4/<주제>/<편>.json`(페르시아어앱은 R1~R3). 일본어앱 tools/script_publish.py 를 옮김(2026-11-18).
+대상: 회화 편 `assets/data/dialogues/R0~R4/<주제>/<편>.json`(페르시아어앱은 R1~R3) + 문법 `grammar/lesson1~10.json`·`grammar/sense_course.json`(11-23). 일본어앱 tools/script_publish.py 를 옮김(2026-11-18).
 앱 안 기준표 `assets/data/script_rev.json`(rev·파일별 sha1 앞 12자리)과 지금 파일을 견주어 바뀐 것만 올린다.
 
   python3 tools/script_publish.py             # 무엇이 바뀌었는지만 본다(아무것도 안 올림)
@@ -28,7 +28,8 @@ PREFIX = 'script/fa'
 
 
 def current():
-    paths = sorted(glob.glob(str(DATA / 'dialogues/R[0-4]/*/*.json')))
+    # 회화 편 + 문법(스텝 1~10 lessonN·언어감각 sense_course — 사용자 11-23 「DB업데이트 하면서 업뎃되게」)
+    paths = sorted(glob.glob(str(DATA / 'dialogues/R[0-4]/*/*.json')) + glob.glob(str(DATA / 'grammar/lesson*.json')) + glob.glob(str(DATA / 'grammar/sense_course.json')))
     out = {}
     for p in paths:
         b = Path(p).read_bytes()

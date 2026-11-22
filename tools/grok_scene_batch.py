@@ -107,8 +107,9 @@ def do(eid):
     os.makedirs(out, exist_ok=True)
     # 없는 컷만 골라 4장씩 요청(카오스·심쿵으로 바뀐 턴의 컷만 지우고 다시 받을 때 — 2026-11-03)
     missing = [c for c in cuts if not os.path.exists(os.path.join(out, f'cut{c[0]}.jpg'))]
-    for part, k in enumerate(range(0, len(missing), 4), 1):
-        chunk = missing[k:k + 4]
+    per = int(os.environ.get('SCENE_PER_REQ', '1'))  # 11-22 페르시아어: Grok 「빠른」이 한 요청에 1장만 줌 → 1장씩
+    for part, k in enumerate(range(0, len(missing), per), 1):
+        chunk = missing[k:k + per]
         if all(os.path.exists(os.path.join(out, f'cut{n}.jpg')) for n, _ in chunk):
             print('SKIP', ep['id'], part, flush=True); continue
         pf = os.path.join(ROOT, 'data/scene_prompts', f"{ep['id']}{'_f' if FEMALE else ''}_scene{part}_prompt.md")

@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart' show rootBundle;
 
+import 'package:flutter/services.dart';
 import '../core/embed_env.dart';
+import '../services/script_sync.dart';
 import '../core/theme.dart';
 import '../services/ko_reading.dart';
 import '../services/tts_service.dart';
@@ -26,21 +27,49 @@ class GrammarLesson {
   int get exampleCount =>
       patterns.fold(0, (n, p) => n + ((p['examples'] as List?)?.length ?? 0));
 
+  /// 한 스텝 파일 → 강의. 내용(패턴)이 없으면 null(빈 스텝은 숨김 — 서버에 내용이 오면 저절로 보임).
+  static GrammarLesson? fromJson(int i, Map<String, dynamic> d) {
+    final patterns = [for (final p in (d['patterns'] as List? ?? const [])) Map<String, dynamic>.from(p as Map)];
+    if (patterns.isEmpty) return null;
+    return GrammarLesson(
+      (d['lesson'] as num?)?.toInt() ?? i,
+      d['title'] as String? ?? trf('문법 {0}', [i]),
+      d['subtitle'] as String? ?? '',
+      [for (final s in (d['stages'] as List? ?? const [])) Map<String, dynamic>.from(s as Map)],
+      patterns,
+    );
+  }
+
+  static final _stepFile = RegExp(r'^grammar/lesson(\d+)\.json$');
+
+  /// 있는 스텝 번호 — 앱에 묶은 파일 + 서버 원고가 더한 파일. 스텝 수를 코드에 박지 않는다
+  /// (사용자 11-23 「스텝 15까지 하자 내용이 없으면 자동으로 안나타나게」 — 15 를 넘어도 데이터대로).
+  static List<int> stepNumbers(Iterable<String> rels) {
+    final n = <int>{
+      for (final r in rels)
+        if (_stepFile.firstMatch(r) case final m?) int.parse(m.group(1)!)
+    }.toList()
+      ..sort();
+    return n;
+  }
+
+  /// 스텝들 — 서버 원고(ScriptSync)가 있으면 그것, 없으면 앱에 묶은 파일. 내용 없는 스텝은 건너뜀.
   static Future<List<GrammarLesson>> loadAll() async {
+    final sync = ScriptSync.instance;
+    await sync.init();
+    var bundled = <String>[];
+    try {
+      final manifest = await AssetManifest.loadFromAssetBundle(rootBundle);
+      bundled = [for (final p in manifest.listAssets().map(stripAssetPrefix)) if (p.startsWith('assets/data/')) p.substring('assets/data/'.length)];
+    } catch (_) {}
     final out = <GrammarLesson>[];
-    for (var i = 1; i <= 20; i++) {
+    for (final i in stepNumbers([...bundled, ...sync.added])) {
       try {
-        final raw = await rootBundle.loadString(assetPath('assets/data/grammar/lesson$i.json'));
-        final d = json.decode(raw) as Map<String, dynamic>;
-        out.add(GrammarLesson(
-          (d['lesson'] as num?)?.toInt() ?? i,
-          d['title'] as String? ?? trf('문법 {0}', [i]),
-          d['subtitle'] as String? ?? '',
-          [for (final s in (d['stages'] as List? ?? const [])) Map<String, dynamic>.from(s as Map)],
-          [for (final p in (d['patterns'] as List? ?? const [])) Map<String, dynamic>.from(p as Map)],
-        ));
+        final d = json.decode(await sync.load('grammar/lesson$i.json')) as Map<String, dynamic>;
+        final l = fromJson(i, d);
+        if (l != null) out.add(l);
       } catch (_) {
-        break;
+        continue;
       }
     }
     return out;

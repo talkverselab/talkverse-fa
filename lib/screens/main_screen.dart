@@ -1,3 +1,4 @@
+import 'sense_course_screen.dart';
 import 'custom_script_screen.dart';
 import 'curriculum_screen.dart';
 import 'package:flutter/material.dart';
@@ -409,6 +410,11 @@ class _MenuGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final sections = <(String, List<_MenuItem>)>[
+      // 정규과정 — 언어감각 익히기(헝가리어앱·일본어앱 구조, 2026-11-22, 문장은 Claude 작성)
+      (tr('정규과정'), [
+        _MenuItem(label: tr('언어감각 익히기'), sub: 'حس زبان', badge: 'L', color: AppColors.ai,
+          builder: (_) => const SenseCourseScreen()),
+      ]),
       (tr('기초'), [
         _MenuItem(label: tr('문자와 발음'), sub: 'الفبا', badge: 'ا', color: AppColors.farsi,
           builder: (_) => const AlphabetScreen()),

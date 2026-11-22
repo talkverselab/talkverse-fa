@@ -115,7 +115,7 @@ def do(eid):
         pf = os.path.join(ROOT, 'data/scene_prompts', f"{ep['id']}{'_f' if FEMALE else ''}_scene{part}_prompt.md")
         open(pf, 'w', encoding='utf-8').write(prompt(ep, chunk, part))
         c = g.CDP(g.tab(tab)); c.call('Page.bringToFront')
-        before = set() if fetch_only else set(last_imgs(c))
+        before = set()
         if fetch_only:
             last = 'OK'
         else:
@@ -123,6 +123,8 @@ def do(eid):
           # 긴 방에서 그림 없이 "완료"만 답하면(2026-11-03) FAIL 로 멈춘다 — 그때만 사용자에게 알리고 GROK_ROOM 을 새 방으로 바꾼다.
           if ROOM.rsplit('/', 1)[-1] not in (c.ev('location.href') or ''):
               c.call('Page.navigate', url=ROOM); time.sleep(8)
+          # 방으로 옮긴 뒤에 「이미 있던 그림」을 잡는다 — 크롬을 다시 켠 뒤 옛 방 그림을 새 그림으로 잡던 문제(헝가리어앱 발견, 11-23)
+          before = set(last_imgs(c))
           r = subprocess.run(['/usr/bin/python3', os.path.join(ROOT, 'tools/grok_send.py'), pf, pf.replace('_prompt.md', '_answer.md'),
                             '--tab', tab, '--wait', '90', '--attach', attachments(ep)], capture_output=True, text=True)
           last = (r.stdout.strip().splitlines() or [''])[-1]

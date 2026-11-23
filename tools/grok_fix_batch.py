@@ -10,7 +10,7 @@ import glob, json, os, re, subprocess, sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TRI = os.path.join(ROOT, 'data/review/triage')
-FIX = os.path.join(ROOT, 'data/grok/fix')
+FIX = os.path.join(ROOT, os.environ.get('GROK_FIX_DIR', 'data/grok/fix'))
 LEN = {'R1': '2~9단어(1~2문장)', 'R2': '1~2문장', 'R3': '2문장 이내'}
 LINE = re.compile(r'^\s*`*\s*(\d+)\s*[.:)]?\s*([A-E])\s*\|(.*)$')
 
@@ -19,8 +19,13 @@ def ep_json(i):
     return glob.glob(os.path.join(ROOT, 'assets/data/dialogues/R*/*/%s.json' % i))[0]
 
 
+ONLY = None  # --ids <파일> 이면 그 편만(11-23: 이미 반영한 옛 44편을 다시 덮어쓰지 않게)
+
+
 def jobs():
     for f in sorted(glob.glob(os.path.join(TRI, '*.json'))):
+        if ONLY is not None and os.path.basename(f)[:-5] not in ONLY:
+            continue
         t = json.load(open(f, encoding='utf-8'))
         rw = sorted({int(r['line']): r['why'] for r in t.get('rewrite', [])}.items())
         if rw:
@@ -113,6 +118,8 @@ def apply():
 
 if __name__ == '__main__':
     a = sys.argv[1:]
+    if '--ids' in a:
+        ONLY = {x.strip() for x in open(a[a.index('--ids') + 1]) if x.strip()}
     if '--apply' in a:
         apply()
     else:

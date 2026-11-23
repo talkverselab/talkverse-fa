@@ -206,4 +206,26 @@ void main() {
       expect(svc.levels(), ['R1', 'R2', 'R3']);
     });
   });
+  test('단계 값 pick·pass·daily 는 JSON 에서, 없으면 기본값 · 시험 판정도 pass 로', () {
+    final svc = CurriculumService.instance;
+    final keep = svc.cfg;
+    svc.cfg = {
+      'rev': 9,
+      'stages': [
+        {'n': 1, 'dialogueIds': [], 'pick': [2, 4], 'pass': 70, 'daily': {'light': 1, 'normal': 3, 'focus': 5}},
+        {'n': 2, 'dialogueIds': []},
+      ],
+    };
+    expect(svc.pickOptions('1'), [2, 4]);
+    expect(svc.passFor('1'), 70);
+    expect(svc.dailyFor('1'), (1, 3, 5));
+    expect(svc.pickOptions('2'), [3, 5, 10]);
+    expect(svc.passFor('2'), 80);
+    expect(svc.dailyFor('2'), (1, 2, 3));
+    svc.cfg = keep;
+    final st = CurriculumState()..course = Course('c', ['a']);
+    expect(st.recordExam(7, 10, {}, '2026-11-23', pass: 70), isTrue);
+    final st2 = CurriculumState()..course = Course('c', ['a']);
+    expect(st2.recordExam(7, 10, {}, '2026-11-23'), isFalse);
+  });
 }

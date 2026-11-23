@@ -4,6 +4,7 @@ import '../core/l10n.dart';
 import '../core/pane.dart';
 import '../core/platform.dart';
 import '../core/theme.dart';
+import '../services/access.dart';
 import '../services/curriculum_service.dart';
 import '../services/dialogue_service.dart';
 import '../services/tts_service.dart';
@@ -56,6 +57,11 @@ class _CurriculumScreenState extends State<CurriculumScreen> {
   }
 
   Future<void> _setLevel(String lv) async {
+    // 이용권이 필요한 단계는 결제 화면부터(PAYWALL_SPEC §2·§3) — 목록에서는 자물쇠로 보이고 숨기지 않는다
+    if (!await Access.ensure(context, Access.canStage(lv))) {
+      if (mounted) setState(() {});
+      return;
+    }
     _st.level = lv;
     await _svc.save();
     setState(() {
@@ -66,6 +72,7 @@ class _CurriculumScreenState extends State<CurriculumScreen> {
   }
 
   Future<void> _startCourse() async {
+    if (!await Access.ensure(context, Access.canStage(_st.level))) return;
     await _svc.startCourse(_picked.toList());
     setState(() {
       _picking = false;
@@ -74,11 +81,13 @@ class _CurriculumScreenState extends State<CurriculumScreen> {
   }
 
   Future<void> _practice(Dialogue d) async {
+    if (!await Access.ensure(context, Access.canStage(_st.level)) || !mounted) return;
     await openFull(context, (_) => CurriculumPracticeScreen(dialogue: d));
     if (mounted) setState(() {});
   }
 
   Future<void> _exam() async {
+    if (!await Access.ensure(context, Access.canStage(_st.level)) || !mounted) return;
     final c = _st.course!;
     final ds = [for (final id in c.dialogueIds) DialogueService.instance.byId(id)].whereType<Dialogue>().toList();
     final per = examPerDialogue(ds.length);
@@ -179,6 +188,7 @@ class _CurriculumScreenState extends State<CurriculumScreen> {
                   ),
                 ]),
               ),
+              if (!Access.canStage(lv)) const Icon(Icons.lock_outline, size: 20, color: AppColors.muted),
               if (_st.level == null && lv == lowest) _pill(tr('추천'), AppColors.matcha),
             ]),
           ),

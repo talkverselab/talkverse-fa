@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
 import '../core/embed_env.dart';
+import '../services/access.dart';
 import '../services/script_sync.dart';
 import '../core/theme.dart';
 import '../services/ko_reading.dart';
@@ -124,18 +125,24 @@ class _GrammarHubScreenState extends State<GrammarHubScreen> {
                           subtitle: Text(
                               '${l.subtitle.isEmpty ? '' : '${l.subtitle}\n'}${trf('패턴 {0} · 예문 {1}', [l.patterns.length, l.exampleCount])}',
                               style: const TextStyle(fontSize: 12, height: 1.4)),
-                          trailing: IconButton(
-                            tooltip: tr('테스트'),
-                            icon: const Icon(Icons.quiz, color: AppColors.rojo),
-                            onPressed: () => Navigator.push(
+                          // 무료 스텝(freeSteps, 기본 2) 뒤는 이용권 — 자물쇠, 누르면 결제 화면(PAYWALL_SPEC §2)
+                          trailing: !Access.canStep(l.number)
+                              ? const Padding(padding: EdgeInsets.all(12), child: Icon(Icons.lock_outline, color: AppColors.muted))
+                              : IconButton(
+                                  tooltip: tr('테스트'),
+                                  icon: const Icon(Icons.quiz, color: AppColors.rojo),
+                                  onPressed: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(builder: (_) => GrammarTestScreen(lesson: l)),
+                                  ),
+                                ),
+                          onTap: () async {
+                            if (!await Access.ensure(context, Access.canStep(l.number)) || !context.mounted) return;
+                            Navigator.push(
                               context,
-                              MaterialPageRoute(builder: (_) => GrammarTestScreen(lesson: l)),
-                            ),
-                          ),
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (_) => GrammarLessonScreen(lesson: l)),
-                          ),
+                              MaterialPageRoute(builder: (_) => GrammarLessonScreen(lesson: l)),
+                            );
+                          },
                         ),
                       ),
                   ],

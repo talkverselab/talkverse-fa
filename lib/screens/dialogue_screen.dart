@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../core/l10n.dart';
+import '../services/access.dart';
 import '../services/ko_reading.dart';
 import '../widgets/glyph_sheet.dart';
 import '../core/platform.dart';
@@ -101,7 +102,9 @@ class _TodayCut extends StatelessWidget {
       Text(d.scene, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 12, color: AppColors.sumiLight, height: 1.4)),
       const SizedBox(height: 10),
       FilledButton.icon(
-        onPressed: () => openPane(context, (_) => DialogueScreen(dialogue: d)),
+        onPressed: () async {
+          if (await Access.ensure(context, Access.canRegion(d.region)) && context.mounted) openPane(context, (_) => DialogueScreen(dialogue: d));
+        },
         style: FilledButton.styleFrom(backgroundColor: AppColors.beni, foregroundColor: Colors.white, shape: const StadiumBorder(), visualDensity: VisualDensity.compact),
         icon: const Icon(Icons.menu_book_rounded, size: 18),
         label: Text(tr('읽기 시작'), style: const TextStyle(fontWeight: FontWeight.w800)),
@@ -152,7 +155,7 @@ class _IslandRow extends StatelessWidget {
             leading: Text(DialogueService.islandEmoji[island] ?? '💬', style: const TextStyle(fontSize: 26)),
             title: Text(tr(DialogueService.islandKo[island] ?? island), style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: AppColors.sumi)),
             subtitle: Text(trf('{0}편', [count]), style: const TextStyle(fontSize: 11, color: AppColors.muted)),
-            trailing: const Icon(Icons.chevron_right, color: AppColors.muted),
+            trailing: Icon(Access.canRegion(lv) ? Icons.chevron_right : Icons.lock_outline, color: AppColors.muted),
           ),
         ),
       );
@@ -184,11 +187,16 @@ class DialogueListScreen extends StatelessWidget {
             child: Material(
               color: Colors.transparent,
               child: ListTile(
-                onTap: () => openPane(context, (_) => DialogueScreen(dialogue: d)),
+                // R2 이상은 이용권(PAYWALL_SPEC §2) — 목록에는 자물쇠로 보이고, 누르면 결제 화면
+                onTap: () async {
+                  if (await Access.ensure(context, Access.canRegion(d.region)) && context.mounted) openPane(context, (_) => DialogueScreen(dialogue: d));
+                },
                 leading: Text(d.emoji, style: const TextStyle(fontSize: 24)),
                 title: Text(d.title, style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w800, color: AppColors.sumi)),
                 subtitle: Text(d.scene, maxLines: 2, overflow: TextOverflow.ellipsis, style: const TextStyle(fontSize: 11, color: AppColors.muted, height: 1.3)),
-                trailing: Text(trf('{0}턴', [d.turns.length]), style: const TextStyle(fontSize: 11, color: AppColors.muted)),
+                trailing: Access.canRegion(d.region)
+                    ? Text(trf('{0}턴', [d.turns.length]), style: const TextStyle(fontSize: 11, color: AppColors.muted))
+                    : const Icon(Icons.lock_outline, size: 18, color: AppColors.muted),
               ),
             ),
           );

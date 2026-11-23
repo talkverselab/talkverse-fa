@@ -414,6 +414,14 @@ const Map<String, String> kDictEn = {
   '로그인하면 안드로이드 기기 어디서나': 'Sign in to use it on any Android device',
   '결제는 App Store 에서 처리됩니다. 표시 가격은 스토어 가격을 따르며 세금이 포함될 수 있습니다. 숨은 요금은 없습니다.': 'Payment is handled by the App Store. Prices follow the store and may include tax. No hidden fees.',
   '결제는 Google Play 에서 처리됩니다. 표시 가격은 스토어 가격을 따르며 세금이 포함될 수 있습니다. 숨은 요금은 없습니다.': 'Payment is handled by Google Play. Prices follow the store and may include tax. No hidden fees.',
+  // 이용권(11-23)
+  '토크버스 커리큘럼 2단계 이상': 'Talkverse Curriculum stage 2 and up',
+  '회화 2단계 이상(중급·고급) 모든 편': 'All conversations from level 2 (intermediate · advanced)',
+  '문법 3스텝부터 끝까지': 'Grammar from step 3 to the end',
+  '언어감각 익히기 2급부터 끝까지': 'Language Sense from level 2 to the end',
+  '커리큘럼 1단계·회화 1단계·문자와 발음·단어·문법 1~2스텝·언어감각 1급은 무료': 'Curriculum stage 1, conversation level 1, letters & pronunciation, words, grammar steps 1–2 and Language Sense level 1 are free',
+  '지금 스토어에 연결할 수 없습니다. 잠시 뒤 다시 시도해 주세요.': 'Can\'t reach the store right now. Please try again in a moment.',
+  '다시 시도': 'Try again',
 };
 
 const Map<String, String> kDictJa = {
@@ -803,6 +811,14 @@ const Map<String, String> kDictJa = {
   '로그인하면 안드로이드 기기 어디서나': 'ログインすればAndroid端末どこでも',
   '결제는 App Store 에서 처리됩니다. 표시 가격은 스토어 가격을 따르며 세금이 포함될 수 있습니다. 숨은 요금은 없습니다.': 'お支払いはApp Storeで処理されます。表示価格はストア価格に準じ、税金が含まれる場合があります。隠れた料金はありません。',
   '결제는 Google Play 에서 처리됩니다. 표시 가격은 스토어 가격을 따르며 세금이 포함될 수 있습니다. 숨은 요금은 없습니다.': 'お支払いはGoogle Playで処理されます。表示価格はストア価格に準じ、税金が含まれる場合があります。隠れた料金はありません。',
+  // 이용권(11-23)
+  '토크버스 커리큘럼 2단계 이상': 'トークバース・カリキュラム 2段階以上',
+  '회화 2단계 이상(중급·고급) 모든 편': '会話2段階以上(中級・上級)の全編',
+  '문법 3스텝부터 끝까지': '文法 ステップ3から最後まで',
+  '언어감각 익히기 2급부터 끝까지': '言語感覚 2級から最後まで',
+  '커리큘럼 1단계·회화 1단계·문자와 발음·단어·문법 1~2스텝·언어감각 1급은 무료': 'カリキュラム1段階・会話1段階・文字と発音・単語・文法ステップ1〜2・言語感覚1級は無料',
+  '지금 스토어에 연결할 수 없습니다. 잠시 뒤 다시 시도해 주세요.': '現在ストアに接続できません。しばらくしてからもう一度お試しください。',
+  '다시 시도': 'もう一度',
 };
 
 const Map<String, String> kDictZh = {
@@ -1192,4 +1208,12 @@ const Map<String, String> kDictZh = {
   '로그인하면 안드로이드 기기 어디서나': '登录后可在任意 Android 设备上使用',
   '결제는 App Store 에서 처리됩니다. 표시 가격은 스토어 가격을 따르며 세금이 포함될 수 있습니다. 숨은 요금은 없습니다.': '付款由 App Store 处理。显示价格以商店为准，可能含税。没有隐藏费用。',
   '결제는 Google Play 에서 처리됩니다. 표시 가격은 스토어 가격을 따르며 세금이 포함될 수 있습니다. 숨은 요금은 없습니다.': '付款由 Google Play 处理。显示价格以商店为准，可能含税。没有隐藏费用。',
+  // 이용권(11-23)
+  '토크버스 커리큘럼 2단계 이상': 'Talkverse 课程 第2阶段以上',
+  '회화 2단계 이상(중급·고급) 모든 편': '第2阶段以上(中级·高级)的全部对话',
+  '문법 3스텝부터 끝까지': '语法 第3步到最后',
+  '언어감각 익히기 2급부터 끝까지': '语感训练 第2级到最后',
+  '커리큘럼 1단계·회화 1단계·문자와 발음·단어·문법 1~2스텝·언어감각 1급은 무료': '课程第1阶段、会话第1阶段、文字与发音、单词、语法第1~2步、语感第1级免费',
+  '지금 스토어에 연결할 수 없습니다. 잠시 뒤 다시 시도해 주세요.': '暂时无法连接商店，请稍后再试。',
+  '다시 시도': '重试',
 };

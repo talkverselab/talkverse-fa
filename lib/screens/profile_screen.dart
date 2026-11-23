@@ -1,10 +1,8 @@
-import 'custom_script_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'about_screen.dart';
 import 'login_screen.dart';
 
-import 'custom_script_screen.dart' show kCustomScriptLive;
 import '../core/theme.dart';
 import '../widgets/legal_links.dart';
 import '../widgets/spanish_decor.dart';
@@ -249,8 +247,6 @@ class _AccountSection extends StatelessWidget {
               ),
             ],
             Container(height: 0.5, color: AppColors.gualda.withValues(alpha: 0.3)),
-            // 이용권이 여는 것(맞춤 회화)이 숨김인 동안 결제 입구도 숨김 — 사도 열리는 게 없으면 심사 거절(애플 2.1, 심사 점검 11-23)
-            if (kCustomScriptLive) ...[
             ListTile(
               leading: const Icon(Icons.workspace_premium_outlined, color: AppColors.rojo),
               title: Text(tr('이용권'), style: const TextStyle(fontWeight: FontWeight.w700, color: AppColors.tinta)),
@@ -274,7 +270,6 @@ class _AccountSection extends StatelessWidget {
               ),
               onTap: () => Purchase.restore(),
             ),
-            ],
           ])),
         ),
       );

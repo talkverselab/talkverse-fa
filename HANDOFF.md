@@ -44,6 +44,7 @@
 - **11-23 Gemini 25건 끝(9226, Neon)**: 언어감각 30줄 Claude 수정 + 새 15편 독음 27곳 → `91d1650`, 서버 원고 rev 4. **대사 다시 쓰기 62줄(14편)은 Grok 「재개」 뒤** — `data/review/triage/<id>.json`(로컬), `GROK_HOST=m4 GROK_CDP_PORT=<M4 포트> python3 tools/grok_fix_batch.py` → `--apply` → 독음 → 검사기 → `script_publish --publish`. 예약(cron)은 지움.
 - **11-23 낮**: 커리큘럼 §12(단계·편·pick·pass·daily 를 서버 JSON 에서, b0f5063·e1f890b) · 검수 지적 62줄 Grok 반영(cd9f628, rev 5) · 심사 점검 B·C·D·F(79f1943, 회화 JSON 의 draft·grok·grok_fix 칸 제거 → 로컬 data/review/authoring_fa.local.json, rev 6) · 이용권 잠금(PAYWALL_SPEC, 5582443 — lib/services/access.dart, 무료 = 커리큘럼 1단계·R0·R1·문법 1~2·언어감각 1급).
   - 아직: 청크 검색·문장 카드·말하기의 옛 L1 줄 → R1~R3 줄로 바꾸면서 잠금도 같이. 기기·샌드박스 결제 확인 안 함.
+- **11-23 uk**: 단독 iOS 빌드(TestFlight) 당분간 멈춤 — 출시는 통합 앱 하나(uk 가 1.0.0+15 로 묶음). 단독은 Android CI·Zealot 만.
 - 다음: uk 순서 + 크롬 뜨면 → Grok 45편(`tools/grok_text.py`, 3분 상한, 첫 방 약속 뒤 한 줄씩) → Gemini 3.1 Pro 확인 → 샘플 2편 → `GEMINI_CDP_PORT=9244 python3 tools/gemini_batch.py data/gemini/prompts/list_30.tsv -j 1 --gap 60` → 실제 오류만 반영 → `tools/turn_lock.py --write` → `rm assets/data/script_rev.json && python3 tools/script_publish.py --init`(R2 rev 1) → 회화·코드 함께 커밋(`git add` 경로 지정) → CI Android + iOS → uk 에 보고(커밋·`persian_universe`·새 에셋 `script_rev.json`·rev). 그 뒤 언어감각 과정(급마다 외울 대화 10줄+참고, `video_player`)·단어 퀴즈 복습(외래어 표기 따로 없음 → 단어 복습용)·장면 컷 10장.
 
 ## 화면(이번까지 만든 것)

@@ -36,28 +36,20 @@ def same(a, b):
     return bone(a) == bone(b) or difflib.SequenceMatcher(None, a, b).ratio() >= 0.6
 
 
-SIL_DB = -40.0   # 이 아래 20ms 프레임 = 말 아닌 프레임
-SIL_RUN = 15     # 0.3초 이상 이어진 곳만 — 낱말 사이 순간 낮아짐 제외
-SIL_EDGE = 3     # 그 구간 앞뒤 60ms 는 버림 — 말끝 잦아듦이 섞이지 않게
-SIL_MIN = 0.15   # 말 아닌 구간 합이 150ms 미만이면 잡음 판정 불가 = 통과(기록만)
-
-
 def floor(f):
-    """잡음 바닥(dB) = 말 아닌 프레임만의 RMS(§5, 11-24 it 2ce965d 판으로 맞춤). 잴 구간이 모자라면 None(판정 불가 = 통과)."""
+    """무음 구간만 재는 잡음 바닥(§5): -40dB 아래 20ms 프레임이 0.3초 이상 이어진 곳의 RMS. 그런 구간이 없으면 None(검사 건너뜀)."""
     o = subprocess.run(['ffmpeg', '-v', 'error', '-i', f, '-ac', '1', '-ar', '16000', '-f', 's16le', '-'], capture_output=True).stdout
     x = array.array('h', o[:len(o) // 2 * 2])
-    ms = [sum(v * v for v in x[i:i + 320]) / 320 for i in range(0, len(x) - 320, 320)]
-    db = [20 * math.log10(max(math.sqrt(m), 1) / 32768) for m in ms]
+    fr = [20 * math.log10(max(math.sqrt(sum(v * v for v in x[i:i + 320]) / 320), 1) / 32768) for i in range(0, len(x) - 320, 320)]
     quiet, run = [], []
-    for m, d in zip(ms + [None], db + [0.0]):
-        if m is not None and d < SIL_DB:
-            run.append(m); continue
-        if len(run) >= SIL_RUN:
-            quiet += run[SIL_EDGE:len(run) - SIL_EDGE]
-        run = []
-    if len(quiet) * 0.02 < SIL_MIN:
-        return None
-    return 20 * math.log10(max(math.sqrt(sum(quiet) / len(quiet)), 1) / 32768)
+    for v in fr + [0.0]:
+        if v < -40:
+            run.append(v)
+        else:
+            if len(run) >= 15:
+                quiet += run
+            run = []
+    return 10 * math.log10(sum(10 ** (v / 10) for v in quiet) / len(quiet)) if quiet else None
 
 
 def noisy(f, limit=None):

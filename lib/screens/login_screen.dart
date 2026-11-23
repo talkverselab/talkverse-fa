@@ -30,13 +30,10 @@ class _LoginScreenState extends State<LoginScreen> {
     Account.providers().then((p) => mounted ? setState(() => providers = p) : null);
   }
 
-  bool _ready(String p) => p == 'apple' ? (providers?.contains('apple') ?? true) : (providers?.contains(p) ?? false);
+  bool _ready(String p) => providers?.contains(p) ?? false;
 
   Future<void> _go(String p) async {
-    if (!_ready(p)) {
-      setState(() => error = trf('{0} 로그인은 준비 중입니다. 지금은 Apple 로그인이나 이메일 로그인을 써 주세요.', [_name(p)]));
-      return;
-    }
+    if (!_ready(p)) return;
     setState(() { busy = p; error = null; });
     try {
       final ok = await Account.signIn(p);
@@ -92,7 +89,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   if (providers == null)
                     const Center(child: Padding(padding: EdgeInsets.all(24), child: CircularProgressIndicator()))
                   else
-                    for (final p in const ['google', 'naver', 'kakao', 'apple']) Padding(padding: const EdgeInsets.only(bottom: 12), child: _button(p)),
+                    // 서버 /providers 에 켜져 있고 앱에 연결 코드가 있는 제공자만 — 누르면 「준비 중」인 단추는 두지 않는다(애플 2.1, 심사 점검 11-23)
+                    for (final p in const ['google', 'naver', 'kakao', 'apple'])
+                      if (_ready(p)) Padding(padding: const EdgeInsets.only(bottom: 12), child: _button(p)),
                   // 로그인 동의 안내(출시 점검 2026-11-09)
                   LegalLinks(lead: tr('로그인하면 이용약관에 동의하고, 개인정보처리방침에 따른 정보(이메일·이름·계정 ID) 수집에 동의하는 것으로 봅니다.')),
                   if (error != null) ...[
@@ -119,8 +118,6 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
       );
-
-  String _name(String p) => switch (p) { 'google' => 'Google', 'naver' => tr('네이버'), 'kakao' => tr('카카오'), 'apple' => 'Apple', _ => p };
 
   Widget _button(String p) {
     final disabled = busy != null;

@@ -3,7 +3,6 @@
   "region": "R1",
   "island": "friends",
   "kind": "short",
-  "draft": true,
   "purpose": [
     "making_friends"
   ],
@@ -61,8 +60,7 @@
         "expr:ممنون"
       ],
       "new": [],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 3,
@@ -79,8 +77,7 @@
         "بستنی",
         "خوردن"
       ],
-      "emotion": "excited",
-      "grok_fix": true
+      "emotion": "excited"
     },
     {
       "num": 4,
@@ -149,6 +146,5 @@
   ],
   "cast": {
     "B": "sara"
-  },
-  "grok": true
+  }
 }

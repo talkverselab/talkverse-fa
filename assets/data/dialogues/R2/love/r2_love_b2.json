@@ -3,7 +3,6 @@
   "region": "R2",
   "island": "love",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "love"
   ],
@@ -103,8 +102,7 @@
         "expr:خانم"
       ],
       "new": [],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 5,
@@ -121,8 +119,7 @@
       "new": [
         "خوردن"
       ],
-      "emotion": "gentle",
-      "grok_fix": true
+      "emotion": "gentle"
     },
     {
       "num": 6,
@@ -136,8 +133,7 @@
         "expr:ممنون"
       ],
       "new": [],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 7,
@@ -151,8 +147,7 @@
       "new": [
         "هم‌کلاسی"
       ],
-      "emotion": "stiff",
-      "grok_fix": true
+      "emotion": "stiff"
     },
     {
       "num": 8,
@@ -166,8 +161,7 @@
         "expr:آقا"
       ],
       "new": [],
-      "emotion": "flustered",
-      "grok_fix": true
+      "emotion": "flustered"
     },
     {
       "num": 9,
@@ -185,8 +179,7 @@
         "ماندن",
         "کباب"
       ],
-      "emotion": "excited",
-      "grok_fix": true
+      "emotion": "excited"
     },
     {
       "num": 10,
@@ -233,6 +226,5 @@
     "B": "negar",
     "C": "man_m",
     "D": "woman_m"
-  },
-  "grok": true
+  }
 }

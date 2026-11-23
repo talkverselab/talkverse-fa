@@ -33,7 +33,10 @@ def current():
     out = {}
     for p in paths:
         b = Path(p).read_bytes()
-        json.loads(b)  # 깨진 JSON 은 올리지 않는다
+        j = json.loads(b)  # 깨진 JSON 은 올리지 않는다
+        # 작업 기록 칸(AI 이름 등)은 공개 원고에 넣지 않는다(심사 점검 11-23) — 남아 있으면 멈춤
+        if isinstance(j, dict) and ({'draft', 'grok', 'review', 'src', 'prev', 'grok_rewrite'} & set(j) or any(isinstance(t, dict) and 'grok_fix' in t for t in j.get('turns', []))):
+            sys.exit(f'작업 기록 칸이 남아 있음: {p}')
         out[str(Path(p).relative_to(DATA))] = hashlib.sha1(b).hexdigest()[:12]
     return out
 

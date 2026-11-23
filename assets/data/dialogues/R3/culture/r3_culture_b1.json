@@ -3,7 +3,6 @@
   "region": "R3",
   "island": "culture",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "media",
     "reading"
@@ -86,8 +85,7 @@
       "new": [
         "مؤدبانه"
       ],
-      "emotion": "teasing",
-      "grok_fix": true
+      "emotion": "teasing"
     },
     {
       "num": 4,
@@ -122,8 +120,7 @@
       "new": [
         "بلیت"
       ],
-      "emotion": "surprised",
-      "grok_fix": true
+      "emotion": "surprised"
     },
     {
       "num": 6,
@@ -270,8 +267,7 @@
       "new": [
         "دوست داشتن"
       ],
-      "emotion": "shy",
-      "grok_fix": true
+      "emotion": "shy"
     },
     {
       "num": 15,
@@ -289,6 +285,5 @@
   "cast": {
     "B": "negar",
     "C": "man_o"
-  },
-  "grok": true
+  }
 }

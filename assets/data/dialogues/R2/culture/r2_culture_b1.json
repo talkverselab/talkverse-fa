@@ -3,7 +3,6 @@
   "region": "R2",
   "island": "culture",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "media",
     "reading"
@@ -53,8 +52,7 @@
         "ورودی",
         "مجانی"
       ],
-      "emotion": "cheerful",
-      "grok_fix": true
+      "emotion": "cheerful"
     },
     {
       "num": 2,
@@ -122,8 +120,7 @@
         "پرسیدن",
         "فروش"
       ],
-      "emotion": "gentle",
-      "grok_fix": true
+      "emotion": "gentle"
     },
     {
       "num": 6,
@@ -141,8 +138,7 @@
       "new": [
         "تابلو"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 7,
@@ -199,8 +195,7 @@
           "flustered",
           "نه، این یکی پنجاه تومانه نه سی."
         ]
-      ],
-      "grok_fix": true
+      ]
     },
     {
       "num": 10,
@@ -232,13 +227,11 @@
         "کوچک",
         "مال"
       ],
-      "emotion": "teasing",
-      "grok_fix": true
+      "emotion": "teasing"
     }
   ],
   "cast": {
     "B": "negar",
     "C": "woman_m"
-  },
-  "grok": true
+  }
 }

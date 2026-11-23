@@ -3,7 +3,6 @@
   "region": "R1",
   "island": "culture",
   "kind": "short",
-  "draft": true,
   "purpose": [
     "media",
     "reading"
@@ -61,8 +60,7 @@
         "کلمه",
         "تمرین"
       ],
-      "emotion": "flustered",
-      "grok_fix": true
+      "emotion": "flustered"
     },
     {
       "num": 3,
@@ -94,8 +92,7 @@
       "new": [
         "اسم"
       ],
-      "emotion": "flustered",
-      "grok_fix": true
+      "emotion": "flustered"
     },
     {
       "num": 5,
@@ -119,12 +116,10 @@
       "note": "\"رها کنم = 놓을 수 없었어\"",
       "tags": [],
       "new": [],
-      "emotion": "shy",
-      "grok_fix": true
+      "emotion": "shy"
     }
   ],
   "cast": {
     "B": "negar"
-  },
-  "grok": true
+  }
 }

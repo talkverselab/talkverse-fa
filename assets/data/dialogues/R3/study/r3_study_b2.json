@@ -3,7 +3,6 @@
   "region": "R3",
   "island": "study",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "study_abroad"
   ],
@@ -168,8 +167,7 @@
         "expr:بفرمایید"
       ],
       "new": [],
-      "emotion": "flustered",
-      "grok_fix": true
+      "emotion": "flustered"
     },
     {
       "num": 10,
@@ -238,8 +236,7 @@
         "expr:واقعاً؟"
       ],
       "new": [],
-      "emotion": "surprised",
-      "grok_fix": true
+      "emotion": "surprised"
     },
     {
       "num": 14,
@@ -253,8 +250,7 @@
       "new": [
         "سرد"
       ],
-      "emotion": "amused",
-      "grok_fix": true
+      "emotion": "amused"
     },
     {
       "num": 15,
@@ -280,13 +276,11 @@
       "note": "قند = 설탕",
       "tags": [],
       "new": [],
-      "emotion": "amused",
-      "grok_fix": true
+      "emotion": "amused"
     }
   ],
   "cast": {
     "B": "sara",
     "C": "man_o"
-  },
-  "grok": true
+  }
 }

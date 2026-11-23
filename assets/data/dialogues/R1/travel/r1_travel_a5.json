@@ -3,7 +3,6 @@
   "region": "R1",
   "island": "travel",
   "kind": "short",
-  "draft": true,
   "purpose": [
     "travel"
   ],
@@ -62,8 +61,7 @@
         "اهل",
         "جوان"
       ],
-      "emotion": "cheerful",
-      "grok_fix": true
+      "emotion": "cheerful"
     },
     {
       "num": 3,
@@ -109,8 +107,7 @@
       "new": [
         "فقط"
       ],
-      "emotion": "flustered",
-      "grok_fix": true
+      "emotion": "flustered"
     },
     {
       "num": 6,
@@ -125,12 +122,10 @@
         "پشت",
         "سر"
       ],
-      "emotion": "teasing",
-      "grok_fix": true
+      "emotion": "teasing"
     }
   ],
   "cast": {
     "B": "man_o"
-  },
-  "grok": true
+  }
 }

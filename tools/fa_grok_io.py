@@ -103,6 +103,16 @@ def similar(reply, path):
     return [round(SequenceMatcher(None, o.get('tl_col', ''), n['tl_col']).ratio(), 2) for o, n in zip(d['turns'], turns)]
 
 
+def _log(eid, **kv):
+    p = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'data/review/authoring_fa.local.json')
+    rec = json.load(open(p, encoding='utf-8')) if os.path.exists(p) else {}
+    r = rec.setdefault(eid, {})
+    for k, v in kv.items():
+        if isinstance(v, list): r[k] = sorted(set(r.get(k, []) + v))
+        else: r[k] = v
+    json.dump(rec, open(p, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
+
+
 def imp(reply, path):
     d = json.load(open(path, encoding='utf-8'))
     head, turns = parse(open(reply, encoding='utf-8').read())
@@ -124,7 +134,7 @@ def imp(reply, path):
             if n.get(k):
                 o[k] = n[k]
         o['tl'] = n.get('tl', ''); o['rd'] = ''; o['fill'] = True
-    d['grok'] = True
+    _log(d['id'], grok=True)  # 작업 기록은 공개 원고 밖(로컬 data/review/authoring_fa.local.json, 심사 점검 11-23)
     json.dump(d, open(path, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     print('반영', path, len(old), '턴 — tl·rd 채우기 필요')
 

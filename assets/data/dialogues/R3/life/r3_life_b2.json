@@ -3,7 +3,6 @@
   "region": "R3",
   "island": "life",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "making_friends",
     "study_abroad"
@@ -67,8 +66,7 @@
       "new": [
         "گم شدن"
       ],
-      "emotion": "worried",
-      "grok_fix": true
+      "emotion": "worried"
     },
     {
       "num": 3,
@@ -85,8 +83,7 @@
       "new": [
         "آدرس"
       ],
-      "emotion": "gentle",
-      "grok_fix": true
+      "emotion": "gentle"
     },
     {
       "num": 4,
@@ -102,8 +99,7 @@
       "new": [
         "اتوبوس"
       ],
-      "emotion": "flustered",
-      "grok_fix": true
+      "emotion": "flustered"
     },
     {
       "num": 5,
@@ -180,8 +176,7 @@
       "new": [
         "کیف"
       ],
-      "emotion": "annoyed",
-      "grok_fix": true
+      "emotion": "annoyed"
     },
     {
       "num": 10,
@@ -211,8 +206,7 @@
       "new": [
         "آدم"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 12,
@@ -227,8 +221,7 @@
         "جیب",
         "کوله"
       ],
-      "emotion": "teasing",
-      "grok_fix": true
+      "emotion": "teasing"
     },
     {
       "num": 13,
@@ -266,6 +259,5 @@
   "cast": {
     "B": "arash",
     "C": "man_y"
-  },
-  "grok": true
+  }
 }

@@ -3,7 +3,6 @@
   "region": "R3",
   "island": "friends",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "making_friends"
   ],
@@ -68,8 +67,7 @@
       "new": [
         "پیش"
       ],
-      "emotion": "surprised",
-      "grok_fix": true
+      "emotion": "surprised"
     },
     {
       "num": 3,
@@ -84,8 +82,7 @@
         "expr:بفرمایید"
       ],
       "new": [],
-      "emotion": "stiff",
-      "grok_fix": true
+      "emotion": "stiff"
     },
     {
       "num": 4,
@@ -150,8 +147,7 @@
         "گوشی",
         "پیام"
       ],
-      "emotion": "annoyed",
-      "grok_fix": true
+      "emotion": "annoyed"
     },
     {
       "num": 8,
@@ -198,8 +194,7 @@
       "new": [
         "قهر کردن"
       ],
-      "emotion": "sad",
-      "grok_fix": true
+      "emotion": "sad"
     },
     {
       "num": 11,
@@ -248,8 +243,7 @@
       "new": [
         "مهمان"
       ],
-      "emotion": "gentle",
-      "grok_fix": true
+      "emotion": "gentle"
     },
     {
       "num": 14,
@@ -282,6 +276,5 @@
   ],
   "cast": {
     "B": "sara"
-  },
-  "grok": true
+  }
 }

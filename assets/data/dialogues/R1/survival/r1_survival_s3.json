@@ -3,7 +3,6 @@
   "region": "R1",
   "island": "survival",
   "kind": "survival",
-  "draft": true,
   "purpose": [
     "travel"
   ],
@@ -66,8 +65,7 @@
         "راست",
         "دور"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 3,
@@ -83,8 +81,7 @@
       "new": [
         "چپ"
       ],
-      "emotion": "worried",
-      "grok_fix": true
+      "emotion": "worried"
     },
     {
       "num": 4,
@@ -99,8 +96,7 @@
         "expr:آقا"
       ],
       "new": [],
-      "emotion": "annoyed",
-      "grok_fix": true
+      "emotion": "annoyed"
     },
     {
       "num": 5,
@@ -134,8 +130,7 @@
         "پشت",
         "سر"
       ],
-      "emotion": "surprised",
-      "grok_fix": true
+      "emotion": "surprised"
     },
     {
       "num": 7,
@@ -149,8 +144,7 @@
         "expr:وای"
       ],
       "new": [],
-      "emotion": "surprised",
-      "grok_fix": true
+      "emotion": "surprised"
     },
     {
       "num": 8,
@@ -169,6 +163,5 @@
   ],
   "cast": {
     "B": "woman_m"
-  },
-  "grok": true
+  }
 }

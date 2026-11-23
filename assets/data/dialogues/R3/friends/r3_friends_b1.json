@@ -3,7 +3,6 @@
   "region": "R3",
   "island": "friends",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "making_friends"
   ],
@@ -235,8 +234,7 @@
         "گوشی",
         "زنگ زدن"
       ],
-      "emotion": "annoyed",
-      "grok_fix": true
+      "emotion": "annoyed"
     },
     {
       "num": 14,
@@ -259,6 +257,5 @@
   "cast": {
     "B": "sara",
     "C": "man_m"
-  },
-  "grok": true
+  }
 }

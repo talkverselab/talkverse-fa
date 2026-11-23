@@ -3,7 +3,6 @@
   "region": "R2",
   "island": "culture",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "media",
     "reading"
@@ -101,8 +100,7 @@
         "هزار",
         "تومان"
       ],
-      "emotion": "stiff",
-      "grok_fix": true
+      "emotion": "stiff"
     },
     {
       "num": 5,
@@ -134,8 +132,7 @@
       "new": [
         "کمیاب"
       ],
-      "emotion": "stiff",
-      "grok_fix": true
+      "emotion": "stiff"
     },
     {
       "num": 7,
@@ -168,8 +165,7 @@
         "سال",
         "پیش"
       ],
-      "emotion": "flustered",
-      "grok_fix": true
+      "emotion": "flustered"
     },
     {
       "num": 9,
@@ -200,8 +196,7 @@
         "صد",
         "آخر"
       ],
-      "emotion": "stiff",
-      "grok_fix": true
+      "emotion": "stiff"
     },
     {
       "num": 11,
@@ -219,6 +214,5 @@
   "cast": {
     "B": "negar",
     "C": "man_o"
-  },
-  "grok": true
+  }
 }

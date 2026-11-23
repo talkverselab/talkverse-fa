@@ -3,7 +3,6 @@
   "region": "R2",
   "island": "friends",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "making_friends"
   ],
@@ -71,8 +70,7 @@
         "دل",
         "شروع"
       ],
-      "emotion": "teasing",
-      "grok_fix": true
+      "emotion": "teasing"
     },
     {
       "num": 4,
@@ -116,8 +114,7 @@
         "صدا",
         "پایین"
       ],
-      "emotion": "worried",
-      "grok_fix": true
+      "emotion": "worried"
     },
     {
       "num": 7,
@@ -175,8 +172,7 @@
       "note": "راز = 비밀",
       "tags": [],
       "new": [],
-      "emotion": "shy",
-      "grok_fix": true
+      "emotion": "shy"
     },
     {
       "num": 11,
@@ -211,6 +207,5 @@
   ],
   "cast": {
     "B": "reza"
-  },
-  "grok": true
+  }
 }

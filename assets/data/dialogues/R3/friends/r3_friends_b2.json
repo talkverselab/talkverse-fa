@@ -3,7 +3,6 @@
   "region": "R3",
   "island": "friends",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "making_friends"
   ],
@@ -179,8 +178,7 @@
         "بازار",
         "کوچه"
       ],
-      "emotion": "flustered",
-      "grok_fix": true
+      "emotion": "flustered"
     },
     {
       "num": 10,
@@ -224,8 +222,7 @@
         "لیست",
         "هنوز"
       ],
-      "emotion": "gentle",
-      "grok_fix": true
+      "emotion": "gentle"
     },
     {
       "num": 13,
@@ -278,12 +275,10 @@
       "note": "\"مرسی = 고마워\"",
       "tags": [],
       "new": [],
-      "emotion": "gentle",
-      "grok_fix": true
+      "emotion": "gentle"
     }
   ],
   "cast": {
     "B": "sara"
-  },
-  "grok": true
+  }
 }

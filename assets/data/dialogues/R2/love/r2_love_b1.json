@@ -3,7 +3,6 @@
   "region": "R2",
   "island": "love",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "love"
   ],
@@ -187,6 +186,5 @@
   ],
   "cast": {
     "B": "negar"
-  },
-  "grok": true
+  }
 }

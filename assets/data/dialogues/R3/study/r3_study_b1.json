@@ -3,7 +3,6 @@
   "region": "R3",
   "island": "study",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "study_abroad"
   ],
@@ -101,8 +100,7 @@
       "new": [
         "استاد"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 5,
@@ -135,8 +133,7 @@
       "new": [
         "آمار"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 7,
@@ -166,8 +163,7 @@
         "expr:بفرمایید"
       ],
       "new": [],
-      "emotion": "stiff",
-      "grok_fix": true
+      "emotion": "stiff"
     },
     {
       "num": 9,
@@ -183,8 +179,7 @@
       "new": [
         "بار"
       ],
-      "emotion": "surprised",
-      "grok_fix": true
+      "emotion": "surprised"
     },
     {
       "num": 10,
@@ -213,8 +208,7 @@
       "new": [
         "آخر"
       ],
-      "emotion": "worried",
-      "grok_fix": true
+      "emotion": "worried"
     },
     {
       "num": 12,
@@ -278,6 +272,5 @@
   "cast": {
     "B": "sara",
     "C": "man_o"
-  },
-  "grok": true
+  }
 }

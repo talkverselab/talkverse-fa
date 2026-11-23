@@ -3,7 +3,6 @@
   "region": "R3",
   "island": "life",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "making_friends",
     "study_abroad"
@@ -86,8 +85,7 @@
       "new": [
         "طبقه"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 4,
@@ -101,8 +99,7 @@
       "new": [
         "آسانسور"
       ],
-      "emotion": "neutral",
-      "grok_fix": true
+      "emotion": "neutral"
     },
     {
       "num": 5,
@@ -194,8 +191,7 @@
       "new": [
         "پول"
       ],
-      "emotion": "flustered",
-      "grok_fix": true
+      "emotion": "flustered"
     },
     {
       "num": 11,
@@ -212,8 +208,7 @@
       "new": [
         "همسایه"
       ],
-      "emotion": "excited",
-      "grok_fix": true
+      "emotion": "excited"
     },
     {
       "num": 12,
@@ -279,6 +274,5 @@
     "B": "arash",
     "C": "man_m",
     "D": "woman_o"
-  },
-  "grok": true
+  }
 }

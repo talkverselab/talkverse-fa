@@ -3,7 +3,6 @@
   "region": "R2",
   "island": "life",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "making_friends",
     "study_abroad"
@@ -68,8 +67,7 @@
         "اجاره",
         "ماه"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 3,
@@ -100,8 +98,7 @@
       "new": [
         "قرار گذاشتن"
       ],
-      "emotion": "annoyed",
-      "grok_fix": true
+      "emotion": "annoyed"
     },
     {
       "num": 5,
@@ -115,8 +112,7 @@
         "expr:یعنی چی؟"
       ],
       "new": [],
-      "emotion": "flustered",
-      "grok_fix": true
+      "emotion": "flustered"
     },
     {
       "num": 6,
@@ -131,8 +127,7 @@
         "پارکینگ",
         "بدون"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 7,
@@ -146,8 +141,7 @@
       "new": [
         "ماشین"
       ],
-      "emotion": "cheerful",
-      "grok_fix": true
+      "emotion": "cheerful"
     },
     {
       "num": 8,
@@ -208,8 +202,7 @@
         "طول کشیدن",
         "شب"
       ],
-      "emotion": "amused",
-      "grok_fix": true
+      "emotion": "amused"
     },
     {
       "num": 12,
@@ -233,6 +226,5 @@
     "B": "arash",
     "C": "man_m",
     "D": "woman_m"
-  },
-  "grok": true
+  }
 }

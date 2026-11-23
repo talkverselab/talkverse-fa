@@ -3,7 +3,6 @@
   "region": "R2",
   "island": "travel",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "travel"
   ],
@@ -54,8 +53,7 @@
       "new": [
         "بلیت"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 2,
@@ -71,8 +69,7 @@
         "ایرانی",
         "هزار"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 3,
@@ -123,8 +120,7 @@
         "لازم",
         "همه‌چی"
       ],
-      "emotion": "cheerful",
-      "grok_fix": true
+      "emotion": "cheerful"
     },
     {
       "num": 6,
@@ -203,8 +199,7 @@
       "note": "\"بلده = 잘 안다\"",
       "tags": [],
       "new": [],
-      "emotion": "teasing",
-      "grok_fix": true
+      "emotion": "teasing"
     },
     {
       "num": 11,
@@ -221,8 +216,7 @@
       "new": [
         "کم"
       ],
-      "emotion": "flustered",
-      "grok_fix": true
+      "emotion": "flustered"
     },
     {
       "num": 12,
@@ -242,6 +236,5 @@
   "cast": {
     "B": "sara",
     "C": "man_o"
-  },
-  "grok": true
+  }
 }

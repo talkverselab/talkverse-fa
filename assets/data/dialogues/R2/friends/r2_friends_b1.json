@@ -3,7 +3,6 @@
   "region": "R2",
   "island": "friends",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "making_friends"
   ],
@@ -46,8 +45,7 @@
         "تیم",
         "بردن"
       ],
-      "emotion": "teasing",
-      "grok_fix": true
+      "emotion": "teasing"
     },
     {
       "num": 2,
@@ -64,8 +62,7 @@
         "باختن",
         "بستنی"
       ],
-      "emotion": "cheerful",
-      "grok_fix": true
+      "emotion": "cheerful"
     },
     {
       "num": 3,
@@ -126,8 +123,7 @@
       "new": [
         "تمام"
       ],
-      "emotion": "excited",
-      "grok_fix": true
+      "emotion": "excited"
     },
     {
       "num": 7,
@@ -184,8 +180,7 @@
         "expr:جدی؟"
       ],
       "new": [],
-      "emotion": "surprised",
-      "grok_fix": true
+      "emotion": "surprised"
     },
     {
       "num": 11,
@@ -200,8 +195,7 @@
         "ظرف",
         "شستن"
       ],
-      "emotion": "teasing",
-      "grok_fix": true
+      "emotion": "teasing"
     },
     {
       "num": 12,
@@ -222,6 +216,5 @@
   ],
   "cast": {
     "B": "reza"
-  },
-  "grok": true
+  }
 }

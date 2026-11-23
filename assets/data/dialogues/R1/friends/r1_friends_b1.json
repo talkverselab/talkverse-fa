@@ -3,7 +3,6 @@
   "region": "R1",
   "island": "friends",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "making_friends"
   ],
@@ -52,8 +51,7 @@
       "new": [
         "دست"
       ],
-      "emotion": "cheerful",
-      "grok_fix": true
+      "emotion": "cheerful"
     },
     {
       "num": 2,
@@ -105,8 +103,7 @@
       "new": [
         "فقط"
       ],
-      "emotion": "cheerful",
-      "grok_fix": true
+      "emotion": "cheerful"
     },
     {
       "num": 5,
@@ -173,6 +170,5 @@
   ],
   "cast": {
     "B": "sara"
-  },
-  "grok": true
+  }
 }

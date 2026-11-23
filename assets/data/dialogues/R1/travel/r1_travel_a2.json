@@ -3,7 +3,6 @@
   "region": "R1",
   "island": "travel",
   "kind": "short",
-  "draft": true,
   "purpose": [
     "travel"
   ],
@@ -72,8 +71,7 @@
         "دیدن",
         "ولی"
       ],
-      "emotion": "flustered",
-      "grok_fix": true
+      "emotion": "flustered"
     },
     {
       "num": 4,
@@ -92,8 +90,7 @@
         "گفتن",
         "بالا"
       ],
-      "emotion": "neutral",
-      "grok_fix": true
+      "emotion": "neutral"
     },
     {
       "num": 5,
@@ -108,8 +105,7 @@
         "شنیدن",
         "ساری"
       ],
-      "emotion": "surprised",
-      "grok_fix": true
+      "emotion": "surprised"
     },
     {
       "num": 6,
@@ -123,8 +119,7 @@
         "expr:یعنی چی؟"
       ],
       "new": [],
-      "emotion": "flustered",
-      "grok_fix": true
+      "emotion": "flustered"
     },
     {
       "num": 7,
@@ -144,6 +139,5 @@
   ],
   "cast": {
     "B": "sara"
-  },
-  "grok": true
+  }
 }

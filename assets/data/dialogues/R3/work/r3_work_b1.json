@@ -3,7 +3,6 @@
   "region": "R3",
   "island": "work",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "work_japan"
   ],
@@ -68,8 +67,7 @@
       "new": [
         "صندلی"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 3,
@@ -115,8 +113,7 @@
         "expr:دست شما درد نکنه"
       ],
       "new": [],
-      "emotion": "excited",
-      "grok_fix": true
+      "emotion": "excited"
     },
     {
       "num": 6,
@@ -174,8 +171,7 @@
       "new": [
         "توهین"
       ],
-      "emotion": "annoyed",
-      "grok_fix": true
+      "emotion": "annoyed"
     },
     {
       "num": 10,
@@ -249,8 +245,7 @@
       "new": [
         "قبول"
       ],
-      "emotion": "flustered",
-      "grok_fix": true
+      "emotion": "flustered"
     },
     {
       "num": 15,
@@ -265,8 +260,7 @@
         "رئیس",
         "پرسیدن"
       ],
-      "emotion": "worried",
-      "grok_fix": true
+      "emotion": "worried"
     },
     {
       "num": 16,
@@ -286,6 +280,5 @@
   "cast": {
     "B": "reza",
     "C": "man_o"
-  },
-  "grok": true
+  }
 }

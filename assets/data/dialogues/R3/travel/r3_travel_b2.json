@@ -3,7 +3,6 @@
   "region": "R3",
   "island": "travel",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "travel"
   ],
@@ -87,8 +86,7 @@
         "دریا",
         "صبحانه"
       ],
-      "emotion": "cheerful",
-      "grok_fix": true
+      "emotion": "cheerful"
     },
     {
       "num": 4,
@@ -164,8 +162,7 @@
         "expr:چقدر میشه؟"
       ],
       "new": [],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 9,
@@ -179,8 +176,7 @@
         "expr:خانم"
       ],
       "new": [],
-      "emotion": "amused",
-      "grok_fix": true
+      "emotion": "amused"
     },
     {
       "num": 10,
@@ -211,8 +207,7 @@
         "مهمان",
         "جنوب"
       ],
-      "emotion": "cheerful",
-      "grok_fix": true
+      "emotion": "cheerful"
     },
     {
       "num": 12,
@@ -228,8 +223,7 @@
       "new": [
         "نصف"
       ],
-      "emotion": "annoyed",
-      "grok_fix": true
+      "emotion": "annoyed"
     },
     {
       "num": 13,
@@ -245,8 +239,7 @@
       "new": [
         "شام"
       ],
-      "emotion": "teasing",
-      "grok_fix": true
+      "emotion": "teasing"
     },
     {
       "num": 14,
@@ -275,8 +268,7 @@
         "expr:چقدر میشه؟"
       ],
       "new": [],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 16,
@@ -296,6 +288,5 @@
   "cast": {
     "B": "sara",
     "C": "woman_o"
-  },
-  "grok": true
+  }
 }

@@ -3,7 +3,6 @@
   "region": "R1",
   "island": "travel",
   "kind": "short",
-  "draft": true,
   "purpose": [
     "travel"
   ],
@@ -80,8 +79,7 @@
         "اتاق",
         "هفت"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 4,
@@ -97,8 +95,7 @@
       "new": [
         "شناختن"
       ],
-      "emotion": "surprised",
-      "grok_fix": true
+      "emotion": "surprised"
     },
     {
       "num": 5,
@@ -113,8 +110,7 @@
         "سال",
         "زندگی کردن"
       ],
-      "emotion": "gentle",
-      "grok_fix": true
+      "emotion": "gentle"
     },
     {
       "num": 6,
@@ -151,6 +147,5 @@
   ],
   "cast": {
     "B": "man_m"
-  },
-  "grok": true
+  }
 }

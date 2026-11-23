@@ -3,7 +3,6 @@
   "region": "R1",
   "island": "love",
   "kind": "short",
-  "draft": true,
   "purpose": [
     "love"
   ],
@@ -105,8 +104,7 @@
         "expr:دیگه"
       ],
       "new": [],
-      "emotion": "excited",
-      "grok_fix": true
+      "emotion": "excited"
     },
     {
       "num": 6,
@@ -156,6 +154,5 @@
     "B": "negar",
     "C": "arash",
     "D": "man_m"
-  },
-  "grok": true
+  }
 }

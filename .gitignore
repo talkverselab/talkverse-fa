@@ -81,3 +81,7 @@ android/.kotlin/
 # Drift generated
 **/*.g.dart
 !lib/data/db/app_database.g.dart
+tools/__pycache__/
+data/scene/
+data/scene_prompts/
+data/review/authoring_fa.local.json

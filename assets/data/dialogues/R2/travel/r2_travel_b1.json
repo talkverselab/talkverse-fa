@@ -3,7 +3,6 @@
   "region": "R2",
   "island": "travel",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "travel"
   ],
@@ -85,8 +84,7 @@
         "گز",
         "خوردن"
       ],
-      "emotion": "gentle",
-      "grok_fix": true
+      "emotion": "gentle"
     },
     {
       "num": 4,
@@ -165,8 +163,7 @@
         "دوباره",
         "اعلام کردن"
       ],
-      "emotion": "shout",
-      "grok_fix": true
+      "emotion": "shout"
     },
     {
       "num": 9,
@@ -198,8 +195,7 @@
         "چایی",
         "گرم"
       ],
-      "emotion": "amused",
-      "grok_fix": true
+      "emotion": "amused"
     },
     {
       "num": 11,
@@ -211,8 +207,7 @@
       "note": "\"دویدیم = 뛰어다녔어\"",
       "tags": [],
       "new": [],
-      "emotion": "surprised",
-      "grok_fix": true
+      "emotion": "surprised"
     },
     {
       "num": 12,
@@ -228,13 +223,11 @@
       "new": [
         "حوصله"
       ],
-      "emotion": "teasing",
-      "grok_fix": true
+      "emotion": "teasing"
     }
   ],
   "cast": {
     "B": "sara",
     "C": "woman_o"
-  },
-  "grok": true
+  }
 }

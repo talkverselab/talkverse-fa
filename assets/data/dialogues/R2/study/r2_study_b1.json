@@ -3,7 +3,6 @@
   "region": "R2",
   "island": "study",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "study_abroad"
   ],
@@ -129,8 +128,7 @@
       "new": [
         "یازده"
       ],
-      "emotion": "flustered",
-      "grok_fix": true
+      "emotion": "flustered"
     },
     {
       "num": 7,
@@ -144,8 +142,7 @@
         "expr:باشه"
       ],
       "new": [],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 8,
@@ -191,8 +188,7 @@
         "ناهار",
         "الان"
       ],
-      "emotion": "amused",
-      "grok_fix": true
+      "emotion": "amused"
     },
     {
       "num": 11,
@@ -213,6 +209,5 @@
   "cast": {
     "B": "reza",
     "C": "man_o"
-  },
-  "grok": true
+  }
 }

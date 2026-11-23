@@ -3,7 +3,6 @@
   "region": "R1",
   "island": "life",
   "kind": "short",
-  "draft": true,
   "purpose": [
     "making_friends",
     "study_abroad"
@@ -45,8 +44,7 @@
       "new": [
         "ساعت"
       ],
-      "emotion": "annoyed",
-      "grok_fix": true
+      "emotion": "annoyed"
     },
     {
       "num": 2,
@@ -102,8 +100,7 @@
         "اتاق",
         "رسیدن"
       ],
-      "emotion": "worried",
-      "grok_fix": true
+      "emotion": "worried"
     },
     {
       "num": 6,
@@ -117,8 +114,7 @@
         "expr:نگران نباش"
       ],
       "new": [],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 7,
@@ -154,6 +150,5 @@
   ],
   "cast": {
     "B": "man_m"
-  },
-  "grok": true
+  }
 }

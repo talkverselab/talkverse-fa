@@ -3,7 +3,6 @@
   "region": "R3",
   "island": "culture",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "media",
     "reading"
@@ -132,8 +131,7 @@
       "new": [
         "قابل"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 7,
@@ -163,8 +161,7 @@
         "تعارف",
         "دوباره"
       ],
-      "emotion": "tsukkomi",
-      "grok_fix": true
+      "emotion": "tsukkomi"
     },
     {
       "num": 9,
@@ -181,8 +178,7 @@
       "new": [
         "قیمت"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 10,
@@ -213,8 +209,7 @@
       "new": [
         "سه‌شنبه"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 12,
@@ -226,8 +221,7 @@
       "note": "واسه من = 나를 위해",
       "tags": [],
       "new": [],
-      "emotion": "surprised",
-      "grok_fix": true
+      "emotion": "surprised"
     },
     {
       "num": 13,
@@ -261,6 +255,5 @@
   "cast": {
     "B": "negar",
     "C": "man_m"
-  },
-  "grok": true
+  }
 }

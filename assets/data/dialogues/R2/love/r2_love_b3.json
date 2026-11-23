@@ -3,7 +3,6 @@
   "region": "R2",
   "island": "love",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "love"
   ],
@@ -47,8 +46,7 @@
         "سرد",
         "ساکت"
       ],
-      "emotion": "gentle",
-      "grok_fix": true
+      "emotion": "gentle"
     },
     {
       "num": 2,
@@ -95,8 +93,7 @@
         "ساعت",
         "کافه"
       ],
-      "emotion": "annoyed",
-      "grok_fix": true
+      "emotion": "annoyed"
     },
     {
       "num": 5,
@@ -152,8 +149,7 @@
       "new": [
         "آشنا"
       ],
-      "emotion": "flustered",
-      "grok_fix": true
+      "emotion": "flustered"
     },
     {
       "num": 9,
@@ -214,6 +210,5 @@
   ],
   "cast": {
     "B": "negar"
-  },
-  "grok": true
+  }
 }

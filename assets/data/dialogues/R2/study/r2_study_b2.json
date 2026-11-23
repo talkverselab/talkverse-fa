@@ -3,7 +3,6 @@
   "region": "R2",
   "island": "study",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "study_abroad"
   ],
@@ -189,6 +188,5 @@
   "cast": {
     "B": "reza",
     "C": "man_o"
-  },
-  "grok": true
+  }
 }

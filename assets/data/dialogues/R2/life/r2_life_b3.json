@@ -3,7 +3,6 @@
   "region": "R2",
   "island": "life",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "making_friends",
     "study_abroad"
@@ -181,8 +180,7 @@
         "expr:شوخی می‌کنی؟"
       ],
       "new": [],
-      "emotion": "surprised",
-      "grok_fix": true
+      "emotion": "surprised"
     },
     {
       "num": 11,
@@ -197,13 +195,11 @@
         "expr:عزیزم"
       ],
       "new": [],
-      "emotion": "teasing",
-      "grok_fix": true
+      "emotion": "teasing"
     }
   ],
   "cast": {
     "B": "arash",
     "C": "woman_o"
-  },
-  "grok": true
+  }
 }

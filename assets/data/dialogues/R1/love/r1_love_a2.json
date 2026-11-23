@@ -3,7 +3,6 @@
   "region": "R1",
   "island": "love",
   "kind": "short",
-  "draft": true,
   "purpose": [
     "love"
   ],
@@ -73,8 +72,7 @@
         "expr:چشم"
       ],
       "new": [],
-      "emotion": "teasing",
-      "grok_fix": true
+      "emotion": "teasing"
     },
     {
       "num": 4,
@@ -100,8 +98,7 @@
       "note": "\"چشمم = 내 눈\"",
       "tags": [],
       "new": [],
-      "emotion": "teasing",
-      "grok_fix": true
+      "emotion": "teasing"
     },
     {
       "num": 6,
@@ -130,12 +127,10 @@
       "new": [
         "فردا"
       ],
-      "emotion": "teasing",
-      "grok_fix": true
+      "emotion": "teasing"
     }
   ],
   "cast": {
     "B": "negar"
-  },
-  "grok": true
+  }
 }

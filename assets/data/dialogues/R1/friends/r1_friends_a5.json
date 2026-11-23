@@ -3,7 +3,6 @@
   "region": "R1",
   "island": "friends",
   "kind": "short",
-  "draft": true,
   "purpose": [
     "making_friends"
   ],
@@ -67,8 +66,7 @@
         "expr:مرسی"
       ],
       "new": [],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 3,
@@ -83,8 +81,7 @@
         "expr:چیزی نیست"
       ],
       "new": [],
-      "emotion": "teasing",
-      "grok_fix": true
+      "emotion": "teasing"
     },
     {
       "num": 4,
@@ -135,8 +132,7 @@
         "expr:نمی‌خوام"
       ],
       "new": [],
-      "emotion": "flustered",
-      "grok_fix": true
+      "emotion": "flustered"
     },
     {
       "num": 7,
@@ -154,8 +150,7 @@
         "شام",
         "ماندن"
       ],
-      "emotion": "excited",
-      "grok_fix": true
+      "emotion": "excited"
     },
     {
       "num": 8,
@@ -169,12 +164,10 @@
         "form:که"
       ],
       "new": [],
-      "emotion": "sad",
-      "grok_fix": true
+      "emotion": "sad"
     }
   ],
   "cast": {
     "B": "sara"
-  },
-  "grok": true
+  }
 }

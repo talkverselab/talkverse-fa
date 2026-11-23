@@ -3,7 +3,6 @@
   "region": "R2",
   "island": "life",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "making_friends",
     "study_abroad"
@@ -80,8 +79,7 @@
       "note": "\"دلتون تنگ شده = 그리워하다\"",
       "tags": [],
       "new": [],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 4,
@@ -168,8 +166,7 @@
         "عشق",
         "دارو"
       ],
-      "emotion": "gentle",
-      "grok_fix": true
+      "emotion": "gentle"
     },
     {
       "num": 10,
@@ -214,13 +211,11 @@
         "expr:حیف"
       ],
       "new": [],
-      "emotion": "amused",
-      "grok_fix": true
+      "emotion": "amused"
     }
   ],
   "cast": {
     "B": "arash",
     "C": "man_m"
-  },
-  "grok": true
+  }
 }

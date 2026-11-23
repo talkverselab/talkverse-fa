@@ -7,6 +7,7 @@
 반영은 --apply: 그 줄의 tl_col·tl·ko·note 만 Grok 답으로 바꾸고 rd 는 비운다(Claude 가 독음만 채움). 기록 data/grok/fix/log.tsv.
 """
 import glob, json, os, re, subprocess, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TRI = os.path.join(ROOT, 'data/review/triage')
@@ -110,9 +111,10 @@ def apply():
             for k in ('tl_col', 'tl', 'ko', 'note'):
                 t[k] = got[n][k].replace('؟', '?') if k == 'ko' else got[n][k]
             t['rd'] = ''
-            t['grok_fix'] = True
             tot += 1
         json.dump(d, open(p, 'w', encoding='utf-8'), ensure_ascii=False, indent=2); open(p, 'a').write('\n')
+        import fa_grok_io as IO
+        IO._log(i, fix_turns=[n for n, _ in rw])
     print('반영 줄', tot)
 
 

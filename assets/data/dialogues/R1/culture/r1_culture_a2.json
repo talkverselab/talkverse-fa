@@ -3,7 +3,6 @@
   "region": "R1",
   "island": "culture",
   "kind": "short",
-  "draft": true,
   "purpose": [
     "media",
     "reading"
@@ -92,8 +91,7 @@
         "expr:وای"
       ],
       "new": [],
-      "emotion": "surprised",
-      "grok_fix": true
+      "emotion": "surprised"
     },
     {
       "num": 5,
@@ -109,8 +107,7 @@
         "نفر",
         "مامان"
       ],
-      "emotion": "teasing",
-      "grok_fix": true
+      "emotion": "teasing"
     },
     {
       "num": 6,
@@ -143,6 +140,5 @@
   ],
   "cast": {
     "B": "negar"
-  },
-  "grok": true
+  }
 }

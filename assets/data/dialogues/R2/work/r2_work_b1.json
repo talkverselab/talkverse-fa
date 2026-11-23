@@ -3,7 +3,6 @@
   "region": "R2",
   "island": "work",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "work_japan"
   ],
@@ -64,8 +63,7 @@
         "خوشبخت",
         "آشپزخونه"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 3,
@@ -113,8 +111,7 @@
       "new": [
         "قند"
       ],
-      "emotion": "cheerful",
-      "grok_fix": true
+      "emotion": "cheerful"
     },
     {
       "num": 6,
@@ -129,8 +126,7 @@
         "بی‌قند",
         "قهوه"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 7,
@@ -144,8 +140,7 @@
         "expr:باشه"
       ],
       "new": [],
-      "emotion": "flustered",
-      "grok_fix": true
+      "emotion": "flustered"
     },
     {
       "num": 8,
@@ -162,8 +157,7 @@
         "بغلی",
         "شنیدن"
       ],
-      "emotion": "teasing",
-      "grok_fix": true
+      "emotion": "teasing"
     },
     {
       "num": 9,
@@ -221,14 +215,12 @@
         "expr:مرسی"
       ],
       "new": [],
-      "emotion": "amused",
-      "grok_fix": true
+      "emotion": "amused"
     }
   ],
   "cast": {
     "B": "reza",
     "C": "woman_m",
     "D": "man_o"
-  },
-  "grok": true
+  }
 }

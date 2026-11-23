@@ -3,7 +3,6 @@
   "region": "R3",
   "island": "work",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "work_japan"
   ],
@@ -66,8 +65,7 @@
         "کباب",
         "سالاد"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 3,
@@ -102,8 +100,7 @@
         "تیم",
         "معرفی"
       ],
-      "emotion": "excited",
-      "grok_fix": true
+      "emotion": "excited"
     },
     {
       "num": 5,
@@ -148,8 +145,7 @@
       "new": [
         "دیر"
       ],
-      "emotion": "amused",
-      "grok_fix": true
+      "emotion": "amused"
     },
     {
       "num": 8,
@@ -163,8 +159,7 @@
         "expr:آقا"
       ],
       "new": [],
-      "emotion": "teasing",
-      "grok_fix": true
+      "emotion": "teasing"
     },
     {
       "num": 9,
@@ -192,8 +187,7 @@
         "expr:اصلاً"
       ],
       "new": [],
-      "emotion": "amused",
-      "grok_fix": true
+      "emotion": "amused"
     },
     {
       "num": 11,
@@ -229,8 +223,7 @@
         "expr:آقا"
       ],
       "new": [],
-      "emotion": "surprised",
-      "grok_fix": true
+      "emotion": "surprised"
     },
     {
       "num": 13,
@@ -244,8 +237,7 @@
       "new": [
         "بدون"
       ],
-      "emotion": "teasing",
-      "grok_fix": true
+      "emotion": "teasing"
     },
     {
       "num": 14,
@@ -259,8 +251,7 @@
         "expr:چشم"
       ],
       "new": [],
-      "emotion": "teasing",
-      "grok_fix": true
+      "emotion": "teasing"
     },
     {
       "num": 15,
@@ -279,6 +270,5 @@
   ],
   "cast": {
     "B": "reza"
-  },
-  "grok": true
+  }
 }

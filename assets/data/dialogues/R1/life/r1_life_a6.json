@@ -3,7 +3,6 @@
   "region": "R1",
   "island": "life",
   "kind": "short",
-  "draft": true,
   "purpose": [
     "making_friends",
     "study_abroad"
@@ -56,8 +55,7 @@
       "new": [
         "بلد"
       ],
-      "emotion": "surprised",
-      "grok_fix": true
+      "emotion": "surprised"
     },
     {
       "num": 3,
@@ -73,8 +71,7 @@
       "new": [
         "سوزوندن"
       ],
-      "emotion": "flustered",
-      "grok_fix": true
+      "emotion": "flustered"
     },
     {
       "num": 4,
@@ -104,8 +101,7 @@
         "کافه",
         "ساکت"
       ],
-      "emotion": "gentle",
-      "grok_fix": true
+      "emotion": "gentle"
     },
     {
       "num": 6,
@@ -117,8 +113,7 @@
       "note": "بهم تو گفتی = 나한테 반말 했어",
       "tags": [],
       "new": [],
-      "emotion": "surprised",
-      "grok_fix": true
+      "emotion": "surprised"
     },
     {
       "num": 7,
@@ -137,6 +132,5 @@
   ],
   "cast": {
     "B": "arash"
-  },
-  "grok": true
+  }
 }

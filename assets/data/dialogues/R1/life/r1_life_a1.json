@@ -3,7 +3,6 @@
   "region": "R1",
   "island": "life",
   "kind": "short",
-  "draft": true,
   "purpose": [
     "making_friends",
     "study_abroad"
@@ -52,8 +51,7 @@
         "چای",
         "قهوه"
       ],
-      "emotion": "cheerful",
-      "grok_fix": true
+      "emotion": "cheerful"
     },
     {
       "num": 2,
@@ -86,8 +84,7 @@
         "دارچین",
         "تازه"
       ],
-      "emotion": "cheerful",
-      "grok_fix": true
+      "emotion": "cheerful"
     },
     {
       "num": 4,
@@ -119,8 +116,7 @@
       "new": [
         "کیک"
       ],
-      "emotion": "excited",
-      "grok_fix": true
+      "emotion": "excited"
     },
     {
       "num": 6,
@@ -159,6 +155,5 @@
   ],
   "cast": {
     "B": "arash"
-  },
-  "grok": true
+  }
 }

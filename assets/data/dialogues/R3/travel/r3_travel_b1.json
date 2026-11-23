@@ -3,7 +3,6 @@
   "region": "R3",
   "island": "travel",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "travel"
   ],
@@ -75,8 +74,7 @@
         "نفری",
         "دویست"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 3,
@@ -170,8 +168,7 @@
         "expr:خیلی"
       ],
       "new": [],
-      "emotion": "excited",
-      "grok_fix": true
+      "emotion": "excited"
     },
     {
       "num": 9,
@@ -234,8 +231,7 @@
       "new": [
         "نقشه"
       ],
-      "emotion": "shout",
-      "grok_fix": true
+      "emotion": "shout"
     },
     {
       "num": 13,
@@ -251,8 +247,7 @@
       "new": [
         "پس دادن"
       ],
-      "emotion": "worried",
-      "grok_fix": true
+      "emotion": "worried"
     },
     {
       "num": 14,
@@ -264,13 +259,11 @@
       "note": "\"اصرار = 우기다\"",
       "tags": [],
       "new": [],
-      "emotion": "teasing",
-      "grok_fix": true
+      "emotion": "teasing"
     }
   ],
   "cast": {
     "B": "sara",
     "C": "man_m"
-  },
-  "grok": true
+  }
 }

@@ -3,7 +3,6 @@
   "region": "R1",
   "island": "friends",
   "kind": "short",
-  "draft": true,
   "purpose": [
     "making_friends"
   ],
@@ -74,8 +73,7 @@
       "new": [
         "آمدن"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 4,
@@ -107,8 +105,7 @@
         "form:taarof"
       ],
       "new": [],
-      "emotion": "flustered",
-      "grok_fix": true
+      "emotion": "flustered"
     },
     {
       "num": 6,
@@ -153,12 +150,10 @@
       "note": "\"یادم رفت = 까먹었어요\"",
       "tags": [],
       "new": [],
-      "emotion": "amused",
-      "grok_fix": true
+      "emotion": "amused"
     }
   ],
   "cast": {
     "B": "sara"
-  },
-  "grok": true
+  }
 }

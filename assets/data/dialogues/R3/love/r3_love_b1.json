@@ -3,7 +3,6 @@
   "region": "R3",
   "island": "love",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "love"
   ],
@@ -64,8 +63,7 @@
       "new": [
         "ریاضی"
       ],
-      "emotion": "amused",
-      "grok_fix": true
+      "emotion": "amused"
     },
     {
       "num": 3,
@@ -121,8 +119,7 @@
       "new": [
         "سفارش دادن"
       ],
-      "emotion": "surprised",
-      "grok_fix": true
+      "emotion": "surprised"
     },
     {
       "num": 7,
@@ -154,8 +151,7 @@
       "new": [
         "دوست"
       ],
-      "emotion": "flustered",
-      "grok_fix": true
+      "emotion": "flustered"
     },
     {
       "num": 9,
@@ -214,8 +210,7 @@
         "callback:r3_love_b1"
       ],
       "new": [],
-      "emotion": "shy",
-      "grok_fix": true
+      "emotion": "shy"
     },
     {
       "num": 13,
@@ -262,6 +257,5 @@
   ],
   "cast": {
     "B": "negar"
-  },
-  "grok": true
+  }
 }

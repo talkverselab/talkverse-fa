@@ -3,7 +3,6 @@
   "region": "R1",
   "island": "friends",
   "kind": "short",
-  "draft": true,
   "purpose": [
     "making_friends"
   ],
@@ -114,8 +113,7 @@
       "new": [
         "بار"
       ],
-      "emotion": "cheerful",
-      "grok_fix": true
+      "emotion": "cheerful"
     },
     {
       "num": 6,
@@ -130,8 +128,7 @@
         "form:تو"
       ],
       "new": [],
-      "emotion": "shy",
-      "grok_fix": true
+      "emotion": "shy"
     },
     {
       "num": 7,
@@ -173,12 +170,10 @@
           "flustered",
           "ای بابا، عجیبه."
         ]
-      ],
-      "grok_fix": true
+      ]
     }
   ],
   "cast": {
     "B": "sara"
-  },
-  "grok": true
+  }
 }

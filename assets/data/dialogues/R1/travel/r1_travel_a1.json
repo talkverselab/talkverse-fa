@@ -3,7 +3,6 @@
   "region": "R1",
   "island": "travel",
   "kind": "short",
-  "draft": true,
   "purpose": [
     "travel"
   ],
@@ -78,8 +77,7 @@
         "ته",
         "اتوبوس"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 4,
@@ -97,8 +95,7 @@
       "new": [
         "نشستن"
       ],
-      "emotion": "worried",
-      "grok_fix": true
+      "emotion": "worried"
     },
     {
       "num": 5,
@@ -150,6 +147,5 @@
   ],
   "cast": {
     "B": "man_m"
-  },
-  "grok": true
+  }
 }

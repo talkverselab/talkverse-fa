@@ -3,7 +3,6 @@
   "region": "R1",
   "island": "culture",
   "kind": "short",
-  "draft": true,
   "purpose": [
     "media",
     "reading"
@@ -45,8 +44,7 @@
         "یاد گرفتن",
         "خواندن"
       ],
-      "emotion": "cheerful",
-      "grok_fix": true
+      "emotion": "cheerful"
     },
     {
       "num": 2,
@@ -151,12 +149,10 @@
         "expr:چه خوب"
       ],
       "new": [],
-      "emotion": "amused",
-      "grok_fix": true
+      "emotion": "amused"
     }
   ],
   "cast": {
     "B": "negar"
-  },
-  "grok": true
+  }
 }

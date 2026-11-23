@@ -3,7 +3,6 @@
   "region": "R2",
   "island": "work",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "work_japan"
   ],
@@ -47,8 +46,7 @@
       "new": [
         "کار کردن"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 2,
@@ -128,8 +126,7 @@
       "new": [
         "جواب"
       ],
-      "emotion": "polite",
-      "grok_fix": true
+      "emotion": "polite"
     },
     {
       "num": 7,
@@ -189,8 +186,7 @@
       "new": [
         "قبول شدن"
       ],
-      "emotion": "worried",
-      "grok_fix": true
+      "emotion": "worried"
     },
     {
       "num": 11,
@@ -209,6 +205,5 @@
   ],
   "cast": {
     "B": "man_m"
-  },
-  "grok": true
+  }
 }

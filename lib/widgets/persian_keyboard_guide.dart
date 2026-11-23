@@ -18,9 +18,7 @@ class _Guide extends StatelessWidget {
   const _Guide();
 
   @override
-  Widget build(BuildContext context) => DefaultTabController(
-        length: 2,
-        child: SizedBox(
+  Widget build(BuildContext context) => SizedBox(
           height: MediaQuery.sizeOf(context).height * 0.8,
           child: Column(children: [
             const SizedBox(height: 10),
@@ -39,16 +37,27 @@ class _Guide extends StatelessWidget {
                   style: const TextStyle(fontSize: 13, color: AppColors.sumiLight, height: 1.4)),
             ),
             const SizedBox(height: 8),
-            TabBar(
-              labelColor: AppColors.beni,
-              unselectedLabelColor: AppColors.muted,
-              indicatorColor: AppColors.beni,
-              labelStyle: const TextStyle(fontWeight: FontWeight.w800),
-              tabs: [Tab(text: tr('안드로이드')), Tab(text: tr('아이폰'))],
-            ),
+            // iOS 에서는 안드로이드·Play 스토어 안내를, 안드로이드에서는 아이폰 안내를 보이지 않는다(심사 점검 11-23).
+            const SizedBox(height: 8),
             Expanded(
-              child: TabBarView(children: [
-                ListView(padding: EdgeInsets.fromLTRB(20, 16, 20, 32 + bottomInset(context)), children: [
+              child: isIOS
+                  ? ListView(padding: EdgeInsets.fromLTRB(20, 16, 20, 32 + bottomInset(context)), children: [
+                  _Section(tr('아이폰 기본 키보드에 페르시아어 추가'), [
+                    tr('설정 앱 열기'),
+                    tr('일반 → 키보드 → 키보드'),
+                    tr('새로운 키보드 추가 → 페르시아어(فارسی)'),
+                    tr('완료'),
+                  ]),
+                  const SizedBox(height: 16),
+                  _Section(tr('키보드 바꾸기'), [
+                    tr('입력 칸을 눌러 키보드 열기'),
+                    tr('스페이스바 왼쪽 🌐 지구본을 누르면 다음 키보드로'),
+                    tr('길게 누르면 목록에서 바로 고르기'),
+                  ]),
+                  const SizedBox(height: 16),
+                  const _Tips(),
+                ])
+                  : ListView(padding: EdgeInsets.fromLTRB(20, 16, 20, 32 + bottomInset(context)), children: [
                   _Section(tr('방법 1 — 삼성 키보드에 페르시아어 추가'), [
                     tr('설정 앱 열기'),
                     tr('일반 → 삼성 키보드 설정'),
@@ -66,26 +75,8 @@ class _Guide extends StatelessWidget {
                   const SizedBox(height: 16),
                   const _Tips(),
                 ]),
-                ListView(padding: EdgeInsets.fromLTRB(20, 16, 20, 32 + bottomInset(context)), children: [
-                  _Section(tr('아이폰 기본 키보드에 페르시아어 추가'), [
-                    tr('설정 앱 열기'),
-                    tr('일반 → 키보드 → 키보드'),
-                    tr('새로운 키보드 추가 → 페르시아어(فارسی)'),
-                    tr('완료'),
-                  ]),
-                  const SizedBox(height: 16),
-                  _Section(tr('키보드 바꾸기'), [
-                    tr('입력 칸을 눌러 키보드 열기'),
-                    tr('스페이스바 왼쪽 🌐 지구본을 누르면 다음 키보드로'),
-                    tr('길게 누르면 목록에서 바로 고르기'),
-                  ]),
-                  const SizedBox(height: 16),
-                  const _Tips(),
-                ]),
-              ]),
             ),
           ]),
-        ),
       );
 }
 

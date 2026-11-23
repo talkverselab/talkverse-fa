@@ -3,7 +3,6 @@
   "region": "R3",
   "island": "love",
   "kind": "long",
-  "draft": true,
   "purpose": [
     "love"
   ],
@@ -96,8 +95,7 @@
       "note": "\"دوستش داره = 좋아해\"",
       "tags": [],
       "new": [],
-      "emotion": "excited",
-      "grok_fix": true
+      "emotion": "excited"
     },
     {
       "num": 5,
@@ -161,8 +159,7 @@
         "انداختن",
         "حوض"
       ],
-      "emotion": "annoyed",
-      "grok_fix": true
+      "emotion": "annoyed"
     },
     {
       "num": 9,
@@ -239,8 +236,7 @@
       "new": [
         "خراب"
       ],
-      "emotion": "sad",
-      "grok_fix": true
+      "emotion": "sad"
     },
     {
       "num": 14,
@@ -285,6 +281,5 @@
     "B": "negar",
     "C": "sara",
     "D": "reza"
-  },
-  "grok": true
+  }
 }

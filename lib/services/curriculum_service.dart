@@ -1,8 +1,12 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
+import '../core/embed_env.dart';
 import '../core/prefs.dart';
 import 'dialogue_service.dart';
 
@@ -321,7 +325,10 @@ class CurriculumService {
         state = CurriculumState.fromJson(json.decode(raw) as Map);
       } catch (_) {}
     }
+    await _loadCfg();
+    _migrateLevel();
     _loaded = true;
+    unawaited(refreshCfg());
   }
 
   Future<void> save() async {
@@ -329,21 +336,127 @@ class CurriculumService {
     changed.value++;
   }
 
-  List<Dialogue> levelList([String? level]) => DialogueService.instance.list(region: level ?? state.level);
+  // ── 단계 설정(기준 문서 §12, 사용자 11-23 「커리큘럼 내용도 모두 DB에서」·「5단계까지」) ──
+  // 앱에 묶은 assets/curriculum_fa.json → 기기에 받아 둔 것(rev 가 더 높으면) → 서버 GET talkverse.uk/api/curriculum/fa(rev 가 더 높으면 받아 둠).
+  // 읽기 실패면 null — 옛 동작(회화 레벨 R 기준)으로.
+  static const cfgAsset = 'assets/curriculum_fa.json';
+  static const cfgUrl = 'https://talkverse.uk/api/curriculum/fa';
+  Map<String, dynamic>? cfg;
 
-  /// 레벨의 편을 모두 통과했나.
+  static Map<String, dynamic>? parseCfg(String raw) {
+    try {
+      final j = json.decode(raw);
+      if (j is Map<String, dynamic> && j['stages'] is List && (j['stages'] as List).isNotEmpty) return j;
+    } catch (_) {}
+    return null;
+  }
+
+  int get cfgRev => (cfg?['rev'] as num?)?.toInt() ?? 0;
+
+  Future<void> _loadCfg() async {
+    try {
+      cfg = parseCfg(await rootBundle.loadString(assetPath(cfgAsset)));
+    } catch (_) {}
+    try {
+      final f = File('${await dataDir()}/curriculum.json');
+      if (f.existsSync()) {
+        final c = parseCfg(await f.readAsString());
+        if (c != null && ((c['rev'] as num?)?.toInt() ?? 0) > cfgRev) cfg = c;
+      }
+    } catch (_) {}
+  }
+
+  /// 서버 판이 더 높으면 받아 두고 화면에 알림. 기다리지 않는다(시작을 늦추지 않게).
+  Future<void> refreshCfg() async {
+    final client = HttpClient()..connectionTimeout = const Duration(seconds: 6);
+    try {
+      final req = await client.getUrl(Uri.parse(cfgUrl));
+      req.headers.set('User-Agent', 'talkverse-fa/0.1');
+      final res = await req.close().timeout(const Duration(seconds: 10));
+      if (res.statusCode != 200) return;
+      final text = await res.transform(utf8.decoder).join();
+      final c = parseCfg(text);
+      if (c == null || ((c['rev'] as num?)?.toInt() ?? 0) <= cfgRev) return;
+      await File('${await dataDir()}/curriculum.json').writeAsString(text, flush: true);
+      cfg = c;
+      _migrateLevel();
+      changed.value++;
+    } catch (_) {
+    } finally {
+      client.close();
+    }
+  }
+
+  /// 옛 회화 레벨(R0~R5) 진도를 단계 번호로(R0·R1 → 1, R2 → 2 …).
+  static String? stageOfR(String? lv) {
+    final m = RegExp(r'^R([0-5])$').firstMatch(lv ?? '');
+    if (m == null) return null;
+    final n = int.parse(m.group(1)!);
+    return '${n <= 1 ? 1 : n}';
+  }
+
+  void _migrateLevel() {
+    if (cfg == null) return;
+    final s = stageOfR(state.level);
+    if (s != null) state.level = s;
+  }
+
+  List<Map<String, dynamic>> get _stages => [for (final x in (cfg?['stages'] as List? ?? const [])) if (x is Map<String, dynamic>) x];
+
+  /// 보일 단계(또는 옛 레벨) 열쇠 — 편이 0개인 것은 숨김.
+  List<String> levels() {
+    if (cfg == null) return [for (final l in kCurriculumLevels) if (DialogueService.instance.count(l) > 0) l];
+    final st = [..._stages]..sort((a, b) => ((a['n'] as num?) ?? 0).compareTo((b['n'] as num?) ?? 0));
+    return [for (final x in st) if (levelList('${x['n']}').isNotEmpty) '${x['n']}'];
+  }
+
+  String levelTitle(String lv) {
+    for (final x in _stages) {
+      if ('${x['n']}' == lv) return '${x['title'] ?? '$lv단계'}';
+    }
+    return DialogueService.levelKo[lv] ?? lv;
+  }
+
+  String levelDesc(String lv) {
+    for (final x in _stages) {
+      if ('${x['n']}' == lv) return '${x['desc'] ?? ''}';
+    }
+    return '';
+  }
+
+  List<Dialogue> levelList([String? level]) {
+    final lv = level ?? state.level;
+    if (cfg == null) return DialogueService.instance.list(region: lv);
+    for (final x in _stages) {
+      if ('${x['n']}' == lv) {
+        return [
+          for (final id in (x['dialogueIds'] as List? ?? const [])) ?DialogueService.instance.byId('$id')
+        ];
+      }
+    }
+    return const [];
+  }
+
+  /// 편이 들어 있는 단계(문제의 오답 보기를 같은 단계에서 뽑을 때).
+  String? levelOf(Dialogue d) {
+    if (cfg == null) return d.region;
+    for (final lv in levels()) {
+      if (levelList(lv).any((x) => x.id == d.id)) return lv;
+    }
+    return null;
+  }
+
+  /// 단계의 편을 모두 통과했나.
   bool levelDone(String level) {
     final l = levelList(level);
     return l.isNotEmpty && l.every((d) => state.passedDialogues.contains(d.id));
   }
 
-  /// 다음 레벨(편이 있는 것), 없으면 null.
+  /// 다음 단계(편이 있는 것), 없으면 null.
   String? nextLevel(String level) {
-    const lv = kCurriculumLevels;
-    for (var i = lv.indexOf(level) + 1; i < lv.length; i++) {
-      if (DialogueService.instance.count(lv[i]) > 0) return lv[i];
-    }
-    return null;
+    final lv = levels();
+    final i = lv.indexOf(level);
+    return i >= 0 && i + 1 < lv.length ? lv[i + 1] : null;
   }
 
   Future<void> startCourse(List<String> ids) async {

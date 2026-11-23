@@ -156,7 +156,7 @@ void main() {
       await t.pump();
     }
     expect(find.text('회화 레벨을 골라요'), findsOneWidget);
-    await t.tap(find.text('초보').first);
+    await t.tap(find.text('1단계').first);
     for (var i = 0; i < 3; i++) {
       await t.runAsync(() => Future<void>.delayed(const Duration(milliseconds: 100)));
       await t.pump();
@@ -169,5 +169,41 @@ void main() {
       await t.pump();
       expect(t.takeException(), isNull);
     }
+  });
+  group('단계 설정(§12)', () {
+    test('옛 회화 레벨 → 단계 번호, JSON 해석', () {
+      expect(CurriculumService.stageOfR('R0'), '1');
+      expect(CurriculumService.stageOfR('R1'), '1');
+      expect(CurriculumService.stageOfR('R3'), '3');
+      expect(CurriculumService.stageOfR('3'), isNull);
+      expect(CurriculumService.parseCfg('{"rev":1,"stages":[]}'), isNull);
+      expect(CurriculumService.parseCfg('깨짐'), isNull);
+      expect(CurriculumService.parseCfg('{"rev":2,"stages":[{"n":1,"dialogueIds":[]}]}')?['rev'], 2);
+    });
+
+    testWidgets('단계 목록·편은 JSON 대로 — 없는 편 건너뜀, 빈 단계 숨김, JSON 없으면 옛 레벨', (t) async {
+      await t.runAsync(() => CurriculumService.instance.ensureLoaded());
+      final svc = CurriculumService.instance;
+      final keep = svc.cfg;
+      addTearDown(() => svc.cfg = keep);
+      expect(keep, isNotNull); // 앱에 묶은 assets/curriculum_fa.json
+      expect(svc.levels(), ['1', '2', '3']);
+      expect(svc.levelList('1').length, 28);
+      svc.cfg = {
+        'rev': 9,
+        'stages': [
+          {'n': 2, 'title': '2단계', 'dialogueIds': ['없는편', 'r1_love_a3']},
+          {'n': 1, 'title': '1단계', 'dialogueIds': ['r1_friends_b1']},
+          {'n': 4, 'title': '4단계', 'dialogueIds': ['없는편']},
+        ],
+      };
+      expect(svc.levels(), ['1', '2']);
+      expect(svc.levelList('2').map((d) => d.id), ['r1_love_a3']);
+      expect(svc.levelTitle('2'), '2단계');
+      expect(svc.nextLevel('1'), '2');
+      expect(svc.nextLevel('2'), isNull);
+      svc.cfg = null;
+      expect(svc.levels(), ['R1', 'R2', 'R3']);
+    });
   });
 }

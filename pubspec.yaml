@@ -81,6 +81,7 @@ flutter:
     - assets/data/dialogues/R3/travel/
     - assets/data/dialogues/R3/work/
     - assets/data/script_rev.json
+    - assets/curriculum_fa.json
     - assets/data/freq/
     - assets/data/grammar/
     - assets/data/vocab/

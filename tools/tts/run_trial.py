@@ -36,7 +36,7 @@ def pc_run():
 
 def fetch(path, dst):
     os.makedirs(dst, exist_ok=True)
-    sh('scp', '-q', '-r', f'{PC}:D:/tts_test/job/out/fa/{path}', dst + '/', check=False)
+    sh('scp', '-q', '-r', f'{PC}:D:/tts_test/job/out/{L.OUT}/{path}', dst + '/', check=False)
 
 
 def fetch_ref():
